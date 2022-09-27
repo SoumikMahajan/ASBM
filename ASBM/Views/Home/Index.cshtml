@@ -1,0 +1,203 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container" style="background-color: white; color: black; padding-bottom: 20px;">
+    <div class="row no-gutters">
+        <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+            <div class="section-title">
+                <h2>WELCOME TO THE ACCOUNTS DEPARTMENT OF BHATPARA MUNICIPALITY</h2>
+            </div>
+        </div>
+    </div>
+
+        <div class="row no-gutters">
+            <div class="banner_automation">
+                <div id="wrap">
+                    
+                    <div id="showcase" class="noselect">
+                        <div class="size">
+                            @*<button type="button" class="cloud9-item" style="font-size:1.2rem;">OFFICER ENTRY</button>*@
+                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/1.png" alt="automation">
+                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/2.png" alt="automation">
+                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/3.png" alt="automation">
+                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/4.png" alt="automation">
+                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/5.png" alt="automation">
+                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/6.png" alt="automation">
+                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/7.png" alt="automation">
+                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/8.png" alt="automation">
+                        </div>
+                    </div>
+                </div>
+                <div class="automation_middle">
+                    <h2>PURO PRADAN</h2>
+                </div>
+            </div>
+        </div>
+    
+    <br />
+
+    @*<div class="row form-group" style="text-align: center;">
+            <div class="radiobtn">
+                <form>
+                    <label>
+                        <input type="radio" class="openmodalpopup" name="radio" />
+                        <span class="radiotext">BILL COLLECTOR</span>
+                    </label>
+                    <label>
+                        <input type="radio" class="openmodalpopup" name="radio" />
+                        <span class="radiotext">VOUCHER GENERATOR</span>
+                    </label>
+                    <label>
+                        <input type="radio" class="openmodalpopup" name="radio" />
+                        <span class="radiotext">ACCOUNTANT</span>
+                    </label>
+                    <label>
+                        <input type="radio" class="openmodalpopup" name="radio" />
+                        <span class="radiotext">DEBIT MANDATE GENERATOR / APPROVER</span>
+                    </label>
+                    <label>
+                        <input type="radio" class="openmodalpopup" name="radio" />
+                        <span class="radiotext">FINANCE OFFICER</span>
+                    </label>
+                </form>
+            </div>
+        </div>*@
+
+    <div class="row no-gutters">
+        <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+            <div class="section-title">
+                <h2>MASTER ENTRY CLICK BELOW AREA</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row form-group">
+
+        <div class="btn-group" style="margin-left: 129px;">
+            <div class="mx-auto">
+                <button type="button" class="btn btn-indigo waves-effect" style="font-size:1.4rem;">OFFICER ENTRY</button>
+                <button type="button" class="btn btn-cyan waves-effect" style="font-size:1.4rem;">PROPRIETOR</button>
+                <button type="button" class="btn btn-indigo waves-effect" style="font-size:1.4rem;">DEPARTMENT</button>
+                <button type="button" class="btn btn-cyan waves-effect" style="font-size:1.4rem;">SCHEME</button>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <div class="btn-group" style="margin-left: 248px;">
+            <div class="mx-auto">
+                <button type="button" class="btn btn-indigo waves-effect" style="font-size:1.4rem;">TREASURY</button>
+                <button type="button" class="btn btn-cyan waves-effect" style="font-size:1.4rem;width:180px;">BANK</button>
+                <button type="button" class="btn btn-indigo waves-effect" style="font-size:1.4rem;">BILL DETAILS</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!---------Popup modal-------->
+    <button class="link_add hide" data-toggle="modal" data-target="#addloginmodal" role="button" id="hdnOpenModel" hidden>Open Model</button>
+
+    <div class="modal fade" id="addloginmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-title text-center">
+                        <h4 style="font-size: 1.5rem;">Login</h4>
+                    </div>
+                    <div class="d-flex flex-column text-center">
+                        <form>
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="email1" placeholder="Your email address...">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                            </div>
+                            <a type="button" class="btn btn-info btn-block btn-round" href="@Url.Content("~/Home/ActionBasedOnDept")">Login</a>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="~/assets/js/cloud9carousel.js"></script>
+<script>
+    $(document).ready(function () {
+    debugger;
+        $(document).on('click', '.openmodalpopup', function () {
+               $("#hdnOpenModel").trigger("click");
+        }); //dev2
+
+        allowautomation();
+
+        function allowautomation() {
+            var showcase = $("#showcase")
+
+            showcase.Cloud9Carousel({
+                yPos: 270,
+                yRadius: 208,
+                mirrorOptions: {
+                    gap: 65,
+                    height: 0.9
+                },
+                buttonLeft: $(".nav > .left"),
+                buttonRight: $(".nav > .right"),
+                autoPlay: true,
+                bringToFront: true,
+                onRendered: showcaseUpdated,
+                onLoaded: function () {
+                    showcase.css('visibility', 'visible')
+                    // showcase.css('display', 'none')
+                    showcase.fadeIn(500)
+                }
+            })
+
+            function showcaseUpdated(showcase) {
+                var title = $('#item-title').html(
+                    $(showcase.nearestItem()).attr('alt')
+                )
+
+                var c = Math.cos((showcase.floatIndex() % 1) * 2 * Math.PI)
+                title.css('opacity', 0.5 + (0.5 * c))
+            }
+
+            // Simulate physical button click effect
+            $('.nav > button').click(function (e) {
+                var b = $(e.target).addClass('down')
+                setTimeout(function () {
+                    b.removeClass('down')
+                }, 80)
+            })
+
+            $(document).keydown(function (e) {
+                //
+                // More codes: http://www.javascripter.net/faq/keycodes.htm
+                //
+                switch (e.keyCode) {
+                    /* left arrow */
+                    case 37:
+                        $('.nav > .left').click()
+                        break
+
+                    /* right arrow */
+                    case 39:
+                        $('.nav > .right').click()
+                }
+            })
+        }
+
+
+    });
+</script>

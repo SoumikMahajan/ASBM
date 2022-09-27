@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "ActionBasedOnDept";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="container" style="background-color: white; color: black; padding-bottom: 20px;">
+        <div class="row no-gutters">
+            <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+                <div class="section-title">
+                    <h2>CHOOSE ACTION HERE AS A BILL COLLECTOR</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group" style="text-align: center;">
+            <div class="col-md-12">
+                <div class="text-center">
+                    <a type="button" class="btn btn-indigo" style="font-size:1.4rem;width:38%" href="@Url.Content("~/Home/BillSubmissionForm")">BILL SUBMISSION</a>
+                    <br />
+                    <a type="button" class="btn btn-cyan" style="font-size: 1.4rem; width: 38%" href="@Url.Content("~/Home/BillAllotment")">BILL ALLOTTMENT</a>
+                    <br />
+                    <a type="button" class="btn btn-indigo" style="font-size: 1.4rem; width: 38%" href="@Url.Content("~/Home/RandomBillGeneretorForm")">RANDOM BILLING</a>
+                    <br />
+                    <a type="button" class="btn btn-cyan" style="font-size: 1.4rem; width: 38%" href="@Url.Content("~/Home/BillingStatus")">KNOW BILLING STATUS</a>
+                    <br />
+                    <a type="button" class="btn btn-indigo" style="font-size: 1.4rem; width: 38%" href="@Url.Content("~/Home/RejectedBill")">REJECTED BILL</a>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+</div>
+
