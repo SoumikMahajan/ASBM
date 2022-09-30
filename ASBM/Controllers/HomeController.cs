@@ -13,6 +13,11 @@ namespace ASBM.Controllers
         BillSubmissionClass bill = new BillSubmissionClass();
         BillAllotementClass billAllote = new BillAllotementClass();
         RandomBillGeneratorClass randomBill = new RandomBillGeneratorClass();
+        OfficerEntryClass officer = new OfficerEntryClass();
+        PayeeEntryClass payee = new PayeeEntryClass();
+        BankEntryClass bank = new BankEntryClass();
+        DepartmentEntryClass dept = new DepartmentEntryClass();
+        SchemeEntryClass scheme = new SchemeEntryClass();
 
         public ActionResult Index()
         {
@@ -30,13 +35,6 @@ namespace ASBM.Controllers
             ViewBag.Message = "Your contact page.";
             return View();
         }
-
-        //public ActionResult BillSubmissionForm() //added by koushik 
-        //{
-
-        //    ViewBag.Message = "Your contact page.";
-        //    return View();
-        //}
 
         public ActionResult ActionBasedOnDept() //added by koushik 
         {
@@ -134,10 +132,7 @@ namespace ASBM.Controllers
             return response;
         }
 
-        //public ActionResult RandomBillGeneratorTable()
-        //{
-
-        //}
+   
         /////////////// RANDOM BILL GENERATION End //////////////////////
         ///
 
@@ -154,11 +149,149 @@ namespace ASBM.Controllers
 
 
         /////////////// REJECTED BILL STATUS Start //////////////////////
-
         public ActionResult RejectedBill()
         {
             return View();
         }
+        /////////////// REJECTED BILL STATUS End //////////////////////
 
+
+        /////////////// OFFICER ENTRY Start //////////////////////
+        public ActionResult OfficerEntry() 
+        {
+            List<OfficerModel> temp = new List<OfficerModel>();
+            temp = officer.FetchAllOfficerList();
+            return View(temp);
+        }
+
+        public ActionResult ajax_OfficerEntryForm()
+        {
+            return PartialView("~/Views/Home/_partialOfficerEntryView.cshtml");
+        }
+
+        [HttpPost]
+        public int ajax_confirm_OfficerEntryForm(string officerName, string pan, string mobile, string gpf, int DeptId, string pass)
+        {
+            int response;
+            response = officer.SubmitOfficer(officerName, pan, mobile, gpf, DeptId, pass);
+            return response;
+            //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
+        }
+        /////////////// OFFICER ENTRY End //////////////////////
+        
+
+        /////////////// Payee Master ENTRY Start //////////////////////
+        public ActionResult PayeeEntry()
+        {
+            List<PayeeModel> temp = new List<PayeeModel>();
+            temp = payee.FetchAllPayeeList();
+            return View(temp);
+        }
+
+        public ActionResult ajax_PayeeEntryForm()
+        {
+            return PartialView("~/Views/Home/_partialPayeeEntryView.cshtml");
+        }
+
+        [HttpPost]
+        public int ajax_confirm_PayeeEntryForm(string payeeName, string pan, string mobile, string gst, string accno, int deptId)
+        {
+            int response;
+            response = payee.SubmitPayee(payeeName, pan, mobile, gst, accno, deptId);
+            return response;
+        }
+        /////////////// Payee Master ENTRY End //////////////////////
+
+
+        /////////////// Bank Master ENTRY Start //////////////////////
+        public ActionResult MstBankDetails()
+        {
+            List<BankModel> temp = new List<BankModel>();
+            temp = bank.FetchAllBankList();
+            return View(temp);
+        }
+
+        public ActionResult ajax_BankEntryForm()
+        {
+            return PartialView("~/Views/Home/_partialBankEntryView.cshtml");
+        }
+
+        [HttpPost]
+        public int ajax_confirm_BankEntryForm(string accNo, string accName, int fundId, string bankName, string ifsc)
+        {
+            int response;
+            response = bank.SubmitBankDetails(accNo, accName, fundId, bankName, ifsc);
+            return response;
+        }
+        /////////////// Bank Master ENTRY End //////////////////////
+
+
+        /////////////// Department Master ENTRY Start //////////////////////
+        public ActionResult MstDepartmentDetails()
+        {
+            List<DepartmentModel> temp = new List<DepartmentModel>();
+            temp = dept.FetchAllDepartmentList();
+            return View(temp);
+        }
+
+        public ActionResult ajax_DepartmentEntryForm()
+        {
+            return PartialView("~/Views/Home/_partialDepartmentEntryView.cshtml");
+        }
+
+        [HttpPost]
+        public int ajax_confirm_DepartmentEntryForm(string deptName)
+        {
+            int response;
+            response = dept.SubmitDepartmentDetails(deptName);
+            return response;
+        }
+        /////////////// Department Master ENTRY End //////////////////////
+        
+
+        /////////////// Scheme Master ENTRY Start //////////////////////
+        public ActionResult MstSchemeDetails()
+        {
+            List<SchemeModel> temp = new List<SchemeModel>();
+            temp = scheme.FetchAllSchemeList();
+            return View(temp);
+        }
+
+        public ActionResult ajax_SchemeEntryForm()
+        {
+            return PartialView("~/Views/Home/_partialSchemaEntryView.cshtml");
+        }
+
+        [HttpPost]
+        public int ajax_confirm_SchemeEntryForm(string schemeName)
+        {
+            int response;
+            response = scheme.SubmitSchemeDetails(schemeName);
+            return response;
+        }
+        /////////////// Scheme Master ENTRY End //////////////////////
+        
+
+        /////////////// Scheme Master ENTRY Start //////////////////////
+        public ActionResult MstTreasuryDetails()
+        {
+            List<SchemeModel> temp = new List<SchemeModel>();
+            temp = scheme.FetchAllSchemeList();
+            return View(temp);
+        }
+
+        public ActionResult ajax_TreasuryEntryForm()
+        {
+            return PartialView("~/Views/Home/_partialSchemaEntryView.cshtml");
+        }
+
+        [HttpPost]
+        public int ajax_confirm_TreassuryEntryForm(string schemeName)
+        {
+            int response;
+            response = scheme.SubmitSchemeDetails(schemeName);
+            return response;
+        }
+        /////////////// Scheme Master ENTRY End //////////////////////
     }
 }

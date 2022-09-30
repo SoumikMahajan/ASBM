@@ -124,20 +124,40 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\SchemeModel.cs" />
+    <Compile Include="Models\DepartmentModel.cs" />
+    <Compile Include="Models\BankModel.cs" />
     <Compile Include="Models\BillAllotementModel.cs" />
     <Compile Include="Models\BillSubmission.cs" />
+    <Compile Include="Models\OfficerModel.cs" />
+    <Compile Include="Models\PayeeModel.cs" />
     <Compile Include="Models\RandomBillGenerationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\BankEntryClass.cs" />
     <Compile Include="Repository\BillAllotementClass.cs" />
     <Compile Include="Repository\BillSubmissionClass.cs" />
+    <Compile Include="Repository\DepartmentEntryClass.cs" />
+    <Compile Include="Repository\OfficerEntryClass.cs" />
+    <Compile Include="Repository\PayeeEntryClass.cs" />
     <Compile Include="Repository\RandomBillGeneratorClass.cs" />
+    <Compile Include="Repository\SchemeEntryClass.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\admin\css\scheme_entry.css" />
+    <Content Include="assets\admin\css\department_entry.css" />
     <Content Include="assets\admin\css\bill_allotement.css" />
+    <Content Include="assets\admin\css\bank_entry.css" />
+    <Content Include="assets\admin\css\payee_entry.css" />
+    <Content Include="assets\admin\css\officer_entry.css" />
     <Content Include="assets\admin\css\random_bill_generation.css" />
     <Content Include="assets\admin\css\bill_submission.css" />
     <Content Include="assets\admin\img\Dual Ring.gif" />
+    <Content Include="assets\admin\js\scheme_entry.js" />
+    <Content Include="assets\admin\js\department_entry.js" />
     <Content Include="assets\admin\js\bill_allotement.js" />
+    <Content Include="assets\admin\js\officer_entry.js" />
+    <Content Include="assets\admin\js\bank_entry.js" />
+    <Content Include="assets\admin\js\payee_entry.js" />
     <Content Include="assets\admin\js\random_bill_generation.js" />
     <Content Include="assets\admin\js\bill_submission.js" />
     <Content Include="assets\css\bootstrap.min.css" />
@@ -211,6 +231,21 @@
     <Content Include="Views\Home\_partialBillAllotementDataTable.cshtml" />
     <Content Include="Views\Home\BillingStatus.cshtml" />
     <Content Include="Views\Home\RejectedBill.cshtml" />
+    <Content Include="Views\Home\OfficerEntry.cshtml" />
+    <Content Include="Views\Home\_partialOfficerEntryView.cshtml" />
+    <Content Include="Views\Home\_partialOfficerEntryDataTable.cshtml" />
+    <Content Include="Views\Home\PayeeEntry.cshtml" />
+    <Content Include="Views\Home\_partialPayeeEntryDataTable.cshtml" />
+    <Content Include="Views\Home\_partialPayeeEntryView.cshtml" />
+    <Content Include="Views\Home\MstBankDetails.cshtml" />
+    <Content Include="Views\Home\MstDepartmentDetails.cshtml" />
+    <Content Include="Views\Home\MstSchemeDetails.cshtml" />
+    <Content Include="Views\Home\_partialBankEntryView.cshtml" />
+    <Content Include="Views\Home\_partialBankEntryDataTable.cshtml" />
+    <Content Include="Views\Home\_partialDepartmentEntryDataTable.cshtml" />
+    <Content Include="Views\Home\_partialDepartmentEntryView.cshtml" />
+    <Content Include="Views\Home\_partialSchemaEntryDataTable.cshtml" />
+    <Content Include="Views\Home\_partialSchemaEntryView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,91 @@
+﻿@model List<ASBM.Models.BankModel>
+
+@{
+    ViewBag.Title = "MstBankDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/assets/admin/css/bank_entry.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="container" style="background-color: white; color: black; padding-bottom: 20px;">
+        <div class="row no-gutters">
+            <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+                <div class="section-title">
+                    <h2>Master Entry Bank Details</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-color: beige;">
+
+            <form id="bankdetails_form" method="post">
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>Bank Account Number:</label>
+                        <input type="text" id="txtAcNo" placeholder="Account Number" name="txtAcNo" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <label>Bank Account Name:</label>
+                        <input type="text" id="txtAcName" placeholder="Account Name" name="txtAcName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>FundScheme:</label>
+                        <select id="ddlFund" name="ddlFund" class="form-control placeholder-no-fix selectpicker" data-show-subtext="true" data-live-search="true">
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label>Bank Name:</label>
+                        <input type="text" id="txtBankNm" placeholder="Bank Name" name="txtBankNm" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="row form-group" id="Partnership">
+                    <div class="col-md-6">
+                        <label>IFSC :</label>
+                        <input type="text" id="txtIfsc" placeholder="Account IFSC Code" name="txtIfsc" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center text-center">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-info" id="btn_submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+
+            <div id="prtCmsDataTable">
+                @Html.Partial("~/Views/Home/_partialBankEntryDataTable.cshtml", Model)
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script src="~/assets/admin/js/bank_entry.js"></script>
+
+
+<!---------------------------- Modal for Confirm Submit ----------------------->
+<div id="myForward" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content modal_forward_claim_content">
+            <div class="modal-header">
+                <h4 class="modal-title modal_title">Are you sure?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body modal_forward_claim_body">
+            </div>
+            <div class="modal-footer">
+                <span class="show_forward_btn_dtls"></span>
+
+                <button type="button" class="btn btn-danger frwd_btn_no btn_auto_redirect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
