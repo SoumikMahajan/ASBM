@@ -132,6 +132,7 @@
     <Compile Include="Models\OfficerModel.cs" />
     <Compile Include="Models\PayeeModel.cs" />
     <Compile Include="Models\RandomBillGenerationModel.cs" />
+    <Compile Include="Models\TreasuryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BankEntryClass.cs" />
     <Compile Include="Repository\BillAllotementClass.cs" />
@@ -141,8 +142,10 @@
     <Compile Include="Repository\PayeeEntryClass.cs" />
     <Compile Include="Repository\RandomBillGeneratorClass.cs" />
     <Compile Include="Repository\SchemeEntryClass.cs" />
+    <Compile Include="Repository\TreasuryEntryClass.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\admin\css\treasury_entry.css" />
     <Content Include="assets\admin\css\scheme_entry.css" />
     <Content Include="assets\admin\css\department_entry.css" />
     <Content Include="assets\admin\css\bill_allotement.css" />
@@ -152,6 +155,7 @@
     <Content Include="assets\admin\css\random_bill_generation.css" />
     <Content Include="assets\admin\css\bill_submission.css" />
     <Content Include="assets\admin\img\Dual Ring.gif" />
+    <Content Include="assets\admin\js\treasury_entry.js" />
     <Content Include="assets\admin\js\scheme_entry.js" />
     <Content Include="assets\admin\js\department_entry.js" />
     <Content Include="assets\admin\js\bill_allotement.js" />
@@ -246,6 +250,9 @@
     <Content Include="Views\Home\_partialDepartmentEntryView.cshtml" />
     <Content Include="Views\Home\_partialSchemaEntryDataTable.cshtml" />
     <Content Include="Views\Home\_partialSchemaEntryView.cshtml" />
+    <Content Include="Views\Home\MstTreasuryDetails.cshtml" />
+    <Content Include="Views\Home\_partialTreasuryEntryDataTable.cshtml" />
+    <Content Include="Views\Home\_partialTreasuryEntryView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

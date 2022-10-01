@@ -18,6 +18,7 @@ namespace ASBM.Controllers
         BankEntryClass bank = new BankEntryClass();
         DepartmentEntryClass dept = new DepartmentEntryClass();
         SchemeEntryClass scheme = new SchemeEntryClass();
+        TreasuryEntryClass trsy = new TreasuryEntryClass();
 
         public ActionResult Index()
         {
@@ -272,26 +273,26 @@ namespace ASBM.Controllers
         /////////////// Scheme Master ENTRY End //////////////////////
         
 
-        /////////////// Scheme Master ENTRY Start //////////////////////
+        /////////////// Treasury Master ENTRY Start //////////////////////
         public ActionResult MstTreasuryDetails()
         {
-            List<SchemeModel> temp = new List<SchemeModel>();
-            temp = scheme.FetchAllSchemeList();
+            List<TreasuryModel> temp = new List<TreasuryModel>();
+            temp = trsy.FetchAllTreasulyList();
             return View(temp);
         }
 
         public ActionResult ajax_TreasuryEntryForm()
         {
-            return PartialView("~/Views/Home/_partialSchemaEntryView.cshtml");
+            return PartialView("~/Views/Home/_partialTreasuryEntryView.cshtml");
         }
 
         [HttpPost]
-        public int ajax_confirm_TreassuryEntryForm(string schemeName)
+        public int ajax_confirm_TreassuryEntryForm(string adviceNo, string adviceDate)
         {
             int response;
-            response = scheme.SubmitSchemeDetails(schemeName);
+            response = trsy.SubmitTreasuryDetails(adviceNo, adviceDate);
             return response;
         }
-        /////////////// Scheme Master ENTRY End //////////////////////
+        /////////////// Treasury Master ENTRY End //////////////////////
     }
 }
