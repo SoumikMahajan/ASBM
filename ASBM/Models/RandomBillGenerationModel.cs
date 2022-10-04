@@ -16,5 +16,7 @@ namespace ASBM.Models
         public string process_status { get; set; }
         public DateTime creation_date { get; set; }
         public int active_status { get; set; }
+        public string department_name { get; set; }
+        public string fund_scheme_name { get; set; }
     }
 }

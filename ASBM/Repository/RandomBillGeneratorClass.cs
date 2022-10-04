@@ -60,7 +60,17 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select random_bill_id_pk, creation_date, process_status from tbl_accounts_random_bill_generation_details";
+                    string Query = @"SELECT
+	                                    rand_bill.random_bill_id_pk,
+	                                    rand_bill.random_bill_name,
+	                                    dept.department_name,
+                                        fund.fund_scheme_name,
+	                                    rand_bill.random_bill_work_desc,
+	                                    rand_bill.random_bill_mobile_no 
+                                    FROM
+	                                    tbl_accounts_random_bill_generation_details AS rand_bill
+	                                    LEFT JOIN tbl_accounts_department_master AS dept ON dept.department_id_pk = rand_bill.random_bill_dept_id_fk
+	                                    LEFT JOIN tbl_accounts_fund_master AS fund ON fund.fund_id_pk = rand_bill.random_bill_fund_id_fk";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
                     {

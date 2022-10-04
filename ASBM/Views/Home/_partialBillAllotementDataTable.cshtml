@@ -4,7 +4,10 @@
     <thead>
         <tr class="dataHead">
             <th>SL</th>
-            <th>Date</th>          
+            <th>Docket No</th>
+            <th>Department Name</th>
+            <th>Officer Name</th>
+            <th>Bill Allotement Date</th>
         </tr>
     </thead>
     <tbody>
@@ -14,10 +17,10 @@
             {
                 <tr class="inAc" style="color: black;font-size: 13px !important;">
                     <td>@obj.bill_allotement_id_pk</td>
-                    <td>@obj.creation_date</td>
-                    
-
-                             
+                    <td>@obj.bill_allotement_docket_no</td>
+                    <td>@obj.department_name</td>
+                    <td>@obj.officer_name</td>
+                    <td>@obj.bill_allotement_date</td>
                 </tr>
             }
         }

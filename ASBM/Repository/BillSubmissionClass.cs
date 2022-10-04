@@ -124,7 +124,7 @@ namespace ASBM.Repository
                 {
                     string Query = @"SELECT	bill.bill_details_id_pk, bill.bill_category_id_fk, bill.bill_company_name, bill.bill_proprietor_name, bill.bill_type_id_fk, "+  
                                     "dept.department_name, bill.bill_pan, bill.bill_gst, fund.fund_scheme_name, bill.bill_description, bill.bill_amount, bill.bill_CreateDate " +
-                                    "FROM tbl_accounts_bill_details AS bill" +
+                                    "FROM tbl_accounts_bill_details AS bill " +
                                     "LEFT JOIN tbl_accounts_department_master as dept ON dept.department_id_pk = bill.bill_department_id_fk " +
                                     "LEFT JOIN tbl_accounts_fund_master as fund ON fund.fund_id_pk = bill.bill_fund_id_fk"
                                     ;

@@ -3,8 +3,12 @@
 <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
         <tr class="dataHead">
-            <th>Date</th>
-            <th>Status</th>          
+            <th>SL</th>
+            <th>Bill Name</th>          
+            <th>Department Name</th>          
+            <th>Fund Scheme Name</th>          
+            <th>Work Description</th>          
+            <th>Mobile No</th>          
         </tr>
     </thead>
     <tbody>
@@ -13,8 +17,12 @@
             foreach (var obj in Model)
             {
                 <tr class="inAc" style="color: black;font-size: 13px !important;">
-                    <td>@obj.creation_date</td>
-                    <td>@obj.process_status</td>
+                    <td>@obj.random_bill_id_pk</td>
+                    <td>@obj.random_bill_name</td>
+                    <td>@obj.department_name</td>
+                    <td>@obj.fund_scheme_name</td>
+                    <td>@obj.random_bill_work_desc</td>
+                    <td>@obj.random_bill_mobile_no</td>
                 </tr>
             }
         }

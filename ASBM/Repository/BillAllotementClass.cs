@@ -29,7 +29,7 @@ namespace ASBM.Repository
                     cmd.Parameters.AddWithValue("@docketno", DocketNo);
                     cmd.Parameters.AddWithValue("@deptid", DepartmentId);
                     cmd.Parameters.AddWithValue("@officerid", OfficerId);
-                    cmd.Parameters.AddWithValue("@alloteddate", AllotedDatte);                    
+                    cmd.Parameters.AddWithValue("@alloteddate", AllotedDatte);
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
@@ -88,7 +88,16 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select bill_allotement_id_pk, creation_date from [dbo].[tbl_accounts_bill_allotement_details]";
+                    string Query = @"SELECT
+	                                    bill_allot.bill_allotement_id_pk,
+	                                    bill_allot.bill_allotement_docket_no,
+	                                    dept.department_name,
+	                                    officer.officer_name,
+	                                    bill_allot.bill_allotement_date 
+                                    FROM
+	                                    tbl_accounts_bill_allotement_details AS bill_allot
+	                                LEFT JOIN tbl_accounts_department_master AS dept ON dept.department_id_pk = bill_allot.bill_allotement_dept_id_fk
+	                                LEFT JOIN tbl_accounts_officer_master AS officer ON officer.officer_user_id_pk = bill_allot.bill_allotement_officer_id_fk";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
                     {

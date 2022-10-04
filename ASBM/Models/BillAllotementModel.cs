@@ -16,6 +16,8 @@ namespace ASBM.Models
         public DateTime creation_date { get; set; }
         public DateTime entry_time { get; set; }
         public int active_status { get; set; }
+        public string department_name { get; set; }
+        public string officer_name { get; set; }
 
     }
 }
