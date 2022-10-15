@@ -25,6 +25,33 @@ namespace ASBM.Controllers
             return View();
         }
 
+        public ActionResult login(string email, string password)
+        {
+            try
+            {
+                if (email != null && password != null)
+                {
+                    LoginClass login = new LoginClass();
+                    LoginModel UserDetails = login.Loginvalidate(email, password);
+
+                    if(UserDetails.userRoleId == 1)
+                    {
+                        return RedirectToAction("ActionBasedOnDept");
+                    }
+                    else if(UserDetails.userRoleId == 2)
+                    {
+                        return RedirectToAction("Index", "VoucherGenerator");
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -51,7 +78,7 @@ namespace ASBM.Controllers
         }
 
         [HttpPost]
-        public int ajax_confirm_BillSubmissionForm(string CompanyName, string PropriterName, string CompanyCategoryName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount) 
+        public int ajax_confirm_BillSubmissionForm(string CompanyName, string PropriterName, string CompanyCategoryName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount)
         {
             int response;
             response = bill.SubmitBill(CompanyName, PropriterName, CompanyCategoryName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount);
@@ -64,7 +91,7 @@ namespace ASBM.Controllers
             string result = bill.FetchAllDept();
             return result;
         }
-        
+
         public string GetAllFund()
         {
             string result = bill.FetchAllFund();
@@ -95,7 +122,7 @@ namespace ASBM.Controllers
             return result;
         }
 
-        public ActionResult ajax_BillAllotementForm() 
+        public ActionResult ajax_BillAllotementForm()
         {
             return PartialView("~/Views/Home/_partialBillAllotementView.cshtml");
         }
@@ -132,7 +159,7 @@ namespace ASBM.Controllers
             return response;
         }
 
-   
+
         /////////////// RANDOM BILL GENERATION End //////////////////////
         ///
 
@@ -140,7 +167,7 @@ namespace ASBM.Controllers
         /////////////// KNOW YOUR BILLING STATUS Start //////////////////////
 
         public ActionResult BillingStatus()
-        {           
+        {
             return View();
         }
 
@@ -157,7 +184,7 @@ namespace ASBM.Controllers
 
 
         /////////////// OFFICER ENTRY Start //////////////////////
-        public ActionResult OfficerEntry() 
+        public ActionResult OfficerEntry()
         {
             List<OfficerModel> temp = new List<OfficerModel>();
             temp = officer.FetchAllOfficerList();
@@ -178,7 +205,7 @@ namespace ASBM.Controllers
             //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
         }
         /////////////// OFFICER ENTRY End //////////////////////
-        
+
 
         /////////////// Payee Master ENTRY Start //////////////////////
         public ActionResult PayeeEntry()
@@ -247,7 +274,7 @@ namespace ASBM.Controllers
             return response;
         }
         /////////////// Department Master ENTRY End //////////////////////
-        
+
 
         /////////////// Scheme Master ENTRY Start //////////////////////
         public ActionResult MstSchemeDetails()
@@ -270,7 +297,7 @@ namespace ASBM.Controllers
             return response;
         }
         /////////////// Scheme Master ENTRY End //////////////////////
-        
+
 
         /////////////// Treasury Master ENTRY Start //////////////////////
         public ActionResult MstTreasuryDetails()

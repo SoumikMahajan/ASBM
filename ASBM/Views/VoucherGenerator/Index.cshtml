@@ -1,0 +1,300 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="container" style="background-color: white; color: black; padding-bottom: 20px;">
+        <div class="row no-gutters">
+            <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+                <div class="section-title">
+                    <h2>VOUCHER GENERATOR</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-color: beige;">
+
+            <form id="voucher" method="post" style="display:block;">
+                <div class="row form-group">
+                    <div class="col-md-2">
+                        <label>Select Docket Type :</label>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="randomRadio1" value="">
+                            <label class="form-check-label" for="inlineRadio1">Random</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="sbRadio2" value="">
+                            <label class="form-check-label" for="inlineRadio2">SB</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label>Choose Docket No from the List :</label>
+                        <select id="ddlTypeBill" class="form-control placeholder-no-fix selectpicker" data-show-subtext="true" data-live-search="true">
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" class="btn btn-info" id="btn_submit" style="margin-top: 17px;">PROCEED</button>
+                    </div>
+                </div>
+                <hr />
+
+                <div class="row form-group">
+                    <div class="col-md-3"><h6>1. Do you have CIC Number</h6></div>
+                    <div class="col-md-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cicrandomRadio1" value="">
+                            <label class="form-check-label" for="inlineRadio1">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="cicrandomRadio2" value="">
+                            <label class="form-check-label" for="inlineRadio2">No</label>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-check form-check-inline" id="cicnoHide">
+                            <label class="">If Yes then CIC No :</label>
+                            <input class="form-control placeholder-no-fix inputsm" type="text" name="" id="cic_input_no" value="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3"><h6>2. Do you Participate in e-Tender</h6></div>
+                    <div class="col-md-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="eTenRadioOption1" value="">
+                            <label class="form-check-label">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="eTenRadioOption2" value="">
+                            <label class="form-check-label">No</label>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-check form-check-inline" id="tennoHide">
+                            <label class="">If Yes Then Tender No :</label>
+                            <input class="form-control placeholder-no-fix inputsm" type="text" name="" id="ten_input_no" value="">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-3"><h6>3. MED Approval</h6></div>
+                    <div class="col-md-2">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="medRadio1" value="random">
+                            <label class="form-check-label">Yes</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="medRadio2" value="">
+                            <label class="form-check-label">No</label>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="form-check form-check-inline" id="mednoHide">
+                            <label class="">MED Vetting Date :</label>
+                            <input class="form-control placeholder-no-fix inputsm" type="text" name="" id="med_input_no" value="">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label>4.Date of Meeting of Tender Committee: </label>
+                        <input type="date" id="txt" placeholder="" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-4">
+                        <label>5. Date of Meeting of Chairman in Council Reg : </label>
+                        <input type="date" id="txt" placeholder="" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label>6. Acceptance of Tender Rate Rs : </label>
+                        <input type="number" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-4">
+                        <label>7.Date of Meeting of BOC for Sanction of expenditure : </label>
+                        <input type="date" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-3"><h6>8.AA & FS No. of Government</h6></div>
+                    <div class="col-md-2">
+                        <input type="number" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-3"><h6>9.Work Order No.</h6></div>
+                    <div class="col-md-2">
+                        <input type="number" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-3"><h6>Work Order Date.</h6></div>
+                    <div class="col-md-2">
+                        <input type="date" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-3"><h6>10.Amount of Estimate</h6></div>
+                    <div class="col-md-2">
+                        <input type="number" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-3"><h6>11.MB Book No.</h6></div>
+                    <div class="col-md-2">
+                        <input type="number" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-3"><h6>Page No.</h6></div>
+                    <div class="col-md-2">
+                        <input type="number" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-3"><h6>12.Work Register No.</h6></div>
+                    <div class="col-md-2">
+                        <input type="number" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-3"><h6>Work Register Date.</h6></div>
+                    <div class="col-md-2">
+                        <input type="date" id="txt" placeholder="" name="txtSoleProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center text-center">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-info" id="btn_approved">Approved</button>
+                        <button type="button" class="btn btn-info" id="btn_reject">Reject</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="container" style="background-color: white; color: black; padding-bottom: 20px;" id="billDetailsShowHide">
+        <div class="row no-gutters">
+            <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+                <div class="section-title">
+                    <h2>Bill Details of the Docket No</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-color: beige;">
+
+            <form id="" method="post" class="" style="display:block;">
+
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Category of Company: </label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Category of Company">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Type Of Work: </label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Type Of Work">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Company Name: </label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Company Name">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Department Name: </label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Department Name">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Proprietor Name: </label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Proprietor Name">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Fund Name: </label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Fund Name">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Mobile No: </label>
+                        <input type="number" class="form-control" id="" placeholder="Enter Mobile No">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">GST No: </label>
+                        <input type="number" class="form-control" id="" placeholder="Enter GST No">
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Description of Work: </label>
+                        <input type="text" class="form-control" id="" placeholder="Enter Mobile No">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exampleInputEmail1">Bill Amount: </label>
+                        <input type="number" class="form-control" id="" placeholder="Enter Bill Amount">
+                    </div>
+                </div>
+                <div class="form-group row justify-content-center text-center">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-info" id="btn_submit">Submit</button>
+                        <button type="button" class="btn btn-info" id="btn_print">Print</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        showhideForVendorGenerator();
+        function showhideForVendorGenerator() {
+            document.getElementById('cicrandomRadio2').checked = true;
+            document.getElementById('eTenRadioOption2').checked = true;
+            document.getElementById('medRadio2').checked = true;
+            $("#cicnoHide").hide();
+            $("#tennoHide").hide();
+            $("#mednoHide").hide();
+            $("#billDetailsShowHide").hide();
+
+        }
+        $(document).on("click", "#cicrandomRadio1", function () {
+            $("#cicnoHide").show(300);
+            document.getElementById('cicrandomRadio2').checked = false;
+        });
+        $(document).on("click", "#cicrandomRadio2", function () {
+            $("#cicnoHide").hide();
+            document.getElementById('cicrandomRadio1').checked = false;
+        });
+
+        $(document).on("click", "#eTenRadioOption1", function () {
+            $("#tennoHide").show(300);
+            document.getElementById('eTenRadioOption2').checked = false;
+        });
+        $(document).on("click", "#eTenRadioOption2", function () {
+            $("#tennoHide").hide();
+            document.getElementById('eTenRadioOption1').checked = false;
+        });
+        $(document).on("click", "#medRadio1", function () {
+            $("#mednoHide").show(300);
+            document.getElementById('medRadio2').checked = false;
+        });
+        $(document).on("click", "#medRadio2", function () {
+            $("#mednoHide").hide();
+            document.getElementById('medRadio1').checked = false;
+        });
+
+        $(document).on("click", "#btn_approved", function () {
+            $("#billDetailsShowHide").show(300);
+        });
+    });
+</script>

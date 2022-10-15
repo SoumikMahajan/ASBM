@@ -13,30 +13,30 @@
         </div>
     </div>
 
-        <div class="row no-gutters">
-            <div class="banner_automation">
-                <div id="wrap">
-                    
-                    <div id="showcase" class="noselect">
-                        <div class="size">
-                            @*<button type="button" class="cloud9-item" style="font-size:1.2rem;">OFFICER ENTRY</button>*@
-                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/1.png" alt="automation">
-                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/2.png" alt="automation">
-                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/3.png" alt="automation">
-                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/4.png" alt="automation">
-                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/5.png" alt="automation">
-                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/6.png" alt="automation">
-                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/7.png" alt="automation">
-                            <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/8.png" alt="automation">
-                        </div>
+    <div class="row no-gutters">
+        <div class="banner_automation">
+            <div id="wrap">
+
+                <div id="showcase" class="noselect">
+                    <div class="size">
+                        @*<button type="button" class="cloud9-item" style="font-size:1.2rem;">OFFICER ENTRY</button>*@
+                        <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/1.png" alt="automation">
+                        <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/2.png" alt="automation">
+                        <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/3.png" alt="automation">
+                        <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/4.png" alt="automation">
+                        <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/5.png" alt="automation">
+                        <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/6.png" alt="automation">
+                        <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/7.png" alt="automation">
+                        <img class="cloud9-item openmodalpopup" src="~/assets/Images/automation/8.png" alt="automation">
                     </div>
                 </div>
-                <div class="automation_middle">
-                    <h2>PURO PRADAN</h2>
-                </div>
+            </div>
+            <div class="automation_middle">
+                <h2>PURO PRADAN</h2>
             </div>
         </div>
-    
+    </div>
+
     <br />
 
     @*<div class="row form-group" style="text-align: center;">
@@ -112,15 +112,18 @@
                         <h4 style="font-size: 1.5rem;">Login</h4>
                     </div>
                     <div class="d-flex flex-column text-center">
-                        <form>
+                        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                        {
                             <div class="form-group">
-                                <input type="email" class="form-control" id="email1" placeholder="Your email address...">
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Your email address...">
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password1" placeholder="Your password...">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Your password...">
                             </div>
-                            <a type="button" class="btn btn-info btn-block btn-round" href="@Url.Content("~/Home/ActionBasedOnDept")">Login</a>
-                        </form>
+                            @*<a type="button" class="btn btn-info btn-block btn-round" href="@Url.Content("~/Home/ActionBasedOnDept")">Login</a>*@
+                            <input type="submit" class="btn btn-info btn-block btn-round" value="Login" />
+                        }
+
                     </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
@@ -135,9 +138,9 @@
 <script src="~/assets/js/cloud9carousel.js"></script>
 <script>
     $(document).ready(function () {
-    debugger;
+        debugger;
         $(document).on('click', '.openmodalpopup', function () {
-               $("#hdnOpenModel").trigger("click");
+            $("#hdnOpenModel").trigger("click");
         }); //dev2
 
         allowautomation();
