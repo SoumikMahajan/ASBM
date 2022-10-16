@@ -49,11 +49,11 @@
         //event.preventDefault();
 
         var info = {
-            accNo: $("#txtAcNo").val(),
-            accName: $("#txtAcName").val(),
-            fundId: parseInt($("#ddlFund").val()),
-            bankName: $("#txtBankNm").val(),
-            ifsc: $("#txtIfsc").val(),
+            accNo: $("#txtAcNo").val().trim(),
+            accName: $("#txtAcName").val().trim(),
+            fundId: parseInt($("#ddlFund").val().trim()),
+            bankName: $("#txtBankNm").val().trim(),
+            ifsc: $("#txtIfsc").val().trim(),
         };
 
         //info = JSON.stringify(info)

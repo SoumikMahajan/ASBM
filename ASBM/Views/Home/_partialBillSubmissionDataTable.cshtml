@@ -4,32 +4,37 @@
     <thead>
         <tr class="dataHead">
             <th>SL</th>
-            <th>Company Category</th>          
-            <th>Company Name</th>          
-            <th>Department</th>          
-            <th>Pan No</th>          
-            <th>GST No</th>          
-            <th>Fund Name</th>          
-            <th>Description of Work</th>          
-            <th>BIll Amount</th>          
+            <th>Docket NO</th>
+            <th>Company Category</th>
+            <th>Company Name</th>
+            <th>Department</th>
+            <th>Pan No</th>
+            <th>GST No</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
+        @{ int rows = 1;}
         @if (Model != null && Model.Count > 0)
         {
             foreach (var obj in Model)
             {
                 <tr class="inAc" style="color: black;font-size: 13px !important;">
-                    <td>@obj.bill_details_id_pk</td>
+                    <td>@rows</td>
+                    <td>@obj.bill_docket_no</td>
                     <td>@obj.bill_category_id_fk</td>
                     <td>@obj.bill_company_name</td>
                     <td>@obj.department_name</td>
                     <td>@obj.bill_pan</td>
                     <td>@obj.bill_gst</td>
-                    <td>@obj.fund_scheme_name</td>
-                    <td>@obj.bill_description</td>
-                    <td>@obj.bill_amount</td>
+                    <td>
+                        <center>
+                            <a href="javascript:void(o)" id="BtnEdit" data-id="@obj.bill_details_id_pk" class="BtnClEditPoUp"><i class="fa fa-edit"></i></a>
+                            <a href="javascript:void(o)" id="BtnDelete" data-id="@obj.bill_details_id_pk" class="BtnDeletePoUp"><i class="fa fa-trash"></i></a>
+                        </center>
+                    </td>
                 </tr>
+                rows++;
             }
         }
     </tbody>

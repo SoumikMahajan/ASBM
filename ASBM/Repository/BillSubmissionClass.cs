@@ -14,21 +14,23 @@ namespace ASBM.Repository
     {
         string strcon = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
-        public int SubmitBill(string companyName, string propriterName, string CompanyCategoryName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount)
+        public int SubmitBill(string CompanyCategoryName, string companyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount)
         {
             int res = 0;
             try
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = string.Empty;
+                    //string Query = string.Empty;
 
-                    Query = @"INSERT INTO tbl_accounts_bill_details (bill_company_name, bill_proprietor_name, bill_category_id_fk, bill_department_id_fk, bill_pan, bill_gst, bill_fund_id_fk, bill_description, bill_amount) VALUES(@companuName, @propName, @category_id, @dept_id, @pan, @gst, @fund_id, @work_desc, @bill_amount)";
+                    //Query = @"INSERT INTO tbl_accounts_bill_details (bill_category_id_fk, bill_company_name, bill_department_id_fk, bill_pan, bill_gst, bill_fund_id_fk, bill_description, bill_amount) VALUES(@category_id, @companyName,@dept_id, @pan, @gst, @fund_id, @work_desc, @bill_amount)";
 
-                    SqlCommand cmd = new SqlCommand(Query, con);
-                    cmd.Parameters.AddWithValue("@companuName", companyName);
-                    cmd.Parameters.AddWithValue("@propName", propriterName);
+
+                    SqlCommand cmd = new SqlCommand("[dbo].[spBillSubmission]", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
                     cmd.Parameters.AddWithValue("@category_id", CompanyCategoryName);
+                    cmd.Parameters.AddWithValue("@companyName", companyName);
                     cmd.Parameters.AddWithValue("@dept_id", DepartmentId);
                     cmd.Parameters.AddWithValue("@pan", Pan);
                     cmd.Parameters.AddWithValue("@gst", Gst);
@@ -56,6 +58,74 @@ namespace ASBM.Repository
             return res;
         }
 
+        public int DeleteBill(string id)
+        {
+            int res = 0;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = string.Empty;
+
+                    Query = @"Delete from tbl_accounts_bill_details where bill_details_id_pk = @id";
+
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    con.Open();
+                    int AffectedRows = cmd.ExecuteNonQuery();
+                    if (AffectedRows == 1)
+                    {
+                        res = 1;
+                    }
+                    else
+                    {
+                        res = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //res = "Failed|Internal error.";
+            }
+
+            return res;
+        }
+
+        public BillSubmission GetBillDetailsById(int id)
+        {
+            BillSubmission obj = new BillSubmission();
+            DataTable dt = new DataTable();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = @"select * from [dbo].[_HomeBanner]  WHERE ID=@ID";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                    adp.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        obj = JsonConvert.DeserializeObject<List<BillSubmission>>(JsonConvert.SerializeObject(dt)).FirstOrDefault();
+                    }
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return obj;
+        }
         public string FetchAllDept()
         {
             string result = null;
@@ -122,8 +192,8 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"SELECT	bill.bill_details_id_pk, bill.bill_category_id_fk, bill.bill_company_name, bill.bill_proprietor_name, bill.bill_type_id_fk, "+  
-                                    "dept.department_name, bill.bill_pan, bill.bill_gst, fund.fund_scheme_name, bill.bill_description, bill.bill_amount, bill.bill_CreateDate " +
+                    string Query = @"SELECT bill.bill_details_id_pk,bill.bill_docket_no, bill.bill_category_id_fk, bill.bill_company_name,bill.bill_pan,                            bill.bill_gst, " +
+                                    "dept.department_name, fund.fund_scheme_name " +
                                     "FROM tbl_accounts_bill_details AS bill " +
                                     "LEFT JOIN tbl_accounts_department_master as dept ON dept.department_id_pk = bill.bill_department_id_fk " +
                                     "LEFT JOIN tbl_accounts_fund_master as fund ON fund.fund_id_pk = bill.bill_fund_id_fk"

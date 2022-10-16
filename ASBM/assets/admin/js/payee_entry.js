@@ -49,12 +49,12 @@
         //event.preventDefault();
 
         var info = {
-            payeeName: $("#txt_payee_name").val(),
-            pan: $("#txt_pan").val(),
-            mobile: $("#txt_mobile").val(),
-            gst: $("#txt_gst").val(),
-            accno: $("#txt_ac").val(),
-            deptId: parseInt($("#ddlDepartment").val())
+            payeeName: $("#txt_payee_name").val().trim(),
+            pan: $("#txt_pan").val().trim(),
+            mobile: $("#txt_mobile").val().trim(),
+            gst: $("#txt_gst").val().trim(),
+            accno: $("#txt_ac").val().trim(),
+            deptId: parseInt($("#ddlDepartment").val().trim())
         };
 
         //info = JSON.stringify(info)

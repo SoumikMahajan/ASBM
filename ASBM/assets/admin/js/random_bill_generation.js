@@ -67,12 +67,12 @@
         //event.preventDefault();
 
         var info = {
-            Name: $("#txtName").val(),
-            BillTypeId: parseInt($("#ddlTypeOfBill").val()),
-            DepartmentId: parseInt($("#ddlDepartment").val()),
-            FundId: parseInt($("#ddlFund").val()),
-            WorkDesc: $("#txtDescriptionOfWork").val(),
-            Mobile: $("#txtMobileNo").val()
+            Name: $("#txtName").val().trim(),
+            BillTypeId: parseInt($("#ddlTypeOfBill").val().trim()),
+            DepartmentId: parseInt($("#ddlDepartment").val().trim()),
+            FundId: parseInt($("#ddlFund").val().trim()),
+            WorkDesc: $("#txtDescriptionOfWork").val().trim(),
+            Mobile: $("#txtMobileNo").val().trim()
         };
 
         //info = JSON.stringify(info)

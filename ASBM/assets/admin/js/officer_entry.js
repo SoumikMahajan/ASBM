@@ -4,6 +4,17 @@
         window.location.href = "/Home/OfficerEntry";
     });
 
+    $(document).on('change', '#ddlUserType', function () {
+        var typeId = parseInt($("#ddlUserType").val());
+        if (typeId == 2) {
+            $(".department_ddl").removeClass('d-lg-none');
+        }
+        else {
+            $(".department_ddl").addClass('d-lg-none');
+        }
+    });
+
+
     fetchDepartment();
 
     function fetchDepartment() {
@@ -49,13 +60,13 @@
         //event.preventDefault();
 
         var info = {
-            officerName: $("#txt_officer_name").val(),
-            pan: $("#txt_pan").val(),
-            mobile: $("#txt_mobile").val(),
-            gpf: $("#txt_gpf").val(),
-            DeptId: parseInt($("#ddlDepartment").val()),
-            pass: $("#txt_pass").val()
-
+            officerName: $("#txt_officer_name").val().trim(),
+            pan: $("#txt_pan").val().trim(),
+            mobile: $("#txt_mobile").val().trim(),
+            gpf: $("#txt_gpf").val().trim(),
+            DeptId: parseInt($("#ddlDepartment").val().trim()),
+            pass: $("#txt_pass").val(),
+            userTypeId: parseInt($("#ddlUserType").val().trim())
         };
 
         //info = JSON.stringify(info)

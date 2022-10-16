@@ -67,10 +67,10 @@
         //event.preventDefault();
 
         var info = {
-            DocketNo: parseInt($("#ddlDocketNo").val()),
-            DepartmentId: parseInt($("#ddlDepartment").val()),
-            OfficerId: parseInt($("#ddlOfficer").val()),
-            AllotedDatte: $("#AllottedDate").val()
+            DocketNo: parseInt($("#ddlDocketNo").val().trim()),
+            DepartmentId: parseInt($("#ddlDepartment").val().trim()),
+            OfficerId: parseInt($("#ddlOfficer").val().trim()),
+            AllotedDatte: $("#AllottedDate").val().trim()
         };
 
         //info = JSON.stringify(info)

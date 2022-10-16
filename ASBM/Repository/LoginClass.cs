@@ -42,7 +42,7 @@ namespace ASBM.Repository
                     {
                         foreach (DataRow dr in dt.Rows)
                         {
-                            loginModel.loginId = (string)dr[0];
+                            loginModel.userId = (string)dr[0];
                             loginModel.userRole = (string)dr[1];
                             loginModel.userRoleId = Convert.ToInt32(dr[2]);
 
@@ -51,7 +51,6 @@ namespace ASBM.Repository
                             //LogInResult.IsSuccess = true;
                         }
                     }
-
                 }
             }
             catch (Exception ex)

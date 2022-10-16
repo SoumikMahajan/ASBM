@@ -8,11 +8,13 @@
     <link href="~/assets/css/_Layout.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css">
+    <link href="~/assets/sweetalert/sweetalert2.css" rel="stylesheet" />
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>*@
+    <script src="~/assets/sweetalert/sweetalert2.all.min.js"></script>
 
 </head>
 <body>
@@ -54,9 +56,10 @@
                                 <a href="index.aspx" class="reset login-btn">A</a>|
                                 <a href="#" class="decrease login-btn">A-</a>
                                 <a href="javascript:;" id="big_big_font_link" style="display: none;" onclick="chage_font_style('big_big_font');" class="login-btn">A+</a>
-
-                                <a href="login.aspx" class="login-btn"><strong class="fa fa-sign-in"></strong>&nbsp<span class="d-none d-md-inline-block">Login</span></a>
-
+                                @if (Session["UserID"] != null)
+                                {
+                                    <a href="@Url.Content("~/Home/Logout")" class="login-btn"><strong class="fa fa-sign-in"></strong>&nbsp<span class="d-none d-md-inline-block">Logout</span></a>
+                                }
 
                             </div>
                         </div>
@@ -92,9 +95,9 @@
     </header>
 
 
-    
-        @RenderBody()
-   
+
+    @RenderBody()
+
 
 
     @*Footer Section*@
@@ -190,7 +193,7 @@
             });
             getClockDateTime();
             FontIncreaseDecrease();
-            
+
         });
 
         function getClockDateTime() {
@@ -318,4 +321,4 @@
     </script>
 
 </body>
-</html >
+</html>

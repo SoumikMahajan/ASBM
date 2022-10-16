@@ -31,7 +31,7 @@
         //event.preventDefault();
 
         var info = {
-            deptName: $("#txtDptName").val()
+            deptName: $("#txtDptName").val().trim()
         };
 
         //info = JSON.stringify(info)

@@ -31,8 +31,8 @@
         //event.preventDefault();
 
         var info = {
-            adviceNo: $("#txtAdviceNo").val(),
-            adviceDate: $("#txtAdviceDate").val()
+            adviceNo: $("#txtAdviceNo").val().trim(),
+            adviceDate: $("#txtAdviceDate").val().trim()
         };
 
         //info = JSON.stringify(info)

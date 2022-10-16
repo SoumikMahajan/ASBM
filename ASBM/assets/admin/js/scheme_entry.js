@@ -4,7 +4,6 @@
         window.location.href = "/Home/MstSchemeDetails";
     });
 
-
     $(document).on('click', '#btn_submit', function () {
 
         //var pay_hash = $(this).attr('rel');
@@ -31,7 +30,7 @@
         //event.preventDefault();
 
         var info = {
-            schemeName: $("#txtSchemeName").val()
+            schemeName: $("#txtSchemeName").val().trim()
         };
 
         //info = JSON.stringify(info)

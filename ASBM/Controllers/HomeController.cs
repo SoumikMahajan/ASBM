@@ -33,23 +33,41 @@ namespace ASBM.Controllers
                 {
                     LoginClass login = new LoginClass();
                     LoginModel UserDetails = login.Loginvalidate(email, password);
-
-                    if(UserDetails.userRoleId == 1)
+                    Session["UserId"] = UserDetails.userId;
+                    Session["UserRole"] = UserDetails.userRole;
+                    Session["UserRoleId"] = UserDetails.userRoleId;
+                    if (UserDetails.userRoleId == 1)
                     {
                         return RedirectToAction("ActionBasedOnDept");
                     }
-                    else if(UserDetails.userRoleId == 2)
+                    else if (UserDetails.userRoleId == 2)
                     {
                         return RedirectToAction("Index", "VoucherGenerator");
                     }
                 }
-
             }
             catch (Exception ex)
             {
                 throw;
             }
             return View();
+        }
+
+        public ActionResult Logout(string email, string password)
+        {
+            try
+            {
+                Session.Remove("UserId");
+                Session.Remove("UserRole");
+                Session.Remove("UserRoleId");
+                //string x = Session["UserId"].ToString();
+                return RedirectToAction("Index", "Home");
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         public ActionResult About()
@@ -66,8 +84,15 @@ namespace ASBM.Controllers
 
         public ActionResult ActionBasedOnDept() //added by koushik 
         {
-            ViewBag.Message = "Your contact page.";
-            return View();
+            if (Session["UserID"] != null && Session["UserRoleId"].ToString() == "1")
+            {
+                ViewBag.Message = "Your contact page.";
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         /////////////// BILL SUBMISSION Start//////////////////////       
@@ -78,12 +103,39 @@ namespace ASBM.Controllers
         }
 
         [HttpPost]
-        public int ajax_confirm_BillSubmissionForm(string CompanyName, string PropriterName, string CompanyCategoryName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount)
+        public int ajax_confirm_BillSubmissionForm(string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount)
         {
             int response;
-            response = bill.SubmitBill(CompanyName, PropriterName, CompanyCategoryName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount);
+            response = bill.SubmitBill(CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount);
             return response;
             //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
+        }
+
+        [HttpPost]
+        public int ajax_Delete_Bill(string id)
+        {
+            int response;
+            response = bill.DeleteBill(id);
+            return response;
+            //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
+        }
+
+        [HttpPost]
+        public ActionResult ajax_GetBillDetailsForUpdate(string id)
+        {
+            BillSubmission obj = new BillSubmission();
+            try
+            {
+                if (!string.IsNullOrEmpty(id))
+                {
+                    obj = bill.GetBillDetailsById(Convert.ToInt16(id));
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return PartialView("~/Views/ContentManagement/_partialBillSubmissionForm.cshtml", obj);
         }
 
         public string GetAllDept()
@@ -197,10 +249,10 @@ namespace ASBM.Controllers
         }
 
         [HttpPost]
-        public int ajax_confirm_OfficerEntryForm(string officerName, string pan, string mobile, string gpf, int DeptId, string pass)
+        public int ajax_confirm_OfficerEntryForm(string officerName, string pan, string mobile, string gpf, int DeptId, string pass, int userTypeId)
         {
             int response;
-            response = officer.SubmitOfficer(officerName, pan, mobile, gpf, DeptId, pass);
+            response = officer.SubmitOfficer(officerName, pan, mobile, gpf, DeptId, pass, userTypeId);
             return response;
             //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
         }

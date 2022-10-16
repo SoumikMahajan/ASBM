@@ -1,7 +1,7 @@
 ﻿@model List<ASBM.Models.PayeeModel>
 
 @{
-    ViewBag.Title = "OfficerEntry";
+    ViewBag.Title = "Proprietor";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -23,42 +23,39 @@
 
                 <div class="row form-group">
                     <div class="col-md-4">
-                        <label>Payee Name</label>
+                        <label>Payee Name :</label>
                         <input type="text" id="txt_payee_name" name="txt_payee_name" placeholder="Payee Name" class="form-control placeholder-no-fix">
                     </div>
 
                     <div class="col-md-4">
                         <label>Pan No :</label>
-                        <input type="text" id="txt_pan" placeholder="Pan NO" name="txt_pan" class="form-control placeholder-no-fix" autocomplete="off" maxlength="12">
+                        <input type="text" id="txt_pan" placeholder="Pan No" name="txt_pan" class="form-control placeholder-no-fix" autocomplete="off" maxlength="12">
                     </div>
 
                     <div class="col-md-4">
                         <label>Mobile :</label>
-                        <input type="text" id="txt_mobile" placeholder="Enter Mobile No" name="txt_mobile" class="form-control placeholder-no-fix" autocomplete="off" maxlength="10">
+                        <input type="text" id="txt_mobile" placeholder="Mobile No" name="txt_mobile" class="form-control placeholder-no-fix" autocomplete="off" maxlength="10">
                     </div>
                 </div>
 
                 <div class="row form-group">
                     <div class="col-md-4">
                         <label>GST :</label>
-                        <input type="text" id="txt_gst" placeholder="Enter GST NO" name="txt_gst" class="form-control placeholder-no-fix" autocomplete="off">
+                        <input type="text" id="txt_gst" placeholder="GST No" name="txt_gst" class="form-control placeholder-no-fix" autocomplete="off">
                     </div>
 
                     <div class="col-md-4">
                         <label>Account No :</label>
-                        <input type="text" id="txt_ac" placeholder="A/C NO" name="txt_ac" class="form-control placeholder-no-fix" autocomplete="off">
+                        <input type="text" id="txt_ac" placeholder="A/C No" name="txt_ac" class="form-control placeholder-no-fix" autocomplete="off">
                     </div>
 
                     <div class="col-md-4">
-                        <label>Department:</label>
+                        <label>Department :</label>
                         <select id="ddlDepartment" class="form-control placeholder-no-fix selectpicker" data-show-subtext="true" data-live-search="true">
                             @*<option value="">Select</option>*@
                         </select>
                     </div>
-
-              
                 </div>
-
 
                 <div class="form-group row justify-content-center text-center">
                     <div class="col-sm-12">

@@ -1,7 +1,7 @@
 ﻿@model List<ASBM.Models.OfficerModel>
 
 @{
-    ViewBag.Title = "OfficerEntry";
+    ViewBag.Title = "Officer";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -29,7 +29,7 @@
 
                     <div class="col-md-4">
                         <label>Pan No :</label>
-                        <input type="text" id="txt_pan" placeholder="Enter Pan NO" name="txt_pan" class="form-control placeholder-no-fix" autocomplete="off" maxlength="12">
+                        <input type="text" id="txt_pan" placeholder="Enter Pan No" name="txt_pan" class="form-control placeholder-no-fix" autocomplete="off" maxlength="12">
                     </div>
 
                     <div class="col-md-4">
@@ -41,10 +41,21 @@
                 <div class="row form-group">
                     <div class="col-md-4">
                         <label>GPF :</label>
-                        <input type="text" id="txt_gpf" placeholder="Enter GPF NO" name="txt_gpf" class="form-control placeholder-no-fix" autocomplete="off">
+                        <input type="text" id="txt_gpf" placeholder="Enter GPF No" name="txt_gpf" class="form-control placeholder-no-fix" autocomplete="off">
                     </div>
 
                     <div class="col-md-4">
+                        <label>User Type:</label>
+                        <select id="ddlUserType" class="form-control placeholder-no-fix selectpicker" data-show-subtext="true" data-live-search="true">
+                            <option value="">-- Select --</option>
+                            <option value="1">BILL COLLECTOR</option>
+                            <option value="2">VOUCHER GENERATOR</option>
+                            <option value="3">ACCOUNTANT</option>
+                            <option value="4">FINANCE OFFICER</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4 department_ddl d-lg-none">
                         <label>Department:</label>
                         <select id="ddlDepartment" class="form-control placeholder-no-fix selectpicker" data-show-subtext="true" data-live-search="true">
                             @*<option value="">Select</option>*@

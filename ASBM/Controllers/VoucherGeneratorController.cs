@@ -11,7 +11,15 @@ namespace ASBM.Controllers
         // GET: VoucherGenerator
         public ActionResult Index()
         {
-            return View();
+            if (Session["UserID"] != null && Session["UserRoleId"].ToString() == "2")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
         }
     }
 }
