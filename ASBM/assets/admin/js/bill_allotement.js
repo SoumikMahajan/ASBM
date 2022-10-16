@@ -4,8 +4,26 @@
         window.location.href = "/Home/BillAllotment";
     });
 
+    fetchDocketNo();
     fetchDepartment();
-    fetchOfficer();
+    //fetchOfficer();
+
+    function fetchDocketNo() {
+        //debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetAllDocketNo",
+            success: function (data) {
+                html = data;
+                $("#ddlDocketNo").html(html);
+            }
+        });
+        return html;
+    }
 
     function fetchDepartment() {
         //debugger;
@@ -24,22 +42,36 @@
         return html;
     }
 
-    function fetchOfficer() {
-        //debugger;
-        var html = "";
+    $(document).on("change", "#ddlDepartment", function () {
+        var deptId = parseInt($("#ddlDepartment").val());
+
         $.ajax({
             type: "GET",
             async: false,
             dataType: "text",
             contentType: "application/json; charset=utf-8",
-            url: "/Home/GetAllOfficer",
+            url: "/Home/GetAllOfficer/?deptId=" + deptId,
             success: function (data) {
-                html = data;
-                $("#ddlOfficer").html(html);
+                $("#ddlOfficer").html(data);
             }
         });
-        return html;
-    }
+    });
+    //function fetchOfficer() {
+    //    //debugger;
+    //    var html = "";
+    //    $.ajax({
+    //        type: "GET",
+    //        async: false,
+    //        dataType: "text",
+    //        contentType: "application/json; charset=utf-8",
+    //        url: "/Home/GetAllOfficer",
+    //        success: function (data) {
+    //            html = data;
+    //            $("#ddlOfficer").html(html);
+    //        }
+    //    });
+    //    return html;
+    //}
 
     $(document).on('click', '#btn_submit', function () {
 
@@ -67,7 +99,7 @@
         //event.preventDefault();
 
         var info = {
-            DocketNo: parseInt($("#ddlDocketNo").val().trim()),
+            DocketNo: $("#ddlDocketNo").val().trim(),
             DepartmentId: parseInt($("#ddlDepartment").val().trim()),
             OfficerId: parseInt($("#ddlOfficer").val().trim()),
             AllotedDatte: $("#AllottedDate").val().trim()

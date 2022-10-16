@@ -167,10 +167,16 @@ namespace ASBM.Controllers
             temp = billAllote.FetchAllBillAllotementDetails();
             return View(temp);
         }
-
-        public string GetAllOfficer()
+        
+        public string GetAllDocketNo()
         {
-            string result = billAllote.FetchAllOfficer();
+            string result = billAllote.FetchAllDocketNo();
+            return result;
+        }
+
+        public string GetAllOfficer(int deptId)
+        {
+            string result = billAllote.FetchAllOfficer(deptId);
             return result;
         }
 

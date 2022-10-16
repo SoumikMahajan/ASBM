@@ -21,7 +21,7 @@
                     <td>@obj.bill_allotement_docket_no</td>
                     <td>@obj.department_name</td>
                     <td>@obj.officer_name</td>
-                    <td>@obj.bill_allotement_date</td>
+                    <td>@obj.bill_allotement_date.ToShortDateString()</td>
                 </tr>
                 rows++;
             }

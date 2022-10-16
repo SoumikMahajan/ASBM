@@ -51,14 +51,15 @@ namespace ASBM.Repository
             return res;
         }
 
-        public string FetchAllOfficer()
+        public string FetchAllOfficer(int deptId)
         {
             string result = null;
             try
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = "select officer_user_id_pk, officer_name from tbl_accounts_officer_master order by officer_name";
+                    string Query = "select officer_user_id_pk, officer_name from tbl_accounts_officer_master " +
+                        "where officer_dept_id_fk = " + deptId + " order by officer_name";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     con.Open();
 
@@ -68,6 +69,35 @@ namespace ASBM.Repository
                     while (dr.Read())
                     {
                         result += "<option value='" + "" + Convert.ToString(dr["officer_user_id_pk"]) + "'>" + Convert.ToString(dr["officer_name"]) + "</option>";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        public string FetchAllDocketNo()
+        {
+            string result = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = "select bill_details_id_pk, bill_docket_no from tbl_accounts_bill_details order by bill_docket_no";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    con.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    result += "<option value = " + 0 + " selected > -- Select -- </ option >";
+                    while (dr.Read())
+                    {
+                        result += "<option value='" + "" + Convert.ToString(dr["bill_docket_no"]) + "'>" + Convert.ToString(dr["bill_docket_no"]) + "</option>";
                     }
 
                 }
