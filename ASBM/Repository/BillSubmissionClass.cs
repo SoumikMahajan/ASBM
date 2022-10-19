@@ -164,7 +164,7 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = "select fund_id_pk, fund_scheme_name from tbl_accounts_fund_master order by fund_scheme_name";
+                    string Query = "select fund_scheme_id_pk, fund_scheme_name from tbl_accounts_fund_master order by fund_scheme_name";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     con.Open();
 
@@ -173,7 +173,7 @@ namespace ASBM.Repository
                     result += "<option value = " + 0 + " selected > -- Select -- </ option >";
                     while (dr.Read())
                     {
-                        result += "<option value='" + "" + Convert.ToString(dr["fund_id_pk"]) + "'>" + Convert.ToString(dr["fund_scheme_name"]) + "</option>";
+                        result += "<option value='" + "" + Convert.ToString(dr["fund_scheme_id_pk"]) + "'>" + Convert.ToString(dr["fund_scheme_name"]) + "</option>";
                     }
 
                 }
@@ -198,7 +198,7 @@ namespace ASBM.Repository
                                     "dept.department_name, fund.fund_scheme_name " +
                                     "FROM tbl_accounts_bill_details AS bill " +
                                     "LEFT JOIN tbl_accounts_department_master as dept ON dept.department_id_pk = bill.bill_department_id_fk " +
-                                    "LEFT JOIN tbl_accounts_fund_master as fund ON fund.fund_id_pk = bill.bill_fund_id_fk"
+                                    "LEFT JOIN tbl_accounts_fund_master as fund ON fund.fund_scheme_id_pk = bill.bill_fund_id_fk"
                                     ;
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
