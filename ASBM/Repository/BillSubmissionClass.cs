@@ -100,7 +100,8 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select * from [dbo].[_HomeBanner]  WHERE ID=@ID";
+                    string Query = @"select bill_details_id_pk, bill_category_id_fk, bill_company_name, bill_department_id_fk, bill_pan, 
+                                    bill_gst, bill_fund_id_fk, bill_description, bill_amount from [dbo].[tbl_accounts_bill_details] WHERE bill_details_id_pk =@ID";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@ID", id);
                     if (con.State != ConnectionState.Open)
@@ -126,6 +127,7 @@ namespace ASBM.Repository
             }
             return obj;
         }
+
         public string FetchAllDept()
         {
             string result = null;
@@ -220,6 +222,41 @@ namespace ASBM.Repository
 
             }
             return List;
+        }
+
+        public string GetDeptById(int id)
+        {
+            string result = "";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query2 = "select department_id_pk,department_name from [dbo].[tbl_accounts_department_master] order by department_name";
+                    SqlCommand cmd2 = new SqlCommand(Query2, con);
+                    con.Open();
+                    SqlDataReader dr2 = cmd2.ExecuteReader();
+
+                    result += "<option value = " + 0 + "> --Select-- </ option >";
+                    while (dr2.Read())
+                    {
+                        if (id == Convert.ToInt32(dr2["department_id_pk"]))
+                        {
+                            result += "<option value='" + "" + Convert.ToString(dr2["department_id_pk"]) + "'selected>" + Convert.ToString(dr2["department_name"]) + "</option>";
+                        }
+                        else
+                        {
+                            result += "<option value='" + "" + Convert.ToString(dr2["department_id_pk"]) + "'>" + Convert.ToString(dr2["department_name"]) + "</option>";
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
         }
     }
 }

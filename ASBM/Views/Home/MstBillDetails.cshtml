@@ -1,0 +1,42 @@
+﻿@model List<ASBM.Models.BillModel>
+@{
+    ViewBag.Title = "MstBillDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="container">
+    <div class="container" style="background-color: white; color: black; padding-bottom: 20px;">
+        <div class="row no-gutters">
+            <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+                <div class="section-title">
+                    <h2>Bill Entry</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-color: beige;">
+
+            <form id="mstbill_form" method="post">
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label>Type Of Name:</label>
+                        <input type="text" id="txtBillName" placeholder="Enter Bill Name" name="" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-info" id="btn_submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div id="prtCmsDataTable">
+                @Html.Partial("~/Views/Home/_partialBillEntryDataTable.cshtml", Model)
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="~/assets/admin/js/bill_entry.js"></script>
+

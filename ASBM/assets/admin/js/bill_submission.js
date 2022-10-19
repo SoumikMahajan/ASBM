@@ -94,6 +94,23 @@
         return html;
     }
 
+    function fetchDepartmentById(deptId) {
+        //debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetDeptById/?deptId=" + deptId,
+            success: function (data) {
+                html = data;
+                $("#ddlDepartment").html(html);
+            }
+        });
+        return html;
+    }
+
     function fetchFund() {
         //debugger;
         var html = "";
@@ -297,7 +314,6 @@
         });
     }
 
-
     $(document).on('click', '#BtnDelete', function (event) {
         debugger;
         var id = $(this).data("id");
@@ -330,19 +346,87 @@
         })
 
     });
+
     $(document).on('click', '#BtnEdit', function (event) {
         debugger;
         var id = $(this).data("id");
         $.ajax({
             url: "/Home/ajax_GetBillDetailsForUpdate?id=" + id,
-            type: "POST",
+            type: "GET",
             dataType: "json",
-            async: false,
-            contentType: false,
-            processData: false,
-            cache: false,
+            //async: false,            
             success: function (data) {
-                location.reload();
+                $('#txt_gst').val(data.bill_gst);
+                $('#txt_pan').val(data.bill_pan);
+                $('#txt_work_desc').val(data.bill_description);
+                $('#txt_amount').val(data.bill_amount);
+                fetchDepartmentById(data.bill_department_id_fk);
+
+                var companytype = data.bill_category_id_fk;
+
+                if (companytype == 'Limited Company') {
+                    $('#inlineRadio3').prop("checked", true);
+                    $("#ltdHideShow").show(300);
+                    $("#HufHideShow").hide(300);
+                    $("#IndHideShow").hide(300);
+                    $("#pvtHideShow").hide(300);
+                    $("#SoleHideShow").hide(300);
+                    $("#PartnershipHideShow").hide(300);
+                    $('#txtLtd').val(data.bill_company_name);
+                }
+                else if (companytype == 'Individual') {
+                    $('#inlineRadio1').prop("checked", true);
+                    $("#IndHideShow").show(300);
+                    $("#HufHideShow").hide(300);
+                    $("#ltdHideShow").hide(300);
+                    $("#pvtHideShow").hide(300);
+                    $("#SoleHideShow").hide(300);
+                    $("#PartnershipHideShow").hide(300);
+                    $('#txtIndividual').val(data.bill_company_name);
+                }
+                else if (companytype == 'HUF') {
+                    $('#inlineRadio2').prop("checked", true);
+                    $("#HufHideShow").show(300);
+                    $("#IndHideShow").hide(300);
+                    $("#ltdHideShow").hide(300);
+                    $("#pvtHideShow").hide(300);
+                    $("#SoleHideShow").hide(300);
+                    $("#PartnershipHideShow").hide(300);
+                    $('#txtHuf').val(data.bill_company_name);
+                }
+                else if (companytype == 'PVT LTD Company') {
+                    $('#inlineRadio4').prop("checked", true);
+                    $("#pvtHideShow").show(300);
+                    $("#ltdHideShow").hide(300);
+                    $("#HufHideShow").hide(300);
+                    $("#IndHideShow").hide(300);
+                    $("#SoleHideShow").hide(300);
+                    $("#PartnershipHideShow").hide(300);
+                    $('#txtPvt').val(data.bill_company_name);
+                }
+                else if (companytype == 'SOLE PROPRIETOR') {
+                    $('#inlineRadio5').prop("checked", true);
+                    $("#SoleHideShow").show(300);
+                    $("#IndHideShow").hide(300);
+                    $("#HufHideShow").hide(300);
+                    $("#ltdHideShow").hide(300);
+                    $("#pvtHideShow").hide(300);
+                    $("#PartnershipHideShow").hide(300);
+                    $('#txtSoleProprietor').val(data.bill_company_name);
+                }
+                else if (companytype == 'PARTNERSHIP FIRM') {
+                    $('#inlineRadio6').prop("checked", true);
+                    $("#SoleHideShow").hide(300);
+                    $("#IndHideShow").hide(300);
+                    $("#HufHideShow").hide(300);
+                    $("#ltdHideShow").hide(300);
+                    $("#pvtHideShow").hide(300);
+                    $("#PartnershipHideShow").show(300);
+                    $('#txtpartnership').val(data.bill_company_name);
+                }
+
+                $("#btn_update").removeClass('d-lg-none');
+                $("#btn_submit").addClass('d-lg-none');
             },
             error: function () {
 

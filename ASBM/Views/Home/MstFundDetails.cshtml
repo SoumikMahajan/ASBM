@@ -1,0 +1,64 @@
+﻿@model List<ASBM.Models.FundModel>
+@{
+    ViewBag.Title = "MstFundDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/assets/admin/css/treasury_entry.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="container" style="background-color: white; color: black; padding-bottom: 20px;">
+        <div class="row no-gutters">
+            <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+                <div class="section-title">
+                    <h2>Fund Entry</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-color: beige;">
+
+            <form id="fund_form" method="post">
+                <div class="row form-group">
+                    <div class="col-md-4">
+                        <label>Fund Schema Name:</label>
+                        <input type="text" id="txtFundSchemaName" placeholder="Enter Fund Schema No" name="FundSchemaName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-info" id="btn_submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+            <div id="prtCmsDataTable">
+                @Html.Partial("~/Views/Home/_partialFundEntryDataTable.cshtml", Model)
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script src="~/assets/admin/js/fund_entry.js"></script>
+
+
+<!---------------------------- Modal for Confirm Submit ----------------------->
+<!--<div id="myForward" class="modal fade" role="dialog">
+    <div class="modal-dialog">-->
+        <!-- Modal content-->
+        <!--<div class="modal-content modal_forward_claim_content">
+            <div class="modal-header">
+                <h4 class="modal-title modal_title">Are you sure?</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body modal_forward_claim_body">
+            </div>
+            <div class="modal-footer">
+                <span class="show_forward_btn_dtls"></span>
+
+                <button type="button" class="btn btn-danger frwd_btn_no btn_auto_redirect" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>-->
+

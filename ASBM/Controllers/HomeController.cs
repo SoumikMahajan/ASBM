@@ -1,7 +1,9 @@
-﻿using ASBM.Models;
+﻿using Antlr.Runtime.Misc;
+using ASBM.Models;
 using ASBM.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -19,6 +21,8 @@ namespace ASBM.Controllers
         DepartmentEntryClass dept = new DepartmentEntryClass();
         SchemeEntryClass scheme = new SchemeEntryClass();
         TreasuryEntryClass trsy = new TreasuryEntryClass();
+        FundEntryClass fund = new FundEntryClass();
+        BillEntryClass Billmst = new BillEntryClass();
 
         public ActionResult Index()
         {
@@ -120,8 +124,8 @@ namespace ASBM.Controllers
             //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
         }
 
-        [HttpPost]
-        public ActionResult ajax_GetBillDetailsForUpdate(string id)
+        [HttpGet]
+        public JsonResult ajax_GetBillDetailsForUpdate(string id)
         {
             BillSubmission obj = new BillSubmission();
             try
@@ -135,7 +139,8 @@ namespace ASBM.Controllers
             {
 
             }
-            return PartialView("~/Views/ContentManagement/_partialBillSubmissionForm.cshtml", obj);
+            return Json(obj, JsonRequestBehavior.AllowGet);
+            //return PartialView("~/Views/ContentManagement/_partialBillSubmissionForm.cshtml", obj);
         }
 
         public string GetAllDept()
@@ -155,6 +160,12 @@ namespace ASBM.Controllers
             List<BillSubmission> temp = new List<BillSubmission>();
             temp = bill.FetchAllBillSubmission();
             return View(temp);
+        }
+
+        public string GetDeptById(int deptId)
+        {
+            string result = bill.GetDeptById(deptId);
+            return result;
         }
 
         /////////////// BILL ALLOTEMENT End//////////////////////
@@ -378,5 +389,37 @@ namespace ASBM.Controllers
             return response;
         }
         /////////////// Treasury Master ENTRY End //////////////////////
+        /////////////// FUND Master ENTRY Start //////////////////////
+        public ActionResult MstFundDetails()
+        {
+            List<FundModel> temp = new List<FundModel>();
+            temp = fund.FetchAllFundlist();
+            return View(temp);
+        }
+
+        [HttpPost]
+        public int ajax_confirm_FundEntryForm(string FundSchemeName)
+        {
+            int response;
+            response = fund.SubmitFundDetails(FundSchemeName);
+            return response;
+        }
+        /////////////// FUND Master ENTRY End //////////////////////
+        /////////////// BILL Master ENTRY Start //////////////////////
+        public ActionResult MstBillDetails()
+        {
+            List<BillModel> temp = new List<BillModel>();
+            temp = Billmst.FetchAllBillist();
+            return View(temp);
+        }
+
+        [HttpPost]
+        public int ajax_confirm_BillEntryForm(string TypeOfBillName)
+        {
+            int response;
+            response = Billmst.SubmitBillDetails(TypeOfBillName);
+            return response;
+        }
+        /////////////// BILL Master ENTRY End //////////////////////
     }
 }
