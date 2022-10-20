@@ -4,26 +4,26 @@
         window.location.href = "/Home/BillAllotment";
     });
 
-    fetchDocketNo();
+    //fetchDocketNo();
     fetchDepartment();
     //fetchOfficer();
 
-    function fetchDocketNo() {
-        //debugger;
-        var html = "";
-        $.ajax({
-            type: "GET",
-            async: false,
-            dataType: "text",
-            contentType: "application/json; charset=utf-8",
-            url: "/Home/GetAllDocketNo",
-            success: function (data) {
-                html = data;
-                $("#ddlDocketNo").html(html);
-            }
-        });
-        return html;
-    }
+    //function fetchDocketNo() {
+    //    //debugger;
+    //    var html = "";
+    //    $.ajax({
+    //        type: "GET",
+    //        async: false,
+    //        dataType: "text",
+    //        contentType: "application/json; charset=utf-8",
+    //        url: "/Home/GetAllDocketNo",
+    //        success: function (data) {
+    //            html = data;
+    //            $("#ddlDocketNo").html(html);
+    //        }
+    //    });
+    //    return html;
+    //}
 
     function fetchDepartment() {
         //debugger;
@@ -56,6 +56,22 @@
             }
         });
     });
+
+    $(document).on("change", "#ddlDepartment", function () {
+        var deptId = parseInt($("#ddlDepartment").val());
+
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetAllDocketNoByDept/?deptId=" + deptId,
+            success: function (data) {
+                $("#ddlDocketNo").html(data);
+            }
+        });
+    });
+
     //function fetchOfficer() {
     //    //debugger;
     //    var html = "";

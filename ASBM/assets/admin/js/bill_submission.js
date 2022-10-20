@@ -6,6 +6,7 @@
 
     fetchDepartment();
     fetchFund();
+    fetchBillType();
     inputboxshowhide()
     function inputboxshowhide() {
         $("#IndHideShow").hide();
@@ -77,6 +78,23 @@
 
     });
 
+    function fetchBillType() {
+        //debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetAllBillType",
+            success: function (data) {
+                html = data;
+                $("#ddlTypeBill").html(html);
+            }
+        });
+        return html;
+    }
+
     function fetchDepartment() {
         //debugger;
         var html = "";
@@ -106,6 +124,40 @@
             success: function (data) {
                 html = data;
                 $("#ddlDepartment").html(html);
+            }
+        });
+        return html;
+    }
+
+    function fetchFundById(fundId) {
+        //debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetFundById/?fundId=" + fundId,
+            success: function (data) {
+                html = data;
+                $("#ddlFund").html(html);
+            }
+        });
+        return html;
+    }
+
+    function fetchBillTypeById(billTypeId) {
+        //debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetBillTypeById/?billTypeId=" + billTypeId,
+            success: function (data) {
+                html = data;
+                $("#ddlTypeBill").html(html);
             }
         });
         return html;
@@ -143,6 +195,7 @@
         var FundId = parseInt($("#ddlFund").val());
         var WorkDesc = $("#txt_work_desc").val().trim();
         var Amount = $("#txt_amount").val().trim();
+        var BillTypeId = parseInt($("#ddlTypeBill").val());
 
         if (CompanyCategoryName === undefined) {
             Swal.fire('Please Select Company category')
@@ -273,7 +326,8 @@
             Gst: $("#txt_gst").val().trim(),
             FundId: parseInt($("#ddlFund").val()),
             WorkDesc: $("#txt_work_desc").val().trim(),
-            Amount: $("#txt_amount").val().trim()
+            Amount: $("#txt_amount").val().trim(),
+            BillTypeId: parseInt($("#ddlTypeBill").val())
         };
 
         //info = JSON.stringify(info)
@@ -361,6 +415,8 @@
                 $('#txt_work_desc').val(data.bill_description);
                 $('#txt_amount').val(data.bill_amount);
                 fetchDepartmentById(data.bill_department_id_fk);
+                fetchFundById(data.bill_fund_id_fk);
+                fetchBillTypeById(data.bill_type_id_fk);
 
                 var companytype = data.bill_category_id_fk;
 

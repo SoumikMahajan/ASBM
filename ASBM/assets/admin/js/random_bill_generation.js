@@ -6,6 +6,7 @@
 
     fetchDepartment();
     fetchFund();
+    fetchBillType();
 
     function fetchDepartment() {
         //debugger;
@@ -41,6 +42,23 @@
         return html;
     }
 
+    function fetchBillType() {
+        //debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetAllBillType",
+            success: function (data) {
+                html = data;
+                $("#ddlTypeBill").html(html);
+            }
+        });
+        return html;
+    }
+
     $(document).on('click', '#btn_submit', function () {
 
         //var pay_hash = $(this).attr('rel');
@@ -68,7 +86,7 @@
 
         var info = {
             Name: $("#txtName").val().trim(),
-            BillTypeId: parseInt($("#ddlTypeOfBill").val().trim()),
+            BillTypeId: parseInt($("#ddlTypeBill").val().trim()),
             DepartmentId: parseInt($("#ddlDepartment").val().trim()),
             FundId: parseInt($("#ddlFund").val().trim()),
             WorkDesc: $("#txtDescriptionOfWork").val().trim(),

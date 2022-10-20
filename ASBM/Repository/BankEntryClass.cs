@@ -61,7 +61,7 @@ namespace ASBM.Repository
                 {
                     string Query = @"select bank.bank_id_pk, bank.bank_account_no, bank.bank_account_name, bank.bank_name, bank.bank_ifsc, fund.fund_scheme_name from " +
                                     "tbl_accounts_bank_master AS bank " +
-                                    "LEFT JOIN tbl_accounts_fund_master AS fund ON fund.fund_id_pk = bank.bank_fund_id_fk";
+                                    "LEFT JOIN tbl_accounts_fund_master AS fund ON fund.fund_scheme_id_pk = bank.bank_fund_id_fk";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
                     {

@@ -18,5 +18,6 @@ namespace ASBM.Models
         public int active_status { get; set; }
         public string department_name { get; set; }
         public string fund_scheme_name { get; set; }
+        public string typeof_bill_name { get; set; }
     }
 }

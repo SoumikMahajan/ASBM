@@ -107,10 +107,10 @@ namespace ASBM.Controllers
         }
 
         [HttpPost]
-        public int ajax_confirm_BillSubmissionForm(string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount)
+        public int ajax_confirm_BillSubmissionForm(string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
         {
             int response;
-            response = bill.SubmitBill(CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount);
+            response = bill.SubmitBill(CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount, BillTypeId);
             return response;
             //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
         }
@@ -155,6 +155,12 @@ namespace ASBM.Controllers
             return result;
         }
 
+        public string GetAllBillType()
+        {
+            string result = bill.FetchAllBillType();
+            return result;
+        }
+
         public ActionResult BillSubmissionForm()
         {
             List<BillSubmission> temp = new List<BillSubmission>();
@@ -165,6 +171,18 @@ namespace ASBM.Controllers
         public string GetDeptById(int deptId)
         {
             string result = bill.GetDeptById(deptId);
+            return result;
+        }
+
+        public string GetFundById(int fundId)
+        {
+            string result = bill.GetFundById(fundId);
+            return result;
+        }
+
+        public string GetBillTypeById(int billTypeId)
+        {
+            string result = bill.GetBillTypeById(billTypeId);
             return result;
         }
 
@@ -179,9 +197,9 @@ namespace ASBM.Controllers
             return View(temp);
         }
         
-        public string GetAllDocketNo()
+        public string GetAllDocketNoByDept(int deptId)
         {
-            string result = billAllote.FetchAllDocketNo();
+            string result = billAllote.FetchAllDocketNoByDept(deptId);
             return result;
         }
 

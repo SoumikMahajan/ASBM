@@ -5,9 +5,11 @@
         <tr class="dataHead">
             <th>SL</th>
             <th>Docket NO</th>
+            <th>Bill Type</th>
             <th>Company Category</th>
             <th>Company Name</th>
             <th>Department</th>
+            <th>Fund Name</th>
             <th>Pan No</th>
             <th>GST No</th>
             <th>Action</th>
@@ -22,9 +24,11 @@
                 <tr class="inAc" style="color: black;font-size: 13px !important;">
                     <td>@rows</td>
                     <td>@obj.bill_docket_no</td>
+                    <td>@obj.typeof_bill_name</td>
                     <td>@obj.bill_category_id_fk</td>
                     <td>@obj.bill_company_name</td>
                     <td>@obj.department_name</td>
+                    <td>@obj.fund_scheme_name</td>
                     <td>@obj.bill_pan</td>
                     <td>@obj.bill_gst</td>
                     <td>

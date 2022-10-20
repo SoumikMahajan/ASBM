@@ -21,5 +21,7 @@ namespace ASBM.Models
         public string bill_amount { get; set; }
         public string bill_department_id_fk { get; set; }
         public DateTime bill_CreateDate { get; set; }
+        public string typeof_bill_name { get; set; }
+        public string bill_fund_id_fk { get; set; }
     }
 }

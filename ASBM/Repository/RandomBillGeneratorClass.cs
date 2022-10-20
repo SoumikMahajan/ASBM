@@ -23,14 +23,15 @@ namespace ASBM.Repository
                 {
                     string Query = string.Empty;
 
-                    Query = @"INSERT INTO tbl_accounts_random_bill_generation_details (random_bill_name, random_bill_dept_id_fk, random_bill_fund_id_fk, random_bill_work_desc, random_bill_mobile_no) VALUES(@billName, @deptid, @fundid, @workDesc, @mobile)";
+                    Query = @"INSERT INTO tbl_accounts_random_bill_generation_details (random_bill_name, random_bill_dept_id_fk, random_bill_fund_id_fk, random_bill_work_desc, random_bill_mobile_no, random_bill_type_id_fk) VALUES(@billName, @deptid, @fundid, @workDesc, @mobile, @billType)";
 
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@billName", Name);
-                    cmd.Parameters.AddWithValue("@deptid", BillTypeId);
+                    cmd.Parameters.AddWithValue("@deptid", DepartmentId);
                     cmd.Parameters.AddWithValue("@fundid", FundId);
                     cmd.Parameters.AddWithValue("@workDesc", WorkDesc);
                     cmd.Parameters.AddWithValue("@mobile", Mobile);
+                    cmd.Parameters.AddWithValue("@billType", BillTypeId);
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
@@ -66,11 +67,13 @@ namespace ASBM.Repository
 	                                    dept.department_name,
                                         fund.fund_scheme_name,
 	                                    rand_bill.random_bill_work_desc,
-	                                    rand_bill.random_bill_mobile_no 
+	                                    rand_bill.random_bill_mobile_no,
+                                        billtype.typeof_bill_name
                                     FROM
 	                                    tbl_accounts_random_bill_generation_details AS rand_bill
 	                                    LEFT JOIN tbl_accounts_department_master AS dept ON dept.department_id_pk = rand_bill.random_bill_dept_id_fk
-	                                    LEFT JOIN tbl_accounts_fund_master AS fund ON fund.fund_id_pk = rand_bill.random_bill_fund_id_fk";
+	                                    LEFT JOIN tbl_accounts_fund_master AS fund ON fund.fund_scheme_id_pk = rand_bill.random_bill_fund_id_fk
+                                        LEFT JOIN tbl_accounts_bill_master AS billtype ON billtype.typeof_bill_id_pk = rand_bill.random_bill_type_id_fk";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
                     {

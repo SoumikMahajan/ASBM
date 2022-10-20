@@ -81,14 +81,15 @@ namespace ASBM.Repository
             return result;
         }
 
-        public string FetchAllDocketNo()
+        public string FetchAllDocketNoByDept(int deptId)
         {
             string result = null;
             try
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = "select bill_details_id_pk, bill_docket_no from tbl_accounts_bill_details order by bill_docket_no";
+                    string Query = "select bill_details_id_pk, bill_docket_no from tbl_accounts_bill_details " +
+                        "WHERE bill_department_id_fk = " + deptId + " ORDER BY bill_docket_no";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     con.Open();
 

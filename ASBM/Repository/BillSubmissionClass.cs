@@ -14,7 +14,7 @@ namespace ASBM.Repository
     {
         string strcon = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
-        public int SubmitBill(string CompanyCategoryName, string companyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount)
+        public int SubmitBill(string CompanyCategoryName, string companyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
         {
             int res = 0;
             try
@@ -37,6 +37,7 @@ namespace ASBM.Repository
                     cmd.Parameters.AddWithValue("@fund_id", FundId);
                     cmd.Parameters.AddWithValue("@work_desc", WorkDesc);
                     cmd.Parameters.AddWithValue("@bill_amount", Amount);
+                    cmd.Parameters.AddWithValue("@bill_type_id", BillTypeId);
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
@@ -100,7 +101,7 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select bill_details_id_pk, bill_category_id_fk, bill_company_name, bill_department_id_fk, bill_pan, 
+                    string Query = @"select bill_details_id_pk, bill_category_id_fk, bill_company_name, bill_type_id_fk, bill_department_id_fk, bill_pan, 
                                     bill_gst, bill_fund_id_fk, bill_description, bill_amount from [dbo].[tbl_accounts_bill_details] WHERE bill_details_id_pk =@ID";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@ID", id);
@@ -157,6 +158,34 @@ namespace ASBM.Repository
             return result;
         }
 
+        public string FetchAllBillType()
+        {
+            string result = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = "select typeof_bill_id_pk, typeof_bill_name from tbl_accounts_bill_master order by typeof_bill_name";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    con.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    result += "<option value = " + 0 + " selected > -- Select -- </ option >";
+                    while (dr.Read())
+                    {
+                        result += "<option value='" + "" + Convert.ToString(dr["typeof_bill_id_pk"]) + "'>" + Convert.ToString(dr["typeof_bill_name"]) + "</option>";
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
         public string FetchAllFund()
         {
             string result = null;
@@ -194,11 +223,12 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"SELECT bill.bill_details_id_pk,bill.bill_docket_no, bill.bill_category_id_fk, bill.bill_company_name,bill.bill_pan,                            bill.bill_gst, " +
-                                    "dept.department_name, fund.fund_scheme_name " +
+                    string Query = @"SELECT bill.bill_details_id_pk,bill.bill_docket_no, bill.bill_category_id_fk, bill.bill_company_name, "+
+                                    "bill.bill_pan, bill.bill_gst, dept.department_name, fund.fund_scheme_name, billtype.typeof_bill_name " +
                                     "FROM tbl_accounts_bill_details AS bill " +
                                     "LEFT JOIN tbl_accounts_department_master as dept ON dept.department_id_pk = bill.bill_department_id_fk " +
-                                    "LEFT JOIN tbl_accounts_fund_master as fund ON fund.fund_scheme_id_pk = bill.bill_fund_id_fk"
+                                    "LEFT JOIN tbl_accounts_fund_master as fund ON fund.fund_scheme_id_pk = bill.bill_fund_id_fk " +
+                                    "LEFT JOIN tbl_accounts_bill_master as billtype ON billtype.typeof_bill_id_pk = bill.bill_type_id_fk"
                                     ;
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
@@ -246,6 +276,76 @@ namespace ASBM.Repository
                         else
                         {
                             result += "<option value='" + "" + Convert.ToString(dr2["department_id_pk"]) + "'>" + Convert.ToString(dr2["department_name"]) + "</option>";
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        public string GetFundById(int id)
+        {
+            string result = "";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query2 = "select fund_scheme_id_pk, fund_scheme_name from [dbo].[tbl_accounts_fund_master] order by fund_scheme_name";
+                    SqlCommand cmd2 = new SqlCommand(Query2, con);
+                    con.Open();
+                    SqlDataReader dr2 = cmd2.ExecuteReader();
+
+                    result += "<option value = " + 0 + "> --Select-- </ option >";
+                    while (dr2.Read())
+                    {
+                        if (id == Convert.ToInt32(dr2["fund_scheme_id_pk"]))
+                        {
+                            result += "<option value='" + "" + Convert.ToString(dr2["fund_scheme_id_pk"]) + "'selected>" + Convert.ToString(dr2["fund_scheme_name"]) + "</option>";
+                        }
+                        else
+                        {
+                            result += "<option value='" + "" + Convert.ToString(dr2["fund_scheme_id_pk"]) + "'>" + Convert.ToString(dr2["fund_scheme_name"]) + "</option>";
+                        }
+                    }
+                    con.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        public string GetBillTypeById(int id)
+        {
+            string result = "";
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query2 = "select typeof_bill_id_pk, typeof_bill_name from tbl_accounts_bill_master order by typeof_bill_name";
+                    SqlCommand cmd2 = new SqlCommand(Query2, con);
+                    con.Open();
+                    SqlDataReader dr2 = cmd2.ExecuteReader();
+
+                    result += "<option value = " + 0 + "> --Select-- </ option >";
+                    while (dr2.Read())
+                    {
+                        if (id == Convert.ToInt32(dr2["typeof_bill_id_pk"]))
+                        {
+                            result += "<option value='" + "" + Convert.ToString(dr2["typeof_bill_id_pk"]) + "'selected>" + Convert.ToString(dr2["typeof_bill_name"]) + "</option>";
+                        }
+                        else
+                        {
+                            result += "<option value='" + "" + Convert.ToString(dr2["typeof_bill_id_pk"]) + "'>" + Convert.ToString(dr2["typeof_bill_name"]) + "</option>";
                         }
                     }
                     con.Close();
