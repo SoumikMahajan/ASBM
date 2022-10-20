@@ -23,6 +23,7 @@ namespace ASBM.Controllers
         TreasuryEntryClass trsy = new TreasuryEntryClass();
         FundEntryClass fund = new FundEntryClass();
         BillEntryClass Billmst = new BillEntryClass();
+        BillingStatusClass billStatus = new BillingStatusClass();
 
         public ActionResult Index()
         {
@@ -258,6 +259,12 @@ namespace ASBM.Controllers
             return View();
         }
 
+        public ActionResult ajax_check_billing_status(string docketNo, DateTime entryDate)
+        {
+            List<BillingStatusModel> temp = new List<BillingStatusModel>();
+            temp = billStatus.check_billing_status(docketNo, entryDate);
+            return View(temp);
+        }
 
         /////////////// END YOUR BILLING STATUS Start //////////////////////
 

@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BillingStatusModel.cs" />
     <Compile Include="Models\BillModel.cs" />
     <Compile Include="Models\FundModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Repository\BankEntryClass.cs" />
     <Compile Include="Repository\BillAllotementClass.cs" />
     <Compile Include="Repository\BillEntryClass.cs" />
+    <Compile Include="Repository\BillingStatusClass.cs" />
     <Compile Include="Repository\BillSubmissionClass.cs" />
     <Compile Include="Repository\DepartmentEntryClass.cs" />
     <Compile Include="Repository\FundEntryClass.cs" />
@@ -162,6 +164,7 @@
     <Content Include="assets\admin\css\random_bill_generation.css" />
     <Content Include="assets\admin\css\bill_submission.css" />
     <Content Include="assets\admin\img\Dual Ring.gif" />
+    <Content Include="assets\admin\js\billing_status.js" />
     <Content Include="assets\admin\js\bill_entry.js" />
     <Content Include="assets\admin\js\fund_entry.js" />
     <Content Include="assets\admin\js\treasury_entry.js" />
@@ -270,6 +273,7 @@
     <Content Include="Views\Home\_partialFundEntryDataTable.cshtml" />
     <Content Include="Views\Home\MstBillDetails.cshtml" />
     <Content Include="Views\Home\MstFundDetails.cshtml" />
+    <Content Include="Views\Home\_partialBillingStatusDataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,4 +1,4 @@
-﻿
+﻿@model List<ASBM.Models.BillingStatusModel>
 @{
     ViewBag.Title = "Billing Status";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -21,7 +21,7 @@
                 <div class="row form-group">
                     <div class="col-md-4">
                         <label>DOCKET NO :</label>
-                        <input type="text" id="docketNo" placeholder="Enter Docket Number" name="DocketNumber" class="form-control placeholder-no-fix" autocomplete="off">
+                        <input type="text" id="docketNo" placeholder="Docket Number" name="DocketNumber" class="form-control placeholder-no-fix" autocomplete="off">
                     </div>
                 </div>
 
@@ -39,33 +39,32 @@
                 </div>
             </form>
 
-            @*<div id="prtCmsDataTable">
-                @Html.Partial("~/Views/Home/_partialBillAllotementDataTable.cshtml", Model)
-            </div>*@
-
-            <table id="table" class="table table-striped">
-                    <thead>
-                        <tr>                           
-                            <th scope="col">DOCKET NO</th>                          
-                            <th scope="col">DATE</th>
-                            <th scope="col">STATUS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>                           
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Otto</td>                                                       
-                        </tr>
-                        <tr>                         
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>Otto</td>                                                  
-                        </tr>
-                    </tbody>
-            </table>
+            <div id="prtCmsDataTable">
+                @Html.Partial("~/Views/Home/_partialBillingStatusDataTable.cshtml", Model)
+            </div>
+            @*<table id="table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">DOCKET NO</th>
+                                <th scope="col">DATE</th>
+                                <th scope="col">STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>Otto</td>
+                            </tr>
+                            <tr>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>Otto</td>
+                            </tr>
+                        </tbody>
+                </table>*@
         </div>
     </div>
-
 </div>
 
+<script src="~/assets/admin/js/billing_status.js"></script>
