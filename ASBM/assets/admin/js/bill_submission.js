@@ -410,6 +410,7 @@
             dataType: "json",
             //async: false,            
             success: function (data) {
+                $('#hiddenBillId').val(data.bill_details_id_pk);
                 $('#txt_gst').val(data.bill_gst);
                 $('#txt_pan').val(data.bill_pan);
                 $('#txt_work_desc').val(data.bill_description);
@@ -490,4 +491,175 @@
         });
 
     });
+
+
+    $(document).on('click', '#btn_update', function () {
+        debugger;
+        var CompanyCategoryName = $("input:radio[name=inlineRadioOptions]:checked").val();
+        var IndividualCmpName = $("#txtIndividual").val().trim();
+        var HUFCmpName = $("#txtHuf").val().trim();
+        var LTDCmpName = $("#txtLtd").val().trim();
+        var PVTCmpName = $("#txtPvt").val().trim();
+        var SoleProprietorCmpName = $("#txtSoleProprietor").val().trim();
+        var PartnershipCmpName = $("#txtpartnership").val().trim();
+        var DepartmentId = parseInt($("#ddlDepartment").val());
+        var Pan = $("#txt_pan").val().trim();
+        var Gst = $("#txt_gst").val().trim();
+        var FundId = parseInt($("#ddlFund").val());
+        var WorkDesc = $("#txt_work_desc").val().trim();
+        var Amount = $("#txt_amount").val().trim();
+        var BillTypeId = parseInt($("#ddlTypeBill").val());
+
+        if (CompanyCategoryName === undefined) {
+            Swal.fire('Please Select Company category')
+            return;
+        }
+
+        if (CompanyCategoryName == 'Individual' && IndividualCmpName == '') {
+            Swal.fire('Please Type Your Company Name')
+            return;
+        }
+        if (CompanyCategoryName == 'HUF' && HUFCmpName == '') {
+            Swal.fire('Please Type Your Company Name')
+            return;
+        }
+        if (CompanyCategoryName == 'Limited Company' && LTDCmpName == '') {
+            Swal.fire('Please Type Your Company Name')
+            return;
+        }
+        if (CompanyCategoryName == 'PVT LTD Company' && PVTCmpName == '') {
+            Swal.fire('Please Type Your Company Name')
+            return;
+        }
+        if (CompanyCategoryName == 'SOLE PROPRIETOR' && SoleProprietorCmpName == '') {
+            Swal.fire('Please Type Your Company Name')
+            return;
+        }
+        if (CompanyCategoryName == 'PARTNERSHIP FIRM' && PartnershipCmpName == '') {
+            Swal.fire('Please Type Your Company Name')
+            return;
+        }
+        if (DepartmentId == '0') {
+            Swal.fire('Please Select Department')
+            return;
+        }
+        if (Pan == '') {
+            Swal.fire('Please Enter PAN Number')
+            return;
+        }
+        if (Gst == '') {
+            Swal.fire('Please Enter GST Number')
+            return;
+        }
+        if (FundId == '0') {
+            Swal.fire('Please Select Fund')
+            return;
+        }
+        if (WorkDesc == '') {
+            Swal.fire('Please Enter Work Description')
+            return;
+        }
+        if (Amount == '') {
+            Swal.fire('Please Enter Amount')
+            return;
+        }
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                UpdateBillSubmission();
+                $("#bill_form").trigger('reset');               
+            }
+        })
+    });
+
+    function UpdateBillSubmission() {
+        debugger;
+        var cmp = '';
+        var BillId = $('#hiddenBillId').val();
+        var IndividualCmpName = $("#txtIndividual").val().trim();
+        var HUFCmpName = $("#txtHuf").val().trim();
+        var LTDCmpName = $("#txtLtd").val().trim();
+        var PVTCmpName = $("#txtPvt").val().trim();
+        var SoleProprietorCmpName = $("#txtSoleProprietor").val().trim();
+        var PartnershipCmpName = $("#txtpartnership").val().trim();
+
+        if (IndividualCmpName != '') {
+            cmp = IndividualCmpName;
+        }
+        else if (HUFCmpName != '') {
+            cmp = HUFCmpName;
+        }
+        else if (LTDCmpName != '') {
+            cmp = LTDCmpName;
+        }
+        else if (PVTCmpName != '') {
+            cmp = PVTCmpName;
+        }
+        else if (SoleProprietorCmpName != '') {
+            cmp = SoleProprietorCmpName;
+        }
+        else if (PartnershipCmpName != '') {
+            cmp = PartnershipCmpName;
+        }
+
+        var info = {
+
+            //PropriterName: $("#txtSoleProprietorName").val(),
+            BillId: BillId,
+            CompanyCategoryName: $("input:radio[name=inlineRadioOptions]:checked").val(), //parseInt($("#inlineRadioOptions").val()),
+            CompanyName: cmp,
+            /*CompanyName: $("#txtCmpName").val(),*/
+            DepartmentId: parseInt($("#ddlDepartment").val()),
+            Pan: $("#txt_pan").val().trim(),
+            Gst: $("#txt_gst").val().trim(),
+            FundId: parseInt($("#ddlFund").val()),
+            WorkDesc: $("#txt_work_desc").val().trim(),
+            Amount: $("#txt_amount").val().trim(),
+            BillTypeId: parseInt($("#ddlTypeBill").val())
+        };
+
+        //info = JSON.stringify(info)
+        //var valdata = $("#bill_form").serialize();
+
+        //$(".confirm_nodal_frwd_claim").hide();
+        //$(".frwd_btn_no").hide();
+        var url = '/Home/ajax_Update_BillSubmissionForm';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            data: info,
+            success: function (data) {
+                //$(".frwd_btn_no").show();
+                //$('.modal_forward_claim_body').html(data);
+
+                var check_result = data;
+                if (check_result == 1) {
+                    /*$('.modal_forward_claim_body').html('<div class="alert alert-success">Bill Allotement Submitted Successfully</div>');*/
+                    swal.fire({
+                        icon: 'success',
+                        title: 'SAVED!',
+                        text: 'Your file has been saved.'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+                else {
+                    /*$('.modal_forward_claim_body').html('<div class="alert alert-danger">Failed</div>');*/
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                }
+            },
+        });
+    }
 });

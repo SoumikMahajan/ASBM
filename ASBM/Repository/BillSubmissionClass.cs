@@ -59,6 +59,52 @@ namespace ASBM.Repository
             return res;
         }
 
+        public int UpdateBill(string BillId,string CompanyCategoryName, string companyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
+        {
+            int res = 0;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    //string Query = string.Empty;
+
+                    //Query = @"INSERT INTO tbl_accounts_bill_details (bill_category_id_fk, bill_company_name, bill_department_id_fk, bill_pan, bill_gst, bill_fund_id_fk, bill_description, bill_amount) VALUES(@category_id, @companyName,@dept_id, @pan, @gst, @fund_id, @work_desc, @bill_amount)";
+
+
+                    SqlCommand cmd = new SqlCommand("[dbo].[spBillSubmission]", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@OPERATION_ID", 3);
+                    cmd.Parameters.AddWithValue("@bill_id", BillId);
+                    cmd.Parameters.AddWithValue("@category_id", CompanyCategoryName);
+                    cmd.Parameters.AddWithValue("@companyName", companyName);
+                    cmd.Parameters.AddWithValue("@dept_id", DepartmentId);
+                    cmd.Parameters.AddWithValue("@pan", Pan);
+                    cmd.Parameters.AddWithValue("@gst", Gst);
+                    cmd.Parameters.AddWithValue("@fund_id", FundId);
+                    cmd.Parameters.AddWithValue("@work_desc", WorkDesc);
+                    cmd.Parameters.AddWithValue("@bill_amount", Amount);
+                    cmd.Parameters.AddWithValue("@bill_type_id", BillTypeId);
+
+                    con.Open();
+                    int AffectedRows = cmd.ExecuteNonQuery();
+                    if (AffectedRows == 1)
+                    {
+                        res = 1;
+                    }
+                    else
+                    {
+                        res = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //res = "Failed|Internal error.";
+            }
+
+            return res;
+        }
+
         public int DeleteBill(string id)
         {
             int res = 0;

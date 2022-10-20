@@ -144,6 +144,16 @@ namespace ASBM.Controllers
             //return PartialView("~/Views/ContentManagement/_partialBillSubmissionForm.cshtml", obj);
         }
 
+
+        [HttpPost]
+        public int ajax_Update_BillSubmissionForm(string BillId,string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
+        {
+            int response;
+            response = bill.UpdateBill(BillId,CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount, BillTypeId);
+            return response;
+            //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
+        }
+
         public string GetAllDept()
         {
             string result = bill.FetchAllDept();
