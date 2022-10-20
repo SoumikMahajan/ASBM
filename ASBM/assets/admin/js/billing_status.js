@@ -1,8 +1,8 @@
 ﻿$(document).ready(function () {
 
-    $(document).on('click', '.btn_auto_redirect', function () {
-        window.location.href = "/Home/MstBankDetails";
-    });
+    //$(document).on('click', '.btn_auto_redirect', function () {
+    //    window.location.href = "/Home/MstBankDetails";
+    //});
 
     $(document).on('click', '#btn_submit', function () {
 
@@ -23,17 +23,15 @@
             dataType: 'json',
             data: info,
             success: function (data) {
-                var check_result = data;
-                if (check_result == 1) {
-                    alert("Success");
-                }
-                else {
-                    alert("Faild");
-                }
-            },
-            beforeSend: function () {
-                $('.modal_forward_claim_body').html('<div class="loader_con"><div class="loader"></div>Loading ...</div>');
-            }
+                $('#billingDataTable').html(data);
+                //var check_result = data;
+                //if (check_result == 1) {
+                //    alert("Success");
+                //}
+                //else {
+                //    alert("Faild");
+                //}
+            },            
         });
     });
 

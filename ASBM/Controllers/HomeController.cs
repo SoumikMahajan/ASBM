@@ -259,11 +259,11 @@ namespace ASBM.Controllers
             return View();
         }
 
-        public ActionResult ajax_check_billing_status(string docketNo, DateTime entryDate)
+        public ActionResult ajax_check_billing_status(string docketNo, string entryDate)
         {
             List<BillingStatusModel> temp = new List<BillingStatusModel>();
             temp = billStatus.check_billing_status(docketNo, entryDate);
-            return View(temp);
+            return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", temp);
         }
 
         /////////////// END YOUR BILLING STATUS Start //////////////////////
@@ -414,6 +414,7 @@ namespace ASBM.Controllers
             return response;
         }
         /////////////// Treasury Master ENTRY End //////////////////////
+        ///
         /////////////// FUND Master ENTRY Start //////////////////////
         public ActionResult MstFundDetails()
         {

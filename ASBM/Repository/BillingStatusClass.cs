@@ -14,7 +14,7 @@ namespace ASBM.Repository
     {
         string strcon = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
-        public List<BillingStatusModel> check_billing_status(string docketNo, DateTime entryDate)
+        public List<BillingStatusModel> check_billing_status(string docketNo, string entryDate)
         {
             List<BillingStatusModel> List = new List<BillingStatusModel>();
             DataTable dt = new DataTable();
@@ -28,7 +28,7 @@ namespace ASBM.Repository
 	                                    bill_allot.bill_allotement_date
                                     FROM
 	                                    tbl_accounts_bill_allotement_details AS bill_allot
-	                                    WHERE bill_allot.bill_allotement_docket_no = " + docketNo + " AND bill_allot.bill_allotement_date = " + entryDate;
+	                                    WHERE bill_allot.bill_allotement_docket_no = '" + docketNo + "' AND bill_allot.bill_allotement_date = '" + entryDate +"'";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
                     {
