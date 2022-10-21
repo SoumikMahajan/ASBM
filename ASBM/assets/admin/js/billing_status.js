@@ -11,27 +11,31 @@
             entryDate: $("#billing_date").val().trim()
         };
 
-        //info = JSON.stringify(info)
-        //var valdata = $("#bill_form").serialize();
-
-        //$(".confirm_nodal_frwd_claim").hide();
-        //$(".frwd_btn_no").hide();
         var url = '/Home/ajax_check_billing_status';
         $.ajax({
             type: 'GET',
+            async: false,
             url: url,
             dataType: 'json',
+            contentType: "application/json; charset=utf-8",
             data: info,
             success: function (data) {
-                $('#billingDataTable').html(data);
-                //var check_result = data;
-                //if (check_result == 1) {
-                //    alert("Success");
-                //}
-                //else {
-                //    alert("Faild");
-                //}
-            },            
+                //$('#billingDataTable').html(data);
+                var html = '';
+                var i = 1;
+
+                $.each(data, function (key, item) {
+                    var date = new Date(parseInt(item.bill_allotement_date.substr(6)));
+
+                    html += '<tr>';
+                    html += '<td>' + i + '</td>';
+                    html += '<td>' + item.bill_allotement_docket_no + '</td>';
+                    html += '<td>' + date + '</td>';
+                    html += '</tr>';
+                    i++;
+                });
+                $('.tbody').html(html);
+            }
         });
     });
 

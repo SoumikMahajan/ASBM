@@ -1,6 +1,7 @@
 ﻿using ASBM.Models;
 using Newtonsoft.Json;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -17,7 +18,6 @@ namespace ASBM.Repository
         public List<BillingStatusModel> check_billing_status(string docketNo, string entryDate)
         {
             List<BillingStatusModel> List = new List<BillingStatusModel>();
-            DataTable dt = new DataTable();
             try
             {
                 using (SqlConnection con = new SqlConnection(strcon))
@@ -34,12 +34,26 @@ namespace ASBM.Repository
                     {
                         con.Open();
                     }
-                    SqlDataAdapter adp = new SqlDataAdapter(cmd);
-                    adp.Fill(dt);
-                    if (dt.Rows.Count > 0)
+                    //SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                    //adp.Fill(dt);
+                    //if (dt.Rows.Count > 0)
+                    //{
+                    //    List = JsonConvert.DeserializeObject<List<BillingStatusModel>>(JsonConvert.SerializeObject(dt));
+                    //}
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    foreach (DataRow dr in dt.Rows)
                     {
-                        List = JsonConvert.DeserializeObject<List<BillingStatusModel>>(JsonConvert.SerializeObject(dt));
+                        List.Add(new BillingStatusModel
+                        {
+                            bill_allotement_id_pk = Convert.ToInt32(dr[0]),
+                            bill_allotement_docket_no = Convert.ToString(dr[1]),
+                            bill_allotement_date = Convert.ToDateTime(dr[2])
+                        });
                     }
+
                     if (con.State != ConnectionState.Closed)
                     {
                         con.Close();

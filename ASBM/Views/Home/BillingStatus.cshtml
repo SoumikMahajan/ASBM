@@ -39,30 +39,22 @@
                 </div>
             </form>
 
-            <div id="billingDataTable">
-                @Html.Partial("~/Views/Home/_partialBillingStatusDataTable.cshtml", Model)
-            </div>
-            @*<table id="table" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">DOCKET NO</th>
-                                <th scope="col">DATE</th>
-                                <th scope="col">STATUS</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                            </tr>
-                            <tr>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>Otto</td>
-                            </tr>
-                        </tbody>
-                </table>*@
+            <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead>
+                    <tr class="dataHead">
+                        <th scope="col">SL</th>
+                        <th scope="col">DOCKET NO</th>
+                        <th scope="col">DATE</th>
+                        <th scope="col">STATUS</th>
+                    </tr>
+                </thead>
+                <tbody class="tbody">
+                </tbody>
+            </table>
+
+            @*<div id="billingDataTable">
+                    @Html.Partial("~/Views/Home/_partialBillingStatusDataTable.cshtml", Model)
+                </div>*@
         </div>
     </div>
 </div>
