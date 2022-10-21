@@ -646,7 +646,7 @@
                     swal.fire({
                         icon: 'success',
                         title: 'SAVED!',
-                        text: 'Your file has been saved.'
+                        text: 'Your file has been Updated.'
                     }).then(function () {
                         location.reload();
                     });
