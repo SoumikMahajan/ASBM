@@ -269,12 +269,14 @@ namespace ASBM.Controllers
             return View();
         }
 
-        //public ActionResult ajax_check_billing_status(string docketNo, string entryDate)
-        //{
-        //    List<BillingStatusModel> temp = new List<BillingStatusModel>();
-        //    temp = billStatus.check_billing_status(docketNo, entryDate);
-        //    return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", temp);
-        //}
+        public JsonResult ajax_check_billing_status(string docketNo, string entryDate)
+        {
+            //List<BillingStatusModel> temp = new List<BillingStatusModel>();
+            //temp = billStatus.check_billing_status(docketNo, entryDate);
+            //return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", temp);
+
+            return Json(billStatus.check_billing_status(docketNo, entryDate), JsonRequestBehavior.AllowGet);
+        }
 
         /////////////// END YOUR BILLING STATUS Start //////////////////////
 
