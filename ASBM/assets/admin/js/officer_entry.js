@@ -144,7 +144,7 @@
             dataType: 'json',
             data: info,
             success: function (data) {
-                $(".frwd_btn_no").show();
+                //$(".frwd_btn_no").show();
                 //$('.modal_forward_claim_body').html(data);
 
                 var check_result = data;
