@@ -196,6 +196,12 @@
     <Content Include="assets\Images\flag.gif" />
     <Content Include="assets\Images\footer-map.png" />
     <Content Include="assets\Images\google-play.png" />
+    <Content Include="assets\Images\sample\1.png" />
+    <Content Include="assets\Images\sample\2.png" />
+    <Content Include="assets\Images\sample\3.png" />
+    <Content Include="assets\Images\sample\4.png" />
+    <Content Include="assets\Images\sample\5.png" />
+    <Content Include="assets\Images\sample\6.png" />
     <Content Include="assets\js\bootstrap.bundle.min.js" />
     <Content Include="assets\js\cloud9carousel.js" />
     <Content Include="assets\js\jquery.min.js" />
