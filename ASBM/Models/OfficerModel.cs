@@ -15,5 +15,6 @@ namespace ASBM.Models
         public int officer_dept_id_fk { get; set; }
         public string department_name { get; set; }
         public string userTypeId { get; set; }
+        public string user_type_name { get; set; }
     }
 }
