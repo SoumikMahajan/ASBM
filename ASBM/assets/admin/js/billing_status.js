@@ -5,7 +5,7 @@
     //});
 
     $(document).on('click', '#btn_submit', function () {
-
+        debugger;
         var info = {
             docketNo: $("#docketNo").val().trim(),
             entryDate: $("#billing_date").val().trim()
@@ -15,26 +15,28 @@
         $.ajax({
             type: 'GET',
             async: false,
-            url: url,
-            dataType: 'json',
+            url: url,           
             contentType: "application/json; charset=utf-8",
             data: info,
             success: function (data) {
                 //$('#billingDataTable').html(data);
-                var html = '';
-                var i = 1;
+                if (data != "") {
+                    $("#billingDataTable").html(data);
+                }
+                //var html = '';
+                //var i = 1;
 
-                $.each(data, function (key, item) {
-                    var date = new Date(parseInt(item.bill_allotement_date.substr(6)));
+                //$.each(data, function (key, item) {
+                //    var date = new Date(parseInt(item.bill_allotement_date.substr(6)));
 
-                    html += '<tr>';
-                    html += '<td>' + i + '</td>';
-                    html += '<td>' + item.bill_allotement_docket_no + '</td>';
-                    html += '<td>' + date + '</td>';
-                    html += '</tr>';
-                    i++;
-                });
-                $('.tbody').html(html);
+                //    html += '<tr>';
+                //    html += '<td>' + i + '</td>';
+                //    html += '<td>' + item.bill_allotement_docket_no + '</td>';
+                //    html += '<td>' + date + '</td>';
+                //    html += '</tr>';
+                //    i++;
+                //});
+                //$('.tbody').html(html);
             }
         });
     });

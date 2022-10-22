@@ -1,4 +1,4 @@
-﻿@model List<ASBM.Models.OfficerModel>
+﻿@model ASBM.Models.MultipleModel
 
 <table id="table" class="table table-striped table-bordered" cellspacing="0" width="100%">
     <thead>
@@ -14,9 +14,9 @@
     </thead>
     <tbody>
         @{ int rows = 1;}
-        @if (Model != null && Model.Count > 0)
+        @if (Model != null && Model.officerList != null && Model.officerList.Count > 0)
         {
-            foreach (var obj in Model)
+            foreach (var obj in Model.officerList)
             {
                 <tr class="inAc" style="color: black;font-size: 13px !important;">
                     <td>@rows</td>

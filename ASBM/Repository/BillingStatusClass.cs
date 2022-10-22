@@ -15,9 +15,23 @@ namespace ASBM.Repository
     {
         string strcon = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
-        public List<BillingStatusModel> check_billing_status(string docketNo, string entryDate)
+        public MultipleModel FetchBillingBySearch(string docketNo,string entryDate)
         {
-            List<BillingStatusModel> List = new List<BillingStatusModel>();
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm.billingStatusList = check_billing_status(docketNo, entryDate);
+            }
+            catch (Exception)
+            {
+
+            }
+            return mm;
+        }
+
+        public List<BillingStatusModel> check_billing_status(string docketNo,string entryDate)
+        {
+            List<BillingStatusModel> Res = new List<BillingStatusModel>();
             try
             {
                 using (SqlConnection con = new SqlConnection(strcon))
@@ -28,8 +42,11 @@ namespace ASBM.Repository
 	                                    bill_allot.bill_allotement_date
                                     FROM
 	                                    tbl_accounts_bill_allotement_details AS bill_allot
-	                                    WHERE bill_allot.bill_allotement_docket_no = '" + docketNo + "' AND bill_allot.bill_allotement_date = '" + entryDate +"'";
+	                                    WHERE bill_allot.bill_allotement_docket_no = @DocketNo and bill_allot.bill_allotement_date=@entryDate";
                     SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@DocketNo", docketNo);
+                    cmd.Parameters.AddWithValue("@entryDate", entryDate);                   
+                    
                     if (con.State != ConnectionState.Open)
                     {
                         con.Open();
@@ -44,15 +61,10 @@ namespace ASBM.Repository
                     SqlDataAdapter sda = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
                     sda.Fill(dt);
-                    foreach (DataRow dr in dt.Rows)
+                    if (dt.Rows.Count > 0)
                     {
-                        List.Add(new BillingStatusModel
-                        {
-                            bill_allotement_id_pk = Convert.ToInt32(dr[0]),
-                            bill_allotement_docket_no = Convert.ToString(dr[1]),
-                            bill_allotement_date = Convert.ToDateTime(dr[2])
-                        });
-                    }
+                        Res = JsonConvert.DeserializeObject<List<BillingStatusModel>>(JsonConvert.SerializeObject(dt));
+                    }                   
 
                     if (con.State != ConnectionState.Closed)
                     {
@@ -63,8 +75,8 @@ namespace ASBM.Repository
             catch (Exception ex)
             {
 
-            }
-            return List;
+            }           
+            return Res;
         }
     }
 }
