@@ -120,11 +120,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountantController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VoucherGeneratorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountantModel.cs" />
     <Compile Include="Models\BillingStatusModel.cs" />
     <Compile Include="Models\BillModel.cs" />
     <Compile Include="Models\FundModel.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Models\RandomBillGenerationModel.cs" />
     <Compile Include="Models\TreasuryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AccountantClass.cs" />
     <Compile Include="Repository\BankEntryClass.cs" />
     <Compile Include="Repository\BillAllotementClass.cs" />
     <Compile Include="Repository\BillEntryClass.cs" />
@@ -164,6 +167,7 @@
     <Content Include="assets\admin\css\random_bill_generation.css" />
     <Content Include="assets\admin\css\bill_submission.css" />
     <Content Include="assets\admin\img\Dual Ring.gif" />
+    <Content Include="assets\admin\js\accountant.js" />
     <Content Include="assets\admin\js\billing_status.js" />
     <Content Include="assets\admin\js\bill_entry.js" />
     <Content Include="assets\admin\js\fund_entry.js" />
@@ -280,6 +284,8 @@
     <Content Include="Views\Home\MstBillDetails.cshtml" />
     <Content Include="Views\Home\MstFundDetails.cshtml" />
     <Content Include="Views\Home\_partialBillingStatusDataTable.cshtml" />
+    <Content Include="Views\Accountant\Index.cshtml" />
+    <Content Include="Views\Accountant\_partialAccountantVouterDataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

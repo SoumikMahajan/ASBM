@@ -1,0 +1,104 @@
+﻿@model List<ASBM.Models.AccountantModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="container" style="background-color: white; color: black; padding-bottom: 20px;">
+        <div class="row no-gutters">
+            <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+                <div class="section-title">
+                    <h2>Accountant</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-color: beige;">
+
+            <div id="prtCmsDataTable">
+                @Html.Partial("~/Views/Accountant/_partialAccountantVouterDataTable.cshtml", Model)
+            </div>
+        </div>
+        <div class="container" style="background-color: beige;" id="VouterDetailsShowHide">
+
+            <form id="voucher" method="post" style="display:block;">
+                <div class="row form-group">
+                    <div class="col-md-3"><label>Vouter No : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtVouterNo" placeholder="" name="txtVouterNo" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-3"><label>Vouter Date : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtVouterDate" placeholder="" name="txtVouterDate" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3"><h5>Vouter Details : </h5></div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3"><label>Category of Company : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtComapanyCategory" placeholder="" name="txtComapanyCategory" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-3"><label>Type of Work : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtWorkType" placeholder="" name="txtWorkType" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3"><label>Comapany Name : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtComapanyName" placeholder="" name="txtComapanyName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-3"><label>Department Name : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtDeptName" placeholder="" name="txtDeptName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3"><label>Proprietor Name : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtProprietorName" placeholder="" name="txtProprietorName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-3"><label>Fund Name : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtFundName" placeholder="" name="txtFundName" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3"><label>Mobile No : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtMobile" placeholder="" name="txtMobile" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                    <div class="col-md-3"><label>GST No : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtGst" placeholder="" name="txtGst" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <div class="col-md-3"><label>Description of Work : </label></div>
+                    <div class="col-md-3">
+                        <input type="text" id="txtDescWork" placeholder="" name="txtDescWork" class="form-control placeholder-no-fix" autocomplete="off" value="">
+                    </div>
+                </div>
+
+                <div class="form-group row justify-content-center text-center">
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-info" id="btn_approved">Procede for Payment</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script src="~/assets/admin/js/accountant.js"></script>
