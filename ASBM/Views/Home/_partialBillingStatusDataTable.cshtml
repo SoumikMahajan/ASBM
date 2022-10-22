@@ -13,19 +13,19 @@
     </tbody>
     <tbody>
 
-            @{ int rows = 1;}
-            @if (Model != null && Model.billingStatusList.Count > 0)
+        @{ int rows = 1;}
+        @if (Model != null && Model.billingStatusList.Count > 0)
+        {
+            foreach (var obj in Model.billingStatusList)
             {
-                foreach (var obj in Model.billingStatusList)
-                {
-                    <tr class="inAc" style="color: black;font-size: 13px !important;">
-                        <td>@rows</td>
-                        <td>@obj.bill_allotement_docket_no</td>
-                        <td>@obj.bill_allotement_date</td>
-                        <td></td>
-                    </tr>
-                    rows++;
-                }
+                <tr class="inAc" style="color: black;font-size: 13px !important;">
+                    <td>@rows</td>
+                    <td>@obj.bill_allotement_docket_no</td>
+                    <td>@obj.bill_allotement_date</td>
+                    <td></td>
+                </tr>
+                rows++;
             }
-        </tbody>
+        }
+    </tbody>
 </table>

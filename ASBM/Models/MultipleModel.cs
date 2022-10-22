@@ -13,5 +13,8 @@ namespace ASBM.Models
 
         public BillingStatusModel billingStatusModel { get; set; }
         public List<BillingStatusModel> billingStatusList { get; set; }
+
+        public AccountantModel accountantModel { get; set; }
+        public List<AccountantModel> AccountantList { get; set; }
     }
 }

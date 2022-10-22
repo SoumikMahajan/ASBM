@@ -49,6 +49,10 @@ namespace ASBM.Controllers
                     {
                         return RedirectToAction("Index", "VoucherGenerator");
                     }
+                    else if (UserDetails.userRoleId == 3)
+                    {
+                        return RedirectToAction("Index", "Accountant");
+                    }
                 }
             }
             catch (Exception ex)

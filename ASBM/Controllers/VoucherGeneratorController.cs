@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ASBM.Repository;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,7 @@ namespace ASBM.Controllers
 {
     public class VoucherGeneratorController : Controller
     {
+        VouterGeneratorClass vouter = new VouterGeneratorClass();
         // GET: VoucherGenerator
         public ActionResult Index()
         {
@@ -20,6 +22,12 @@ namespace ASBM.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
+        }
+
+        public string GetAllDocketNo(int radioVal)
+        {
+            string result = vouter.FetchAllDocketNo(radioVal);
+            return result;
         }
     }
 }

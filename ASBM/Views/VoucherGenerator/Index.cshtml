@@ -21,23 +21,33 @@
                     <div class="col-md-2">
                         <label>Select Docket Type :</label>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="randomRadio1" value="">
+                    <div class="col-md-6">
+                        @*<div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" id="randomRadio1" value="1">
                             <label class="form-check-label" for="inlineRadio1">Random</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="sbRadio2" value="">
+                            <input class="form-check-input" type="radio" id="sbRadio2" value="2">
                             <label class="form-check-label" for="inlineRadio2">SB</label>
+                        </div>*@
+
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="radio1" name="optradio" value="1">SB
+                            <label class="form-check-label" for="radio1"></label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input type="radio" class="form-check-input" id="radio2" name="optradio" value="2">Random
+                            <label class="form-check-label" for="radio2"></label>
                         </div>
                     </div>
+
                 </div>
 
                 <div class="row form-group">
                     <div class="col-md-6">
                         <label>Choose Docket No from the List :</label>
-                        <select id="ddlTypeBill" class="form-control placeholder-no-fix selectpicker" data-show-subtext="true" data-live-search="true">
-                            <option value="">Select</option>
+                        <select id="ddlDocketNo" class="form-control placeholder-no-fix selectpicker" data-show-subtext="true" data-live-search="true">
+                            <option value="0"> -- Select -- </option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -50,11 +60,11 @@
                     <div class="col-md-3"><h6>1. Do you have CIC Number</h6></div>
                     <div class="col-md-2">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="cicrandomRadio1" value="">
+                            <input class="form-check-input" type="radio" id="cicrandomRadio1" value="1">
                             <label class="form-check-label" for="inlineRadio1">Yes</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="cicrandomRadio2" value="">
+                            <input class="form-check-input" type="radio" id="cicrandomRadio2" value="0">
                             <label class="form-check-label" for="inlineRadio2">No</label>
                         </div>
                     </div>
@@ -70,11 +80,11 @@
                     <div class="col-md-3"><h6>2. Do you Participate in e-Tender</h6></div>
                     <div class="col-md-2">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="eTenRadioOption1" value="">
+                            <input class="form-check-input" type="radio" id="eTenRadioOption1" value="1">
                             <label class="form-check-label">Yes</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="eTenRadioOption2" value="">
+                            <input class="form-check-input" type="radio" id="eTenRadioOption2" value="0">
                             <label class="form-check-label">No</label>
                         </div>
                     </div>
@@ -89,11 +99,11 @@
                     <div class="col-md-3"><h6>3. MED Approval</h6></div>
                     <div class="col-md-2">
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="medRadio1" value="random">
+                            <input class="form-check-input" type="radio" id="medRadio1" value="1">
                             <label class="form-check-label">Yes</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" id="medRadio2" value="">
+                            <input class="form-check-input" type="radio" id="medRadio2" value="0">
                             <label class="form-check-label">No</label>
                         </div>
                     </div>
@@ -296,5 +306,28 @@
         $(document).on("click", "#btn_approved", function () {
             $("#billDetailsShowHide").show(300);
         });
+
+        $('input[name=optradio]').change(function () {
+            debugger;
+            var value = parseInt($('input[name=optradio]:checked').val());
+            fetchDocketNo(value);
+        });
+
+        function fetchDocketNo(value) {
+            //debugger;
+            var html = "";
+            $.ajax({
+                type: "GET",
+                async: false,
+                dataType: "text",
+                contentType: "application/json; charset=utf-8",
+                url: "/VoucherGenerator/GetAllDocketNo/?radioVal=" + value,
+                success: function (data) {
+                    html = data;
+                    $("#ddlDocketNo").html(html);
+                }
+            });
+            return html;
+        }
     });
 </script>

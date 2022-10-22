@@ -20,7 +20,7 @@ namespace ASBM.Repository
         {
             //ResultInfo<LoginModel> LogInResult = new ResultInfo<AdminLogIn>();
             LoginModel loginModel = new LoginModel();
-            string res = "";
+            //string res = "";
             DataTable dt = new DataTable();
             try
             {

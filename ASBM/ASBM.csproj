@@ -156,6 +156,7 @@
     <Compile Include="Repository\RandomBillGeneratorClass.cs" />
     <Compile Include="Repository\SchemeEntryClass.cs" />
     <Compile Include="Repository\TreasuryEntryClass.cs" />
+    <Compile Include="Repository\VouterGeneratorClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\admin\css\treasury_entry.css" />
