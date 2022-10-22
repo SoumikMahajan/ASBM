@@ -129,6 +129,7 @@
     <Compile Include="Models\BillModel.cs" />
     <Compile Include="Models\FundModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MultipleModel.cs" />
     <Compile Include="Models\SchemeModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\BankModel.cs" />

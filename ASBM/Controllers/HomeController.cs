@@ -269,13 +269,25 @@ namespace ASBM.Controllers
             return View();
         }
 
-        public JsonResult ajax_check_billing_status(string docketNo, string entryDate)
+        [HttpGet]
+        public ActionResult ajax_check_billing_status(string docketNo,string entryDate)
         {
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm = billStatus.FetchBillingBySearch(docketNo, entryDate);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", mm);
+            //return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", mm);
             //List<BillingStatusModel> temp = new List<BillingStatusModel>();
             //temp = billStatus.check_billing_status(docketNo, entryDate);
             //return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", temp);
 
-            return Json(billStatus.check_billing_status(docketNo, entryDate), JsonRequestBehavior.AllowGet);
+            //return Json(billStatus.check_billing_status(docketNo, entryDate), JsonRequestBehavior.AllowGet);
         }
 
         /////////////// END YOUR BILLING STATUS Start //////////////////////
@@ -292,9 +304,20 @@ namespace ASBM.Controllers
         /////////////// OFFICER ENTRY Start //////////////////////
         public ActionResult OfficerEntry()
         {
-            List<OfficerModel> temp = new List<OfficerModel>();
-            temp = officer.FetchAllOfficerList();
-            return View(temp);
+            MultipleModel mm = new MultipleModel();
+            //List<OfficerModel> temp = new List<OfficerModel>();
+            try
+            {
+                mm = officer.FetchAllOfficerList();                
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            
+            
+            return View(mm);
         }
 
         public ActionResult ajax_OfficerEntryForm()

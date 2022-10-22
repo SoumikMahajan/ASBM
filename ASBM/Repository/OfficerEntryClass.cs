@@ -50,9 +50,24 @@ namespace ASBM.Repository
             return res;
         }
 
-        public List<OfficerModel> FetchAllOfficerList()
+        public MultipleModel FetchAllOfficerList()
         {
-            List<OfficerModel> List = new List<OfficerModel>();
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm.officerList = GetOfficerList();             
+            }
+            catch (Exception)
+            {
+
+            }
+            return mm;
+        }
+
+
+        public List<OfficerModel> GetOfficerList()
+        {
+            List<OfficerModel> Res = new List<OfficerModel>();
             DataTable dt = new DataTable();
             try
             {
@@ -61,7 +76,7 @@ namespace ASBM.Repository
                     string Query = @"select officer.officer_user_id_pk, officer.officer_name, officer.officer_mobile, "
                                     + "officer.officer_pan, officer.officer_gpf, dept.department_name, usertype.user_type_name " +
                                     "from [dbo].[tbl_accounts_officer_master] AS officer " +
-                                    "LEFT JOIN [dbo].[tbl_accounts_department_master] AS dept ON dept.department_id_pk = officer.officer_dept_id_fk "+
+                                    "LEFT JOIN [dbo].[tbl_accounts_department_master] AS dept ON dept.department_id_pk = officer.officer_dept_id_fk " +
                                     "LEFT JOIN [dbo].[tbl_accounts_user_login] AS login ON login.user_details_id_fk = officer.officer_user_id_pk " +
                                     "LEFT JOIN [dbo].[tbl_accounts_user_type_master] AS usertype ON usertype.user_type_id_pk = login.user_type_id_fk";
                     SqlCommand cmd = new SqlCommand(Query, con);
@@ -73,7 +88,7 @@ namespace ASBM.Repository
                     adp.Fill(dt);
                     if (dt.Rows.Count > 0)
                     {
-                        List = JsonConvert.DeserializeObject<List<OfficerModel>>(JsonConvert.SerializeObject(dt));
+                        Res = JsonConvert.DeserializeObject<List<OfficerModel>>(JsonConvert.SerializeObject(dt));
                     }
                     if (con.State != ConnectionState.Closed)
                     {
@@ -85,7 +100,7 @@ namespace ASBM.Repository
             {
 
             }
-            return List;
+            return Res;
         }
     }
 }
