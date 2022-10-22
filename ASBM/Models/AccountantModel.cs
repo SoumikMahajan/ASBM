@@ -7,7 +7,8 @@ namespace ASBM.Models
 {
     public class AccountantModel
     {
-        public string voterNo { get; set; }
-        public DateTime voterDate { get; set; }
+        public int voucher_id_pk { get; set; }
+        public string voucher_no { get; set; }
+        public DateTime vouter_date { get; set; }
     }
 }

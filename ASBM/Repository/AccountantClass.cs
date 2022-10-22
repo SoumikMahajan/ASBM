@@ -36,12 +36,11 @@ namespace ASBM.Repository
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
                     string Query = @"SELECT
-	                                    bill_allot.voucher_id_pk,
-	                                    bill_allot.bill_allotement_docket_no,
-	                                    bill_allot.bill_allotement_date
+	                                    vouter.voucher_id_pk,
+	                                    vouter.voucher_no
                                     FROM
 	                                    tbl_accounts_voucher AS vouter
-	                                    WHERE bill_allot.bill_allotement_docket_no = @DocketNo and bill_allot.bill_allotement_date=@entryDate";
+	                                ";
                     SqlCommand cmd = new SqlCommand(Query, con);
 
                     if (con.State != ConnectionState.Open)

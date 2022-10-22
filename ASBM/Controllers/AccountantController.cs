@@ -37,7 +37,7 @@ namespace ASBM.Controllers
             {
                 throw ex;
             }
-            return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", mm);            
+            return PartialView("~/Views/Home/_partialAccountantVouterDataTable.cshtml", mm);            
         }
     }
 }
