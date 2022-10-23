@@ -17,11 +17,12 @@
             async: false,
             url: url,           
             contentType: "application/json; charset=utf-8",
+            dataType: "text",
             data: info,
             success: function (data) {
                 //$('#billingDataTable').html(data);
                 if (data != "") {
-                    $("#billingDataTable").html(data);
+                    $("#billingDataTable").html(data);                 
                 }
                 //var html = '';
                 //var i = 1;
