@@ -61,5 +61,25 @@ namespace ASBM.Controllers
             return Json(bs, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public JsonResult ajax_getbilldetailsForRandoms(string billdocketno)
+        {
+            RandomBillGenerationModel rn = new RandomBillGenerationModel();
+            try
+            {
+                if (!string.IsNullOrEmpty(billdocketno))
+                {
+                    //mm = cms.GetHomeBannerById(Convert.ToInt16(id));
+                    rn = vouter.FetchRandomBillingdetails(billdocketno);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            //return PartialView("~/Views/VoucherGenerator/Index.cshtml", mm);
+            return Json(rn, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

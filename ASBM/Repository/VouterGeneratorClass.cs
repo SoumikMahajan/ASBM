@@ -168,5 +168,45 @@ namespace ASBM.Repository
             }
             return Res;
         }
+
+        public RandomBillGenerationModel FetchRandomBillingdetails(string billdocketno)
+        {
+            RandomBillGenerationModel Res = new RandomBillGenerationModel();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = @"select T1.random_bill_name,T1.random_bill_work_desc,T1.random_bill_mobile_no,T2.department_name,T3.fund_scheme_name from tbl_accounts_random_bill_generation_details as T1
+                      left join tbl_accounts_department_master as T2 on T2.department_id_pk=T1.random_bill_dept_id_fk
+                      left join tbl_accounts_fund_master as T3 on T3.fund_scheme_id_pk=T1.random_bill_fund_id_fk
+                      where random_bill_docket_no=@DocketNo";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@DocketNo", billdocketno);
+
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        Res = JsonConvert.DeserializeObject<List<RandomBillGenerationModel>>(JsonConvert.SerializeObject(dt)).FirstOrDefault();
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Res;
+        }
     }
 }
