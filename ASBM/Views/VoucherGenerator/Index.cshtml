@@ -413,11 +413,13 @@
             if (BillDocketType == '1') {
                 showNormalUserBillDetails();
                 $("#billDetailsShowHide").show(300);
+                $("#billDetailsShowHideForRandoms").hide();
 
             }
             if (BillDocketType == '2') {
                 showRandomUserBillDetails();
                 $("#billDetailsShowHideForRandoms").show(300);
+                $("#billDetailsShowHide").hide();
             }          
             
         });
