@@ -57,15 +57,15 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-            //        string Query = string.Empty;
+                    string Query = string.Empty;
 
-            //        Query = @"INSERT INTO tbl_accounts_voucher (bill_docket_no,bill_docket_type_id,IsCICnumber,CICNumber,IsParticipateTender,ParticipateTenderNumber,IsMed,MedDate,TenderCommitteeMeeting,ChairmanMeeting,TenderRate,BOCSanctionMeeting,AAFSNumber,WorkOrderNo,WorkOrderDate,EstimateAmount,MBBookNo,PageNo,WorkRegNo,WorkRegNoDate) 
-				        //VALUES(@billdocketno,@BillDocketType,@iscic,@cicno,@isetender,@tenno,@ismed,@medno,@MeetingTenderCommittee,@MeetingChairman,@Tenderrate,
-				        //@MeetingBOC,@AAFSNo,@WorkOrder,@WorkOrderDate,@AmountEstimate,@MBBookNo,@PageNo,@WorkRegisterNo,@WorkRegisterDate)";
+                    Query = @"INSERT INTO tbl_accounts_voucher (bill_docket_no,bill_docket_type_id,IsCICnumber,CICNumber,IsParticipateTender,ParticipateTenderNumber,IsMed,MedDate,TenderCommitteeMeeting,ChairmanMeeting,TenderRate,BOCSanctionMeeting,AAFSNumber,WorkOrderNo,WorkOrderDate,EstimateAmount,MBBookNo,PageNo,WorkRegNo,WorkRegNoDate) 
+				        VALUES(@billdocketno,@BillDocketType,@iscic,@cicno,@isetender,@tenno,@ismed,@medno,@MeetingTenderCommittee,@MeetingChairman,@Tenderrate,
+				        @MeetingBOC,@AAFSNo,@WorkOrder,@WorkOrderDate,@AmountEstimate,@MBBookNo,@PageNo,@WorkRegisterNo,@WorkRegisterDate)";
 
 
-                    SqlCommand cmd = new SqlCommand("[dbo].[spAccountsVoucher]", con);
-                    //SqlCommand cmd = new SqlCommand(Query, con);
+                    //SqlCommand cmd = new SqlCommand("[dbo].[spAccountsVoucher]", con);
+                    SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
                     cmd.Parameters.AddWithValue("@billdocketno", billdocketno);
                     cmd.Parameters.AddWithValue("@BillDocketType", BillDocketType);
@@ -130,7 +130,10 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select * from tbl_accounts_bill_details where bill_docket_no=@DocketNo";
+                    string Query = @"select T1.bill_details_id_pk,T1.bill_docket_no,T1.bill_category_id_fk,T1.bill_company_name,T1.bill_pan,T1.bill_gst,T1.bill_description,T1.bill_amount,T2.department_name,T3.fund_scheme_name from tbl_accounts_bill_details as T1
+                        left join tbl_accounts_department_master as T2 on T2.department_id_pk=T1.bill_department_id_fk
+                        left join tbl_accounts_fund_master as T3 on T3.fund_scheme_id_pk=T1.bill_fund_id_fk
+                        where bill_docket_no=@DocketNo";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@DocketNo", billdocketno);
 

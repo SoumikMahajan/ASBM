@@ -209,10 +209,6 @@
                             <label for="exampleInputEmail1">Category of Company: </label>
                             <input type="text" class="form-control" id="txtCompanycat" placeholder="Enter Category of Company">
                         </div>
-                        <div class="col-md-6">
-                            <label for="exampleInputEmail1">Type Of Work: </label>
-                            <input type="text" class="form-control" id="txtTypeWork" placeholder="Enter Type Of Work">
-                        </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-md-6">
@@ -386,14 +382,13 @@
                     if (data != "") {
                         //$("#afterVoucherApproved").html(data);
                         $('#txtCompanycat').val(data.bill_category_id_fk);
-                        $('#txtCompanyname').val(data.bill_company_name);                       
-                        //$('#txtTypeWork').val(data.bill_company_name);
-                        //$('#txtDepartment').val(data.bill_company_name);
+                        $('#txtCompanyname').val(data.bill_company_name);                                             
+                        $('#txtDepartment').val(data.department_name);
                         $('#txtpan').val(data.bill_pan);
                         $('#txtgst').val(data.bill_gst);
                         $('#txtdescription').val(data.bill_description);
                         $('#txtbillamount').val(data.bill_amount);
-                        //$('#txtFund').val(data.bill_amount);
+                        $('#txtFund').val(data.bill_fund_id_fk);
                     }
                 }
             });
