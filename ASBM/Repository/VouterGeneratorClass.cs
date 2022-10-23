@@ -1,6 +1,9 @@
-﻿using System;
+﻿using ASBM.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -45,6 +48,122 @@ namespace ASBM.Repository
             }
 
             return result;
+        }
+
+        public int ApprovedVoucher(string BillDocketType, string billdocketno, string iscic, string cicno, string isetender, string tenno, string ismed, string medno, string MeetingTenderCommittee, string MeetingChairman, string Tenderrate, string MeetingBOC, string AAFSNo, string WorkOrder, string WorkOrderDate, string AmountEstimate, string MBBookNo, string PageNo, string WorkRegisterNo, string WorkRegisterDate)
+        {
+            int res = 0;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+            //        string Query = string.Empty;
+
+            //        Query = @"INSERT INTO tbl_accounts_voucher (bill_docket_no,bill_docket_type_id,IsCICnumber,CICNumber,IsParticipateTender,ParticipateTenderNumber,IsMed,MedDate,TenderCommitteeMeeting,ChairmanMeeting,TenderRate,BOCSanctionMeeting,AAFSNumber,WorkOrderNo,WorkOrderDate,EstimateAmount,MBBookNo,PageNo,WorkRegNo,WorkRegNoDate) 
+				        //VALUES(@billdocketno,@BillDocketType,@iscic,@cicno,@isetender,@tenno,@ismed,@medno,@MeetingTenderCommittee,@MeetingChairman,@Tenderrate,
+				        //@MeetingBOC,@AAFSNo,@WorkOrder,@WorkOrderDate,@AmountEstimate,@MBBookNo,@PageNo,@WorkRegisterNo,@WorkRegisterDate)";
+
+
+                    SqlCommand cmd = new SqlCommand("[dbo].[spAccountsVoucher]", con);
+                    //SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
+                    cmd.Parameters.AddWithValue("@billdocketno", billdocketno);
+                    cmd.Parameters.AddWithValue("@BillDocketType", BillDocketType);
+                    cmd.Parameters.AddWithValue("@iscic", iscic);
+                    cmd.Parameters.AddWithValue("@cicno", cicno);
+                    cmd.Parameters.AddWithValue("@isetender", isetender);
+                    cmd.Parameters.AddWithValue("@tenno", tenno);
+                    cmd.Parameters.AddWithValue("@ismed", ismed);
+                    cmd.Parameters.AddWithValue("@medno", medno);
+                    cmd.Parameters.AddWithValue("@MeetingTenderCommittee", MeetingTenderCommittee);
+                    cmd.Parameters.AddWithValue("@MeetingChairman", MeetingChairman);
+                    cmd.Parameters.AddWithValue("@Tenderrate", Tenderrate);
+                    cmd.Parameters.AddWithValue("@MeetingBOC", MeetingBOC);
+                    cmd.Parameters.AddWithValue("@AAFSNo", AAFSNo);
+                    cmd.Parameters.AddWithValue("@WorkOrder", WorkOrder);
+                    cmd.Parameters.AddWithValue("@WorkOrderDate", WorkOrderDate);
+                    cmd.Parameters.AddWithValue("@AmountEstimate", AmountEstimate);
+                    cmd.Parameters.AddWithValue("@MBBookNo", MBBookNo);
+                    cmd.Parameters.AddWithValue("@PageNo", PageNo);
+                    cmd.Parameters.AddWithValue("@WorkRegisterNo", WorkRegisterNo);
+                    cmd.Parameters.AddWithValue("@WorkRegisterDate", WorkRegisterDate);
+
+                    con.Open();
+                    int AffectedRows = cmd.ExecuteNonQuery();
+                    if (AffectedRows == 1)
+                    {
+                        res = 1;
+                    }
+                    else
+                    {
+                        res = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //res = "Failed|Internal error.";
+            }
+
+            return res;
+        }
+
+
+        //public MultipleModel FetchNormalBillingdetails(string billdocketno)
+        //{
+        //    MultipleModel mm = new MultipleModel();
+        //    try
+        //    {
+        //        mm.billSubmission = getNormalBillDeatils(billdocketno);
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //    }
+        //    return mm;
+        //}
+
+        public BillSubmission FetchNormalBillingdetails(string billdocketno)
+        {
+            BillSubmission Res = new BillSubmission();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = @"select * from tbl_accounts_bill_details where bill_docket_no=@DocketNo";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@DocketNo", billdocketno);
+
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    //SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                    //adp.Fill(dt);
+                    //if (dt.Rows.Count > 0)
+                    //{
+                    //    List = JsonConvert.DeserializeObject<List<BillingStatusModel>>(JsonConvert.SerializeObject(dt));
+                    //}
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        Res = JsonConvert.DeserializeObject<List<BillSubmission>>(JsonConvert.SerializeObject(dt)).FirstOrDefault();
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Res;
         }
     }
 }
