@@ -423,10 +423,10 @@ namespace ASBM.Controllers
         }
 
         [HttpPost]
-        public int ajax_confirm_SchemeEntryForm(string schemeName)
+        public int ajax_confirm_SchemeEntryForm(string schemeNo, string schemeName)
         {
             int response;
-            response = scheme.SubmitSchemeDetails(schemeName);
+            response = scheme.SubmitSchemeDetails(schemeNo, schemeName);
             return response;
         }
         /////////////// Scheme Master ENTRY End //////////////////////

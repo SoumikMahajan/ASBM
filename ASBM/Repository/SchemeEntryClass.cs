@@ -13,7 +13,7 @@ namespace ASBM.Repository
     public class SchemeEntryClass
     {
         string strcon = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-        public int SubmitSchemeDetails(string scheme)
+        public int SubmitSchemeDetails(string schemeNo, string scheme)
         {
             int res = 0;
             try
@@ -22,10 +22,11 @@ namespace ASBM.Repository
                 {
                     string Query = string.Empty;
 
-                    Query = @"INSERT INTO tbl_accounts_scheme_master (scheme_name) VALUES(@schemeName)";
+                    Query = @"INSERT INTO tbl_accounts_scheme_master (scheme_no, scheme_name) VALUES(@schemeNo,@schemeName)";
 
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@schemeName", scheme);
+                    cmd.Parameters.AddWithValue("@schemeNo", schemeNo);
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
@@ -55,7 +56,7 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select scheme.scheme_id_pk, scheme.scheme_name from tbl_accounts_scheme_master AS scheme";
+                    string Query = @"select scheme.scheme_id_pk, scheme.scheme_no, scheme.scheme_name from tbl_accounts_scheme_master AS scheme";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
                     {

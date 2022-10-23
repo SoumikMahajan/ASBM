@@ -25,13 +25,23 @@
         //    }
         //});
         var schemeName = $("#txtSchemeName").val().trim();
-        if (schemeName == "") {
+        var schemeNo = $("#txtSchemeNo").val().trim();
+        if (schemeNo == "") {
             Swal.fire({
                 icon: 'warning',
-                text: 'Oops...!Please Scheme Name!',
+                text: 'Oops...!Please Enter Scheme No!',
             })
             return;
         }
+        if (schemeName == "") {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Oops...!Please Enter Scheme Name!',
+            })
+            return;
+        }
+
+        
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -50,7 +60,8 @@
 
     function saveSchemeMasterMaster() {
         var info = {
-            schemeName: $("#txtSchemeName").val().trim()
+            schemeName: $("#txtSchemeName").val().trim(),
+            schemeNo: $("#txtSchemeNo").val().trim()
         };
 
         //info = JSON.stringify(info)

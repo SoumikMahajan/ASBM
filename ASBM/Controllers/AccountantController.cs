@@ -17,6 +17,9 @@ namespace ASBM.Controllers
         {
             if (Session["UserID"] != null && Session["UserRoleId"].ToString() == "3")
             {
+                //MultipleModel mm = new MultipleModel();
+                //mm = acc.Fetch_All_Vouter_Details();
+                //return View(mm);
                 return View();
             }
             else
@@ -37,7 +40,23 @@ namespace ASBM.Controllers
             {
                 throw ex;
             }
-            return PartialView("~/Views/Home/_partialAccountantVouterDataTable.cshtml", mm);            
+            return PartialView("~/Views/Accountant/_partialAccountantVouterDataTable.cshtml", mm);            
+        }
+       
+        public JsonResult Get_Vouter_Details(int id)
+        {
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm = acc.Fetch_Vouter_Details(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Json(mm, JsonRequestBehavior.AllowGet);
+            //return View(mm);
+            //return PartialView("~/Views/Accountant/_partialAccountantVouterDataTable.cshtml", mm);
         }
     }
 }

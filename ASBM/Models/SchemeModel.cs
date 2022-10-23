@@ -9,5 +9,6 @@ namespace ASBM.Models
     {
         public int scheme_id_pk { get; set; }
         public string scheme_name { get; set; }
+        public string scheme_no { get; set; }
     }
 }
