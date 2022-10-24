@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ASBM.Models
 {
-    public class Voucher
+    public class VoucherModel
 	{
 		public int voucher_id_pk { get; set; }
 		public string voucher_no { get; set; }

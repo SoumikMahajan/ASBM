@@ -109,6 +109,43 @@
         //        $('.modal_forward_claim_body').html('<div class="loader_con"><div class="loader"></div>Loading ...</div>');
         //    }
         //});
+        debugger;
+        DocketNo = $("#ddlDocketNo").val().trim();
+        DepartmentId = parseInt($("#ddlDepartment").val().trim());
+        OfficerId = parseInt($("#ddlOfficer").val().trim());
+        AllotedDatte = $("#AllottedDate").val().trim();
+
+        if (DepartmentId == 0) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Oops...!Please Select Department!',
+            })
+            return;
+        }
+
+        if (DocketNo == 0) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Oops...!Please Select Docket No!',
+            })
+            return;
+        }
+
+        if (OfficerId == 0) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Oops...!Please Select Officer!',
+            })
+            return;
+        }
+
+        if (AllotedDatte == '') {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Oops...!Please Choose Alloted Date!',
+            })
+            return;
+        }
 
         Swal.fire({
             title: 'Are you sure?',

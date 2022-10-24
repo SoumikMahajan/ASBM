@@ -17,7 +17,7 @@ namespace ASBM.Models
         public AccountantModel accountantModel { get; set; }
         public List<AccountantModel> AccountantList { get; set; }
 
-        public Voucher voucher { get; set; }
-        public List<Voucher> voucherList { get; set; }
+        public VoucherModel voucher { get; set; }
+        public List<VoucherModel> voucherList { get; set; }
     }
 }

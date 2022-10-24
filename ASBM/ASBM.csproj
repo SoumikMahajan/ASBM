@@ -141,7 +141,7 @@
     <Compile Include="Models\PayeeModel.cs" />
     <Compile Include="Models\RandomBillGenerationModel.cs" />
     <Compile Include="Models\TreasuryModel.cs" />
-    <Compile Include="Models\Voucher.cs" />
+    <Compile Include="Models\VoucherModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AccountantClass.cs" />
     <Compile Include="Repository\BankEntryClass.cs" />

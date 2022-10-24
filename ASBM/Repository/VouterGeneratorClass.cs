@@ -59,13 +59,14 @@ namespace ASBM.Repository
                 {
                     string Query = string.Empty;
 
-                    Query = @"INSERT INTO tbl_accounts_voucher (bill_docket_no,bill_docket_type_id,IsCICnumber,CICNumber,IsParticipateTender,ParticipateTenderNumber,IsMed,MedDate,TenderCommitteeMeeting,ChairmanMeeting,TenderRate,BOCSanctionMeeting,AAFSNumber,WorkOrderNo,WorkOrderDate,EstimateAmount,MBBookNo,PageNo,WorkRegNo,WorkRegNoDate) 
-				        VALUES(@billdocketno,@BillDocketType,@iscic,@cicno,@isetender,@tenno,@ismed,@medno,@MeetingTenderCommittee,@MeetingChairman,@Tenderrate,
-				        @MeetingBOC,@AAFSNo,@WorkOrder,@WorkOrderDate,@AmountEstimate,@MBBookNo,@PageNo,@WorkRegisterNo,@WorkRegisterDate)";
+                    //        Query = @"INSERT INTO tbl_accounts_voucher (bill_docket_no,bill_docket_type_id,IsCICnumber,CICNumber,IsParticipateTender,ParticipateTenderNumber,IsMed,MedDate,TenderCommitteeMeeting,ChairmanMeeting,TenderRate,BOCSanctionMeeting,AAFSNumber,WorkOrderNo,WorkOrderDate,EstimateAmount,MBBookNo,PageNo,WorkRegNo,WorkRegNoDate) 
+                    //VALUES(@billdocketno,@BillDocketType,@iscic,@cicno,@isetender,@tenno,@ismed,@medno,@MeetingTenderCommittee,@MeetingChairman,@Tenderrate,
+                    //@MeetingBOC,@AAFSNo,@WorkOrder,@WorkOrderDate,@AmountEstimate,@MBBookNo,@PageNo,@WorkRegisterNo,@WorkRegisterDate)";
 
 
-                    //SqlCommand cmd = new SqlCommand("[dbo].[spAccountsVoucher]", con);
-                    SqlCommand cmd = new SqlCommand(Query, con);
+                    SqlCommand cmd = new SqlCommand("[dbo].[spAccountsVoucher]", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    //SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
                     cmd.Parameters.AddWithValue("@billdocketno", billdocketno);
                     cmd.Parameters.AddWithValue("@BillDocketType", BillDocketType);
