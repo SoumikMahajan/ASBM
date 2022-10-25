@@ -62,7 +62,7 @@ namespace ASBM.Controllers
             return View();
         }
 
-        public ActionResult Logout(string email, string password)
+        public ActionResult Logout()
         {
             try
             {
@@ -150,10 +150,10 @@ namespace ASBM.Controllers
 
 
         [HttpPost]
-        public int ajax_Update_BillSubmissionForm(string BillId,string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
+        public int ajax_Update_BillSubmissionForm(string BillId, string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
         {
             int response;
-            response = bill.UpdateBill(BillId,CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount, BillTypeId);
+            response = bill.UpdateBill(BillId, CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount, BillTypeId);
             return response;
             //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
         }
@@ -211,7 +211,7 @@ namespace ASBM.Controllers
             temp = billAllote.FetchAllBillAllotementDetails();
             return View(temp);
         }
-        
+
         public string GetAllDocketNoByDept(int deptId)
         {
             string result = billAllote.FetchAllDocketNoByDept(deptId);
@@ -274,7 +274,7 @@ namespace ASBM.Controllers
         }
 
         [HttpGet]
-        public ActionResult ajax_check_billing_status(string docketNo,string entryDate)
+        public ActionResult ajax_check_billing_status(string docketNo, string entryDate)
         {
             MultipleModel mm = new MultipleModel();
             try
@@ -312,15 +312,15 @@ namespace ASBM.Controllers
             //List<OfficerModel> temp = new List<OfficerModel>();
             try
             {
-                mm = officer.FetchAllOfficerList();                
+                mm = officer.FetchAllOfficerList();
             }
             catch (Exception ex)
             {
 
                 throw ex;
             }
-            
-            
+
+
             return View(mm);
         }
 

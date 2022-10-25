@@ -170,6 +170,7 @@
     <Content Include="assets\admin\css\random_bill_generation.css" />
     <Content Include="assets\admin\css\bill_submission.css" />
     <Content Include="assets\admin\img\Dual Ring.gif" />
+    <Content Include="assets\admin\js\voucher.js" />
     <Content Include="assets\admin\js\accountant.js" />
     <Content Include="assets\admin\js\billing_status.js" />
     <Content Include="assets\admin\js\bill_entry.js" />
