@@ -58,5 +58,10 @@ namespace ASBM.Controllers
             //return View(mm);
             //return PartialView("~/Views/Accountant/_partialAccountantVouterDataTable.cshtml", mm);
         }
+
+        public ActionResult AmountCalculation()
+        {
+            return View();
+        }
     }
 }

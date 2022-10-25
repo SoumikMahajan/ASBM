@@ -12,7 +12,7 @@
             <th>Fund Name</th>
             <th>Pan No</th>
             <th>GST No</th>
-            <th>Action</th>
+            @*<th>Action</th>*@
         </tr>
     </thead>
     <tbody>
@@ -31,12 +31,12 @@
                     <td>@obj.fund_scheme_name</td>
                     <td>@obj.bill_pan</td>
                     <td>@obj.bill_gst</td>
-                    <td>
+                    @*<td>
                         <center>
                             <a href="javascript:void(o)" id="BtnEdit" data-id="@obj.bill_details_id_pk" class="BtnClEditPoUp"><i class="fa fa-edit"></i></a>
                             <a href="javascript:void(o)" id="BtnDelete" data-id="@obj.bill_details_id_pk" class="BtnDeletePoUp"><i class="fa fa-trash"></i></a>
                         </center>
-                    </td>
+                    </td>*@
                 </tr>
                 rows++;
             }

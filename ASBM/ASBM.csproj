@@ -291,6 +291,7 @@
     <Content Include="Views\Accountant\Index.cshtml" />
     <Content Include="Views\Accountant\_partialAccountantVouterDataTable.cshtml" />
     <Content Include="Views\VoucherGenerator\_partialNormalBillDetailsModal.cshtml" />
+    <Content Include="Views\Accountant\AmountCalculation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
