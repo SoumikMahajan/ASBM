@@ -440,16 +440,22 @@ namespace ASBM.Controllers
             return View(temp);
         }
 
+        public string GetAllSchemeName()
+        {
+            string result = trsy.FetchAllSchemeName();
+            return result;
+        }
+
         public ActionResult ajax_TreasuryEntryForm()
         {
             return PartialView("~/Views/Home/_partialTreasuryEntryView.cshtml");
         }
 
         [HttpPost]
-        public int ajax_confirm_TreassuryEntryForm(string adviceNo, string adviceDate)
+        public int ajax_confirm_TreassuryEntryForm(int schemeId, string adviceNo, string adviceDate)
         {
             int response;
-            response = trsy.SubmitTreasuryDetails(adviceNo, adviceDate);
+            response = trsy.SubmitTreasuryDetails(schemeId, adviceNo, adviceDate);
             return response;
         }
         /////////////// Treasury Master ENTRY End //////////////////////
@@ -470,6 +476,7 @@ namespace ASBM.Controllers
             return response;
         }
         /////////////// FUND Master ENTRY End //////////////////////
+        
         /////////////// BILL Master ENTRY Start //////////////////////
         public ActionResult MstBillDetails()
         {

@@ -13,7 +13,7 @@ namespace ASBM.Repository
     public class TreasuryEntryClass
     {
         string strcon = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-        public int SubmitTreasuryDetails(string adviceNo, string adviceDate)
+        public int SubmitTreasuryDetails(int schemeId, string adviceNo, string adviceDate)
         {
             int res = 0;
             try
@@ -22,11 +22,12 @@ namespace ASBM.Repository
                 {
                     string Query = string.Empty;
 
-                    Query = @"INSERT INTO tbl_accounts_treasury_master (treasury_advice_no, treasury_advice_date) VALUES(@admiveNo, @adviceDate)";
+                    Query = @"INSERT INTO tbl_accounts_treasury_master (treasury_advice_no, treasury_advice_date, scheme_id_fk) VALUES(@admiveNo, @adviceDate, @schemeId)";
 
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@admiveNo", adviceNo);
                     cmd.Parameters.AddWithValue("@adviceDate", adviceDate);
+                    cmd.Parameters.AddWithValue("@schemeId", schemeId);
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
@@ -56,7 +57,10 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select tsry.treasury_id_pk, tsry.treasury_advice_no, tsry.treasury_advice_date from tbl_accounts_treasury_master AS tsry";
+                    string Query = @"SELECT tsry.treasury_id_pk, tsry.treasury_advice_no, tsry.treasury_advice_date, scheme.scheme_name
+                                            FROM tbl_accounts_treasury_master AS tsry
+                                            LEFT JOIN tbl_accounts_scheme_master AS scheme ON scheme.scheme_id_pk = tsry.scheme_id_fk
+                                            ";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
                     {
@@ -79,6 +83,35 @@ namespace ASBM.Repository
 
             }
             return List;
+        }
+
+        public string FetchAllSchemeName()
+        {
+            string result = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = "select scheme_id_pk, scheme_name from tbl_accounts_scheme_master order by scheme_name";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    con.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    result += "<option value = " + 0 + " selected > -- Select -- </ option >";
+                    while (dr.Read())
+                    {
+                        result += "<option value='" + "" + Convert.ToString(dr["scheme_id_pk"]) + "'>" + Convert.ToString(dr["scheme_name"]) + "</option>";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
         }
     }
 }

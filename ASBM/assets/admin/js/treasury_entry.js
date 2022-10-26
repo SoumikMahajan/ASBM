@@ -4,33 +4,49 @@
         window.location.href = "/Home/MstTreasuryDetails";
     });
 
+    fetchSchemeName();
+
+    function fetchSchemeName() {
+        debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetAllSchemeName",
+            success: function (data) {
+                $("#ddlScheme").html(data);
+            }
+        });
+    }
 
     $(document).on('click', '#btn_submit', function () {
 
-        //var pay_hash = $(this).attr('rel');
-        //var b_hash = $(this).attr('id');
-
-        //$('#myForward').modal({ backdrop: 'static', keyboard: false });
-        //$(".show_forward_btn_dtls").html('');
-        //$(".show_forward_btn_dtls").append('<input type="submit" class="btn btn-md btn-success confirm_nodal_frwd_claim" value="Submit">');
-        //var url = '/Home/ajax_TreasuryEntryForm';
-        //$.ajax({
-        //    type: 'GET',
-        //    url: url,
-        //    data: $('#bill_form').serialize(),
-        //    success: function (result) {
-        //        $('.modal_forward_claim_body').html(result);
-        //    },
-        //    beforeSend: function () {
-        //        $('.modal_forward_claim_body').html('<div class="loader_con"><div class="loader"></div>Loading ...</div>');
-        //    }
-        //});
-
+        var schemeId = parseInt($("#ddlScheme").val());
         var adviceNo = $("#txtAdviceNo").val().trim();
+        var adviceDate = $("#txtAdviceDate").val().trim();
+
+        if (schemeId == 0) {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Oops...!Please Select Scheme!',
+            })
+            return;
+        }
+
         if (adviceNo == '') {
             Swal.fire({
                 icon: 'warning',
                 text: 'Oops...!Please Enter Advice Number!',
+            })
+            return;
+        }
+
+        if (adviceDate == '') {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Oops...!Please Enter Advice Date!',
             })
             return;
         }
@@ -53,6 +69,7 @@
 
     function saveTreasuryEntryMaster() {
         var info = {
+            schemeId: parseInt($("#ddlScheme").val()),
             adviceNo: $("#txtAdviceNo").val().trim(),
             adviceDate: $("#txtAdviceDate").val().trim()
         };

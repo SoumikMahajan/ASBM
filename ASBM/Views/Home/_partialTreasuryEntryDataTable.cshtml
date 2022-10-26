@@ -4,6 +4,7 @@
     <thead>
         <tr class="dataHead">
             <th>SL</th>
+            <th>Scheme Name</th>
             <th>Treasury Advice No</th>
             <th>Treasury Advice Date</th>
         </tr>
@@ -16,6 +17,7 @@
             {
                 <tr class="inAc" style="color: black;font-size: 13px !important;">
                     <td>@rows</td>
+                    <td>@obj.scheme_name</td>
                     <td>@obj.treasury_advice_no</td>
                     <td>@obj.treasury_advice_date.ToShortDateString()</td>
                 </tr>
