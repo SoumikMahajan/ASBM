@@ -217,7 +217,8 @@ namespace ASBM.Repository
                     string Query = @"SELECT
 	                                        bank.bank_id_pk,
 	                                        bank.bank_account_no,
-	                                        fund.fund_scheme_name	                                        
+	                                        fund.fund_scheme_name,
+                                            fund.fund_scheme_id_pk
 	                                    FROM
 		                                    tbl_accounts_bank_master AS bank		                                    
 		                                    LEFT JOIN tbl_accounts_fund_master AS fund ON fund.fund_scheme_id_pk = bank.bank_fund_id_fk
@@ -337,6 +338,69 @@ namespace ASBM.Repository
 
             }
             return Res;
+        }
+
+        public int Finilize_Payment(string VoucherNo, float BasicBill, float SgstVal, float CgstVal, float Igst, float BasicCess, float GrossAmount, float ItTds, float SdMoney, float GrossCess, float TdsCgst, float TdsSgst, float Pf, float PfAdvance, float Ptax, float CcsCount, float CcsLic, float CcsLoan, float Coop, float Gi, float Lic, float Festival, float TotalDeduction, float NetAmountBill, int PaymentTypeId, int BankId, string BankAccNo, int FundSchemeId, int TreasurySchemeId, string TreasuryAdviceNo, string TreasuryAdviceDate)
+        {
+            int res = 0;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    SqlCommand cmd = new SqlCommand("[dbo].[spAccountsPaymentSubmission]", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
+                    cmd.Parameters.AddWithValue("@VoucherNo", VoucherNo);
+                    cmd.Parameters.AddWithValue("@BasicBill", BasicBill);
+                    cmd.Parameters.AddWithValue("@SgstVal", SgstVal);
+                    cmd.Parameters.AddWithValue("@CgstVal", CgstVal);
+                    cmd.Parameters.AddWithValue("@Igst", Igst);
+                    cmd.Parameters.AddWithValue("@BasicCess", BasicCess);
+                    cmd.Parameters.AddWithValue("@GrossAmount", GrossAmount);
+                    cmd.Parameters.AddWithValue("@ItTds", ItTds);
+                    cmd.Parameters.AddWithValue("@SdMoney", SdMoney);
+                    cmd.Parameters.AddWithValue("@GrossCess", GrossCess);
+                    cmd.Parameters.AddWithValue("@TdsCgst", TdsCgst);
+                    cmd.Parameters.AddWithValue("@TdsSgst", TdsSgst);
+                    cmd.Parameters.AddWithValue("@Pf", Pf);
+                    cmd.Parameters.AddWithValue("@PfAdvance", PfAdvance);
+                    cmd.Parameters.AddWithValue("@Ptax", Ptax);
+                    cmd.Parameters.AddWithValue("@CcsCount", CcsCount);
+                    cmd.Parameters.AddWithValue("@CcsLic", CcsLic);
+                    cmd.Parameters.AddWithValue("@CcsLoan", CcsLoan);
+                    cmd.Parameters.AddWithValue("@Coop", Coop);
+                    cmd.Parameters.AddWithValue("@Gi", Gi);
+                    cmd.Parameters.AddWithValue("@Lic", Lic);
+                    cmd.Parameters.AddWithValue("@Festival", Festival);
+                    cmd.Parameters.AddWithValue("@TotalDeduction", TotalDeduction);
+                    cmd.Parameters.AddWithValue("@NetAmountBill", NetAmountBill);
+                    cmd.Parameters.AddWithValue("@PaymentTypeId", PaymentTypeId);
+                    cmd.Parameters.AddWithValue("@BankId", BankId);
+                    cmd.Parameters.AddWithValue("@BankAccNo", BankAccNo);
+                    cmd.Parameters.AddWithValue("@FundSchemeId", FundSchemeId);
+                    cmd.Parameters.AddWithValue("@TreasurySchemeId", TreasurySchemeId);
+                    cmd.Parameters.AddWithValue("@TreasuryAdviceNo", TreasuryAdviceNo);
+                    cmd.Parameters.AddWithValue("@TreasuryAdviceDate", TreasuryAdviceDate);
+
+                    con.Open();
+                    int AffectedRows = cmd.ExecuteNonQuery();
+                    if (AffectedRows == 1)
+                    {
+                        res = 1;
+                    }
+                    else
+                    {
+                        res = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //res = "Failed|Internal error.";
+            }
+
+            return res;
         }
     }
 }

@@ -25,5 +25,6 @@ namespace ASBM.Models
         public string bank_account_no { get; set; }
         public string treasury_advice_no { get; set; }
         public string treasury_advice_date { get; set; }
+        public int fund_scheme_id_pk { get; set; }
     }
 }

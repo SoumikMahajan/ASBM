@@ -11,7 +11,7 @@
 
 
     $(document).on("click", "#BtnView", function () {
-        debugger;
+        //debugger;
         var id = parseInt($(this).data("id"));
         $.ajax({
             type: "GET",
@@ -81,7 +81,7 @@
     });
 
     function CalculateGrossAmount() {
-        debugger;
+        //debugger;
         var gstVal;
         var radioValue = $('input[name=gstradio]:checked').val();
 
@@ -188,7 +188,7 @@
     });
 
     function CalculateNetAmount() {
-        debugger;
+        //debugger;
 
         var ItTds = parseFloat($("#txtItTds").val());
         if (isNaN(ItTds)) {
@@ -331,7 +331,7 @@
     }
 
     $(document).on("change", "#ddlBank", function () {
-        debugger;
+        //debugger;
         var bankId = parseInt($("#ddlBank").val());
         $.ajax({
             type: "GET",
@@ -342,7 +342,8 @@
             url: "/Accountant/Get_bank_acc_Details/?bankId=" + bankId,
             success: function (data) {
                 $("#txtBankAccNo").val(data.accountantModel.bank_account_no);
-                $("#txtFundScheme").val(data.accountantModel.fund_scheme_name);                
+                $("#txtFundScheme").val(data.accountantModel.fund_scheme_name); 
+                $("#txtFundSchemeId").val(data.accountantModel.fund_scheme_id_pk); 
             }
         });
     });
@@ -350,7 +351,7 @@
     fetchSchemeName();
 
     function fetchSchemeName() {
-        debugger;
+        //debugger;
         var html = "";
         $.ajax({
             type: "GET",
@@ -365,7 +366,7 @@
     }
 
     $(document).on("change", "#ddlScheme", function () {
-        debugger;
+        //debugger;
         var SchemeId = parseInt($("#ddlScheme").val());
         $.ajax({
             type: "GET",
@@ -380,4 +381,121 @@
             }
         });
     });
+
+
+    $(document).on('click', '#btn_final_submit', function () {
+
+        //debugger;
+        /*DocketNo = $("#ddlDocketNo").val().trim();*/        
+
+        //if (DocketNo == 0) {
+        //    Swal.fire({
+        //        icon: 'warning',
+        //        text: 'Oops...!Please Select Docket No!',
+        //    })
+        //    return;
+        //}
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                saveBillAllotement();
+                $("#bill_form").trigger('reset');
+            }
+        })
+    });
+
+    function saveBillAllotement() {
+        debugger;
+        var SgstVal = parseFloat($("#txtSgst").val());
+        if (isNaN(SgstVal)) {
+            SgstVal = 0;
+        }
+
+        var CgstVal = parseFloat($("#txtCgst").val());
+        if (isNaN(CgstVal)) {
+            CgstVal = 0;
+        }
+
+        var Igst = parseFloat($("#txtIgst").val());
+        if (isNaN(Igst)) {
+            Igst = 0;
+        }
+
+        var FundSchemeId = parseFloat($("#txtFundSchemeId").val());
+        if (isNaN(FundSchemeId)) {
+            FundSchemeId = 0;
+        }
+
+        var info = {
+            VoucherNo: $("#txtVouterNo").val().trim(),
+            BasicBill: parseFloat($("#txtBasicBillAmount").val()),
+            SgstVal: SgstVal,
+            CgstVal: CgstVal,
+            Igst: Igst,
+            BasicCess: parseFloat($("#txtBasicCess").val()),
+            GrossAmount: parseFloat($("#txtGrossAmount").val()),
+            ItTds: parseFloat($("#txtItTds").val()),
+            SdMoney: parseFloat($("#txtSdMoney").val()),
+            GrossCess: parseFloat($("#txtGrossCess").val()),
+            TdsCgst: parseFloat($("#txtTdsCgst").val()),
+            TdsSgst: parseFloat($("#txtTdsSgst").val()),
+            Pf: parseFloat($("#txtPf").val()),
+            PfAdvance: parseFloat($("#txtPfAdvance").val()),
+            Ptax: parseFloat($("#txtPtax").val()),
+            CcsCount: parseFloat($("#txtCcsCount").val()),
+            CcsLic: parseFloat($("#txtCcsLic").val()),
+            CcsLoan: parseFloat($("#txtCcsLoan").val()), 
+            Coop: parseFloat($("#txtCoop").val()),
+            Gi: parseFloat($("#txtGi").val()),
+            Lic: parseFloat($("#txtLic").val()),
+            Festival: parseFloat($("#txtFestival").val()),
+            TotalDeduction: parseFloat($("#txtTotalDeduction").val()),
+            NetAmountBill: parseFloat($("#txtNetAmountBill").val()),
+
+            PaymentTypeId: $('input[name=optradio]:checked').val(),
+            BankId: parseInt($("#ddlBank").val()),
+            BankAccNo: $("#txtBankAccNo").val(),
+            FundSchemeId: FundSchemeId,
+
+            TreasurySchemeId: parseInt($("#ddlScheme").val()),
+            TreasuryAdviceNo: $("#txtAdviceNo").val().trim(),
+            TreasuryAdviceDate: $("#txtAdviceDate").val().trim()            
+        };
+
+        var url = '/Accountant/ajax_Finilize_Payment';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            data: info,
+            success: function (data) {
+                var check_result = data;
+                if (check_result == 1) {
+                    /*$('.modal_forward_claim_body').html('<div class="alert alert-success">Bill Allotement Submitted Successfully</div>');*/
+                    swal.fire({
+                        icon: 'success',
+                        title: 'SAVED!',
+                        text: 'Payment Details has been Submitted Successfully.'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                }
+            },
+        });
+    }
 });

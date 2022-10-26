@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace ASBM.Controllers
 {
@@ -40,9 +41,9 @@ namespace ASBM.Controllers
             {
                 throw ex;
             }
-            return PartialView("~/Views/Accountant/_partialAccountantVouterDataTable.cshtml", mm);            
+            return PartialView("~/Views/Accountant/_partialAccountantVouterDataTable.cshtml", mm);
         }
-       
+
         public JsonResult Get_Vouter_Details(int id)
         {
             MultipleModel mm = new MultipleModel();
@@ -81,7 +82,7 @@ namespace ASBM.Controllers
             {
                 throw ex;
             }
-            return Json(mm, JsonRequestBehavior.AllowGet);            
+            return Json(mm, JsonRequestBehavior.AllowGet);
         }
 
         public string GetAllSchemeName()
@@ -89,7 +90,7 @@ namespace ASBM.Controllers
             string result = acc.FetchAllSchemeName();
             return result;
         }
-        
+
         public JsonResult Get_Treasury_Details(int SchemeId)
         {
             MultipleModel mm = new MultipleModel();
@@ -102,6 +103,16 @@ namespace ASBM.Controllers
                 throw ex;
             }
             return Json(mm, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public int ajax_Finilize_Payment(string VoucherNo,float BasicBill, float SgstVal, float CgstVal, float Igst, float BasicCess, float GrossAmount, float ItTds, float SdMoney, float GrossCess, float TdsCgst, float TdsSgst, float Pf, float PfAdvance, float Ptax, float CcsCount, float CcsLic, float CcsLoan, float Coop, float Gi, float Lic, float Festival, float TotalDeduction, float NetAmountBill, int PaymentTypeId, int BankId, string BankAccNo, int FundSchemeId, int TreasurySchemeId, string TreasuryAdviceNo, string TreasuryAdviceDate)
+        {
+            int response;
+            response = acc.Finilize_Payment(VoucherNo, BasicBill, SgstVal, CgstVal, Igst, BasicCess, GrossAmount, ItTds, SdMoney, GrossCess, TdsCgst, TdsSgst, Pf, PfAdvance, Ptax, CcsCount, CcsLic, CcsLoan, Coop, Gi, Lic, Festival, TotalDeduction, NetAmountBill, PaymentTypeId, BankId, BankAccNo, FundSchemeId, TreasurySchemeId, TreasuryAdviceNo, TreasuryAdviceDate);
+
+            return response;
+
         }
     }
 }
