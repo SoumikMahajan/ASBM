@@ -63,5 +63,45 @@ namespace ASBM.Controllers
         {
             return View();
         }
+
+        public string GetAllBank()
+        {
+            string result = acc.FetchAllBank();
+            return result;
+        }
+
+        public JsonResult Get_bank_acc_Details(int bankId)
+        {
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm = acc.Fetch_bank_acc_Details(bankId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Json(mm, JsonRequestBehavior.AllowGet);            
+        }
+
+        public string GetAllSchemeName()
+        {
+            string result = acc.FetchAllSchemeName();
+            return result;
+        }
+        
+        public JsonResult Get_Treasury_Details(int SchemeId)
+        {
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm = acc.Fetch_Treasury_Details(SchemeId);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return Json(mm, JsonRequestBehavior.AllowGet);
+        }
     }
 }

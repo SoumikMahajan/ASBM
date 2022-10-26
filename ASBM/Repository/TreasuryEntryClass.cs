@@ -56,7 +56,7 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select tsry.treasury_scheme_id_pk, tsry.treasury_advice_no, tsry.treasury_advice_date from tbl_accounts_treasury_master AS tsry";
+                    string Query = @"select tsry.treasury_id_pk, tsry.treasury_advice_no, tsry.treasury_advice_date from tbl_accounts_treasury_master AS tsry";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     if (con.State != ConnectionState.Open)
                     {

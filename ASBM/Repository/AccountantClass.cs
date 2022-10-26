@@ -47,7 +47,7 @@ namespace ASBM.Repository
                     if (con.State != ConnectionState.Open)
                     {
                         con.Open();
-                    }                    
+                    }
 
                     SqlDataAdapter sda = new SqlDataAdapter(cmd);
                     DataTable dt = new DataTable();
@@ -138,6 +138,181 @@ namespace ASBM.Repository
 	                                ";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@id", id);
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        Res = JsonConvert.DeserializeObject<List<AccountantModel>>(JsonConvert.SerializeObject(dt)).FirstOrDefault();
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Res;
+        }
+
+        public string FetchAllBank()
+        {
+            string result = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = "select bank_id_pk, bank_name from tbl_accounts_bank_master order by bank_name";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    con.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    result += "<option value = " + 0 + " selected > -- Select -- </ option >";
+                    while (dr.Read())
+                    {
+                        result += "<option value='" + "" + Convert.ToString(dr["bank_id_pk"]) + "'>" + Convert.ToString(dr["bank_name"]) + "</option>";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        public MultipleModel Fetch_bank_acc_Details(int bankId)
+        {
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm.accountantModel = Get_Bank_Acc_Data(bankId);
+            }
+            catch (Exception)
+            {
+
+            }
+            return mm;
+        }
+
+        public AccountantModel Get_Bank_Acc_Data(int bankId)
+        {
+            AccountantModel Res = new AccountantModel();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = @"SELECT
+	                                        bank.bank_id_pk,
+	                                        bank.bank_account_no,
+	                                        fund.fund_scheme_name	                                        
+	                                    FROM
+		                                    tbl_accounts_bank_master AS bank		                                    
+		                                    LEFT JOIN tbl_accounts_fund_master AS fund ON fund.fund_scheme_id_pk = bank.bank_fund_id_fk
+	                                    WHERE
+		                                    bank.bank_id_pk = @id
+	                                ";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@id", bankId);
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        Res = JsonConvert.DeserializeObject<List<AccountantModel>>(JsonConvert.SerializeObject(dt)).FirstOrDefault();
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Res;
+        }
+
+        public string FetchAllSchemeName()
+        {
+            string result = null;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = "select scheme_id_pk, scheme_name from tbl_accounts_scheme_master order by scheme_name";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    con.Open();
+
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    result += "<option value = " + 0 + " selected > -- Select -- </ option >";
+                    while (dr.Read())
+                    {
+                        result += "<option value='" + "" + Convert.ToString(dr["scheme_id_pk"]) + "'>" + Convert.ToString(dr["scheme_name"]) + "</option>";
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return result;
+        }
+
+        public MultipleModel Fetch_Treasury_Details(int SchemeId)
+        {
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm.accountantModel = Get_Treasury_Data(SchemeId);
+            }
+            catch (Exception)
+            {
+
+            }
+            return mm;
+        }
+
+        public AccountantModel Get_Treasury_Data(int SchemeId)
+        {
+            AccountantModel Res = new AccountantModel();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = @"SELECT
+	                                        treasury.treasury_advice_no,
+	                                        CONVERT(VARCHAR(10), treasury.treasury_advice_date, 105) as treasury_advice_date                                     
+	                                    FROM
+		                                    tbl_accounts_treasury_master AS treasury		                                    
+		                                    LEFT JOIN tbl_accounts_scheme_master AS scheme ON scheme.scheme_id_pk = treasury.scheme_id_fk
+	                                    WHERE
+		                                    scheme.scheme_id_pk = @id
+	                                ";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@id", SchemeId);
                     if (con.State != ConnectionState.Open)
                     {
                         con.Open();

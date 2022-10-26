@@ -306,11 +306,78 @@
             contentType: "application/json; charset=utf-8",
             url: "/Accountant/Get_All_Vouter_Details",
             success: function (data) {
-
                 $("#prtCmsDataTable").html(data);
             }
         });
         return html;
     }
 
+    fetchBankName();
+
+    function fetchBankName() {
+        //debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Accountant/GetAllBank",
+            success: function (data) {
+                $("#ddlBank").html(data);
+            }
+        });
+        //return data;
+    }
+
+    $(document).on("change", "#ddlBank", function () {
+        debugger;
+        var bankId = parseInt($("#ddlBank").val());
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "json",
+            /*data: id,*/
+            contentType: "application/json; charset=utf-8",
+            url: "/Accountant/Get_bank_acc_Details/?bankId=" + bankId,
+            success: function (data) {
+                $("#txtBankAccNo").val(data.accountantModel.bank_account_no);
+                $("#txtFundScheme").val(data.accountantModel.fund_scheme_name);                
+            }
+        });
+    });
+
+    fetchSchemeName();
+
+    function fetchSchemeName() {
+        debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Accountant/GetAllSchemeName",
+            success: function (data) {
+                $("#ddlScheme").html(data);
+            }
+        });
+    }
+
+    $(document).on("change", "#ddlScheme", function () {
+        debugger;
+        var SchemeId = parseInt($("#ddlScheme").val());
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "json",
+            /*data: id,*/
+            contentType: "application/json; charset=utf-8",
+            url: "/Accountant/Get_Treasury_Details/?SchemeId=" + SchemeId,
+            success: function (data) {
+                $("#txtAdviceNo").val(data.accountantModel.treasury_advice_no);
+                $("#txtAdviceDate").val(data.accountantModel.treasury_advice_date);
+            }
+        });
+    });
 });

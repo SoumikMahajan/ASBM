@@ -21,6 +21,9 @@ namespace ASBM.Models
         public string bill_amount { get; set; }
         public string CreateDate { get; set; }
         public string mobile_no { get; set; }
-
+        public int bank_id_pk { get; set; }
+        public string bank_account_no { get; set; }
+        public string treasury_advice_no { get; set; }
+        public string treasury_advice_date { get; set; }
     }
 }
