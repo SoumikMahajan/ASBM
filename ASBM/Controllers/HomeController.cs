@@ -53,6 +53,10 @@ namespace ASBM.Controllers
                     {
                         return RedirectToAction("Index", "Accountant");
                     }
+                    else if (UserDetails.userRoleId == 4)
+                    {
+                        return RedirectToAction("Index", "Finance");
+                    }
                 }
             }
             catch (Exception ex)

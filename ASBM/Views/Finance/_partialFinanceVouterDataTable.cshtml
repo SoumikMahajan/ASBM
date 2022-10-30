@@ -5,22 +5,20 @@
         <tr class="dataHead">
             <th>SL</th>
             <th>Voucher No</th>
-            <th>Voucher Date</th>
             <th>View</th>
         </tr>
     </thead>
     <tbody>
         @{ int rows = 1;}
-        @if (Model != null && Model.accountantList.Count > 0)
+        @if (Model != null && Model.financeList.Count > 0)
         {
-            foreach (var obj in Model.accountantList)
+            foreach (var obj in Model.financeList)
             {
                 <tr class="inAc" style="color: black;font-size: 13px !important;">
                     <td>@rows</td>
-                    <td>@obj.voucher_no</td>
-                    <td>@obj.CreateDate</td>
+                    <td>@obj.payment_voucher_no</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-primary btn-sm" id="BtnView" data-id="@obj.voucher_id_pk">View</button>
+                        <button type="button" class="btn btn-primary btn-sm" id="BtnView" data-id="@obj.payment_voucher_no">View</button>
                     </td>
                 </tr>
 

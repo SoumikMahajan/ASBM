@@ -19,7 +19,7 @@ namespace ASBM.Repository
             MultipleModel mm = new MultipleModel();
             try
             {
-                mm.AccountantList = Get_All_Vouter_Data();
+                mm.accountantList = Get_All_Vouter_Data();
             }
             catch (Exception)
             {
@@ -75,7 +75,7 @@ namespace ASBM.Repository
             MultipleModel mm = new MultipleModel();
             try
             {
-                mm.accountantModel = Get_Vouter_Data(id);
+                mm.accountant = Get_Vouter_Data(id);
             }
             catch (Exception)
             {
@@ -198,7 +198,7 @@ namespace ASBM.Repository
             MultipleModel mm = new MultipleModel();
             try
             {
-                mm.accountantModel = Get_Bank_Acc_Data(bankId);
+                mm.accountant = Get_Bank_Acc_Data(bankId);
             }
             catch (Exception)
             {
@@ -287,7 +287,7 @@ namespace ASBM.Repository
             MultipleModel mm = new MultipleModel();
             try
             {
-                mm.accountantModel = Get_Treasury_Data(SchemeId);
+                mm.accountant = Get_Treasury_Data(SchemeId);
             }
             catch (Exception)
             {

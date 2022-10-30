@@ -14,10 +14,13 @@ namespace ASBM.Models
         public BillingStatusModel billingStatusModel { get; set; }
         public List<BillingStatusModel> billingStatusList { get; set; }
 
-        public AccountantModel accountantModel { get; set; }
-        public List<AccountantModel> AccountantList { get; set; }
+        public AccountantModel accountant { get; set; }
+        public List<AccountantModel> accountantList { get; set; }
 
         public VoucherModel voucher { get; set; }
         public List<VoucherModel> voucherList { get; set; }
+
+        public FinanceModel finance { get; set; }
+        public List<FinanceModel> financeList { get; set; }
     }
 }

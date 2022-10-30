@@ -121,6 +121,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountantController.cs" />
+    <Compile Include="Controllers\FinanceController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\VoucherGeneratorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -129,6 +130,7 @@
     <Compile Include="Models\AccountantModel.cs" />
     <Compile Include="Models\BillingStatusModel.cs" />
     <Compile Include="Models\BillModel.cs" />
+    <Compile Include="Models\FinanceModel.cs" />
     <Compile Include="Models\FundModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MultipleModel.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Repository\BillingStatusClass.cs" />
     <Compile Include="Repository\BillSubmissionClass.cs" />
     <Compile Include="Repository\DepartmentEntryClass.cs" />
+    <Compile Include="Repository\FinanceClass.cs" />
     <Compile Include="Repository\FundEntryClass.cs" />
     <Compile Include="Repository\LoginClass.cs" />
     <Compile Include="Repository\OfficerEntryClass.cs" />
@@ -170,6 +173,7 @@
     <Content Include="assets\admin\css\random_bill_generation.css" />
     <Content Include="assets\admin\css\bill_submission.css" />
     <Content Include="assets\admin\img\Dual Ring.gif" />
+    <Content Include="assets\admin\js\finance.js" />
     <Content Include="assets\admin\js\voucher.js" />
     <Content Include="assets\admin\js\accountant.js" />
     <Content Include="assets\admin\js\billing_status.js" />
@@ -292,6 +296,8 @@
     <Content Include="Views\Accountant\_partialAccountantVouterDataTable.cshtml" />
     <Content Include="Views\VoucherGenerator\_partialNormalBillDetailsModal.cshtml" />
     <Content Include="Views\Accountant\AmountCalculation.cshtml" />
+    <Content Include="Views\Finance\Index.cshtml" />
+    <Content Include="Views\Finance\_partialFinanceVouterDataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

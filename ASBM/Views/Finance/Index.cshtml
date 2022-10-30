@@ -1,0 +1,140 @@
+﻿@model ASBM.Models.MultipleModel
+
+@{
+    ViewBag.Title = "Finance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="container" style="background-color: white; color: black; padding-bottom: 20px;">
+
+        <div class="row no-gutters">
+            <div class="flex-column justify-content-center about-content" style="width: 100% !important;">
+                <div class="section-title">
+                    <h2>Accountant</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="background-color: beige;">
+
+            <div id="prtCmsDataTable">
+                @Html.Partial("~/Views/Finance/_partialFinanceVouterDataTable.cshtml", Model)
+            </div>
+        </div>
+    </div>
+
+    <div class="container" style="background-color: rgb(9, 109, 147)" id="VouterDetailsShowHide">
+        <input type="hidden" id="txtVoucherNo" />
+        <div class="row">
+            <div class="col-md-1">
+                <p>Memo No:</p>
+            </div>
+            <div class="col-md-2">
+                <input type="text" id="txtMemo" class="form-control" />
+            </div>
+            <div class="col-md-7 text-right">
+                <p>Date:</p>
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" value="@DateTime.Now.ToShortDateString()" disabled />
+            </div>
+        </div>
+
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-md-2">
+                <p style="margin-bottom: 5px;">To, <br />The Branch Manager</p>
+                <p>
+                    <span id="txt1"></span>
+                    <br />
+                    <span id="txt2"></span>
+                    <br />
+                    <span id="txt3"></span>
+                    <br />
+                    scheme,
+
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                
+                @*<input type="text" id="txt1" class="form-control" disabled />
+                <br />
+                <input type="text" id="txt2" class="form-control" disabled />
+                <br />
+                <input type="text" id="txt3" class="form-control" disabled />*@
+                <input type="hidden" id="txt4" class="form-control" />
+                <br />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-5 text-right">
+                <p>
+                    Subject: Debit Mandate for payment in favor of through
+                </p>
+            </div>
+            <div class="col-md-2">
+                <select id="ddlPaymentMode" name="ddlPaymentMode" class="form-control placeholder-no-fix selectpicker" data-show-subtext="true" data-live-search="true">
+                    <option value=""> -- Select -- </option>
+                    <option value="NEFT"> NEFT </option>
+                    <option value="RTGS"> RTGS </option>
+                    <option value="CASH"> CASH </option>
+                </select>
+            </div>
+            <div class="col-md-5">
+                <p>
+                    mode for a sum of Rs. <b><span id="netAmount" class="netAmount"></span></b> as indicated below.
+                </p>
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-12">
+                Respected sir, <br /> you are hereby requested to remit the following amount as indicated in table below by debiting the Bhatpara Municipality account number line with
+            <br />
+                Net Amount: <b><span class="netAmount"></span></b>
+            </div>
+        </div>
+        <br /><br /><br />
+        <div class="row">
+            <div class="col-md-12">
+                Please be noted that after making such disbursement, a report of compilance should reach his office without any
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                Thanking You <br /> Yours Truly
+            </div>
+        </div>
+        <br />
+        <hr />
+
+        @*<div class="row">
+            <div class="col-md-2">
+                N.B. Cheque bearing No.
+            </div>
+            <div class="col-md-2">
+                <input type="text" class="form-control" disabled />
+            </div>
+            <div class="col-md-8">
+                dated on 17/09/2022 of Rs. 15600 drawn on A/C no. 43645464 lying with.
+            </div>
+        </div>*@
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-info" id="btn_final_submit">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/assets/admin/js/finance.js"></script>
+

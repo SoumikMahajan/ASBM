@@ -21,21 +21,21 @@
             contentType: "application/json; charset=utf-8",
             url: "/Accountant/Get_Vouter_Details/?id=" + id,
             success: function (data) {
-                $("#txtVouterNo").val(data.accountantModel.voucher_no);
-                $("#txtVouterDate").val(data.accountantModel.CreateDate);
-                $("#txtComapanyCategory").val(data.accountantModel.bill_category_id_fk);
-                //$("#txtWorkType").val(data.accountantModel.voucher_no);
-                $("#txtComapanyName").val(data.accountantModel.bill_company_name);
-                $("#txtDeptName").val(data.accountantModel.department_name);
-                $("#txtProprietorName").val(data.accountantModel.payee_name);
-                $("#txtFundName").val(data.accountantModel.fund_scheme_name);
-                $("#txtMobile").val(data.accountantModel.mobile_no);
-                $("#txtGst").val(data.accountantModel.bill_gst);
-                $("#txtDescWork").val(data.accountantModel.bill_description);
+                $("#txtVouterNo").val(data.accountant.voucher_no);
+                $("#txtVouterDate").val(data.accountant.CreateDate);
+                $("#txtComapanyCategory").val(data.accountant.bill_category_id_fk);
+                //$("#txtWorkType").val(data.accountant.voucher_no);
+                $("#txtComapanyName").val(data.accountant.bill_company_name);
+                $("#txtDeptName").val(data.accountant.department_name);
+                $("#txtProprietorName").val(data.accountant.payee_name);
+                $("#txtFundName").val(data.accountant.fund_scheme_name);
+                $("#txtMobile").val(data.accountant.mobile_no);
+                $("#txtGst").val(data.accountant.bill_gst);
+                $("#txtDescWork").val(data.accountant.bill_description);
 
                 $("#VouterDetailsShowHide").show(300);
                 $("#block_payment_calculation").hide();
-                //alert(data.accountantModel.voucher_no);
+                //alert(data.accountant.voucher_no);
             }
         });
     });
@@ -341,9 +341,9 @@
             contentType: "application/json; charset=utf-8",
             url: "/Accountant/Get_bank_acc_Details/?bankId=" + bankId,
             success: function (data) {
-                $("#txtBankAccNo").val(data.accountantModel.bank_account_no);
-                $("#txtFundScheme").val(data.accountantModel.fund_scheme_name); 
-                $("#txtFundSchemeId").val(data.accountantModel.fund_scheme_id_pk); 
+                $("#txtBankAccNo").val(data.accountant.bank_account_no);
+                $("#txtFundScheme").val(data.accountant.fund_scheme_name); 
+                $("#txtFundSchemeId").val(data.accountant.fund_scheme_id_pk); 
             }
         });
     });
@@ -376,8 +376,8 @@
             contentType: "application/json; charset=utf-8",
             url: "/Accountant/Get_Treasury_Details/?SchemeId=" + SchemeId,
             success: function (data) {
-                $("#txtAdviceNo").val(data.accountantModel.treasury_advice_no);
-                $("#txtAdviceDate").val(data.accountantModel.treasury_advice_date);
+                $("#txtAdviceNo").val(data.accountant.treasury_advice_no);
+                $("#txtAdviceDate").val(data.accountant.treasury_advice_date);
             }
         });
     });
