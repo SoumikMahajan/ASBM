@@ -38,9 +38,10 @@ namespace ASBM.Repository
                     string Query = @"SELECT
 	                                    vouter.voucher_id_pk,
 	                                    vouter.voucher_no,
-                                        CONVERT(VARCHAR(10), vouter.CreateDate, 105) as CreateDate
+                                        CONVERT(VARCHAR(10), vouter.entry_time, 105) as entry_time
                                     FROM
 	                                    tbl_accounts_voucher AS vouter
+                                    WHERE approve_status = 0
 	                                ";
                     SqlCommand cmd = new SqlCommand(Query, con);
 
@@ -101,7 +102,7 @@ namespace ASBM.Repository
 	                                        bill.bill_gst,
 	                                        bill.bill_description,
 	                                        bill.bill_amount,
-                                            CONVERT(VARCHAR(10), vouter.CreateDate, 105) as CreateDate,
+                                            CONVERT(VARCHAR(10), vouter.entry_time, 105) as entry_time,
 	                                        NULL as mobile_no
 	                                    FROM
 		                                    tbl_accounts_voucher AS vouter
@@ -124,7 +125,7 @@ namespace ASBM.Repository
 		                                    NULL AS bill_gst,
 		                                    rand.random_bill_work_desc,
 		                                    NULL AS bill_amount,
-                                            CONVERT(VARCHAR(10), vouter.CreateDate, 105) as CreateDate,
+                                            CONVERT(VARCHAR(10), vouter.entry_time, 105) as entry_time,
                                             rand.random_bill_mobile_no as mobile_no
 	                                    FROM
 		                                    tbl_accounts_voucher AS vouter
@@ -385,7 +386,7 @@ namespace ASBM.Repository
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
-                    if (AffectedRows == 1)
+                    if (AffectedRows == 2)
                     {
                         res = 1;
                     }

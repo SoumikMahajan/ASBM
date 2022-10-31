@@ -22,7 +22,7 @@
             url: "/Accountant/Get_Vouter_Details/?id=" + id,
             success: function (data) {
                 $("#txtVouterNo").val(data.accountant.voucher_no);
-                $("#txtVouterDate").val(data.accountant.CreateDate);
+                $("#txtVouterDate").val(data.accountant.entry_time);
                 $("#txtComapanyCategory").val(data.accountant.bill_category_id_fk);
                 //$("#txtWorkType").val(data.accountant.voucher_no);
                 $("#txtComapanyName").val(data.accountant.bill_company_name);

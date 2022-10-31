@@ -24,11 +24,11 @@ namespace ASBM.Repository
                 {
                     if (radioVal == 1)
                     {
-                        Query = "select bill_details_id_pk as id, bill_docket_no as docket_no from tbl_accounts_bill_details order by bill_docket_no";
+                        Query = "select bill_details_id_pk as id, bill_docket_no as docket_no from tbl_accounts_bill_details where approve_status = 0 order by bill_docket_no";
                     }
                     else if (radioVal == 2)
                     {
-                        Query = "select random_bill_id_pk as id, random_bill_docket_no as docket_no from tbl_accounts_random_bill_generation_details order by random_bill_docket_no";
+                        Query = "select random_bill_id_pk as id, random_bill_docket_no as docket_no from tbl_accounts_random_bill_generation_details where approve_status = 0 order by random_bill_docket_no";
                     }
                     SqlCommand cmd = new SqlCommand(Query, con);
                     con.Open();

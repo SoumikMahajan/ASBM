@@ -39,7 +39,7 @@ namespace ASBM.Repository
 	                                    pay.payment_voucher_no 
                                     FROM
 	                                    tbl_accounts_payment_details AS pay
-                                    WHERE active_status = 0
+                                    WHERE approve_status = 0
 	                                ";
                     SqlCommand cmd = new SqlCommand(Query, con);
 
@@ -299,8 +299,8 @@ namespace ASBM.Repository
                 {
                     string Query = string.Empty;
                     string Query2 = string.Empty;
-                    Query = @"INSERT INTO tbl_accounts_finance (payment_mode, memo_no, approved_amount, finance_vouter_no, active_status) VALUES(@PaymentMode, @MemoNo, @NetAmount, @VouterNo, @activeStatus)";
-                    Query2 = @"UPDATE tbl_accounts_payment_details SET active_status = 1 WHERE payment_voucher_no = @VouterNo";
+                    Query = @"INSERT INTO tbl_accounts_finance (payment_mode, memo_no, approved_amount, finance_vouter_no, approve_status) VALUES(@PaymentMode, @MemoNo, @NetAmount, @VouterNo, @activeStatus)";
+                    Query2 = @"UPDATE tbl_accounts_payment_details SET approve_status = 1 WHERE payment_voucher_no = @VouterNo";
 
                     SqlCommand cmd = new SqlCommand(Query, con);
                     SqlCommand cmd2 = new SqlCommand(Query2, con);
