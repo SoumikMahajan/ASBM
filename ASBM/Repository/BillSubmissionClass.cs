@@ -26,7 +26,7 @@ namespace ASBM.Repository
                     //Query = @"INSERT INTO tbl_accounts_bill_details (bill_category_id_fk, bill_company_name, bill_department_id_fk, bill_pan, bill_gst, bill_fund_id_fk, bill_description, bill_amount) VALUES(@category_id, @companyName,@dept_id, @pan, @gst, @fund_id, @work_desc, @bill_amount)";
 
 
-                    SqlCommand cmd = new SqlCommand("[dbo].[spBillSubmission]", con);
+                    SqlCommand cmd = new SqlCommand("[dbo].[spAccountsBillSubmission]", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
                     cmd.Parameters.AddWithValue("@category_id", CompanyCategoryName);

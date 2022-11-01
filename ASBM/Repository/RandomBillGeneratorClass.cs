@@ -26,7 +26,7 @@ namespace ASBM.Repository
                     //Query = @"INSERT INTO tbl_accounts_random_bill_generation_details (random_bill_name, random_bill_dept_id_fk, random_bill_fund_id_fk, random_bill_work_desc, random_bill_mobile_no, random_bill_type_id_fk) VALUES(@billName, @deptid, @fundid, @workDesc, @mobile, @billType)";
 
                     //SqlCommand cmd = new SqlCommand(Query, con);
-                    SqlCommand cmd = new SqlCommand("[dbo].[spRandomBillGenerator]", con);
+                    SqlCommand cmd = new SqlCommand("[dbo].[spAccountsRandomBillGenerator]", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
                     cmd.Parameters.AddWithValue("@billName", Name);
