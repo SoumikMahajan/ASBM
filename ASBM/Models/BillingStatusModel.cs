@@ -7,8 +7,10 @@ namespace ASBM.Models
 {
     public class BillingStatusModel
     {
-        public int bill_allotement_id_pk { get; set; }
-        public string bill_allotement_docket_no { get; set; }
-        public DateTime bill_allotement_date { get; set; }
+        //public int bill_allotement_id_pk { get; set; }
+        //public string bill_allotement_docket_no { get; set; }
+        //public DateTime bill_allotement_date { get; set; }
+        public string bill_docket_no { get; set; }
+        public DateTime entry_time { get; set; }
     }
 }
