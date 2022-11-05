@@ -134,6 +134,7 @@
     <Compile Include="Models\FundModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\MultipleModel.cs" />
+    <Compile Include="Models\RejectedBillModel.cs" />
     <Compile Include="Models\SchemeModel.cs" />
     <Compile Include="Models\DepartmentModel.cs" />
     <Compile Include="Models\BankModel.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Repository\OfficerEntryClass.cs" />
     <Compile Include="Repository\PayeeEntryClass.cs" />
     <Compile Include="Repository\RandomBillGeneratorClass.cs" />
+    <Compile Include="Repository\RejectedBillClass.cs" />
     <Compile Include="Repository\SchemeEntryClass.cs" />
     <Compile Include="Repository\TreasuryEntryClass.cs" />
     <Compile Include="Repository\VouterGeneratorClass.cs" />

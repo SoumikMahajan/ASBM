@@ -414,6 +414,12 @@
 
     function saveBillAllotement() {
         debugger;
+
+        var BasicBill = parseFloat($("#txtBasicBillAmount").val());
+        if (isNaN(BasicBill)) {
+            BasicBill = 0;
+        }
+
         var SgstVal = parseFloat($("#txtSgst").val());
         if (isNaN(SgstVal)) {
             SgstVal = 0;
@@ -429,6 +435,101 @@
             Igst = 0;
         }
 
+        var BasicCess = parseFloat($("#txtBasicCess").val());
+        if (isNaN(BasicCess)) {
+            BasicCess = 0;
+        }
+
+        var GrossAmount = parseFloat($("#txtGrossAmount").val());
+        if (isNaN(GrossAmount)) {
+            GrossAmount = 0;
+        }
+
+        var ItTds = parseFloat($("#txtItTds").val());
+        if (isNaN(ItTds)) {
+            ItTds = 0;
+        }
+
+        var SdMoney = parseFloat($("#txtSdMoney").val());
+        if (isNaN(SdMoney)) {
+            SdMoney = 0;
+        }
+
+        var GrossCess = parseFloat($("#txtGrossCess").val());
+        if (isNaN(GrossCess)) {
+            GrossCess = 0;
+        }
+
+        var TdsCgst = parseFloat($("#txtTdsCgst").val());
+        if (isNaN(TdsCgst)) {
+            TdsCgst = 0;
+        }
+
+        var TdsSgst = parseFloat($("#txtTdsSgst").val());
+        if (isNaN(TdsSgst)) {
+            TdsSgst = 0;
+        }
+
+        var Pf = parseFloat($("#txtPf").val());
+        if (isNaN(Pf)) {
+            Pf = 0;
+        }
+
+        var PfAdvance = parseFloat($("#txtPfAdvance").val());
+        if (isNaN(PfAdvance)) {
+            PfAdvance = 0;
+        }
+
+        var Ptax = parseFloat($("#txtPtax").val());
+        if (isNaN(Ptax)) {
+            Ptax = 0;
+        }
+
+        var CcsCount = parseFloat($("#txtCcsCount").val());
+        if (isNaN(CcsCount)) {
+            CcsCount = 0;
+        }
+
+        var CcsLic = parseFloat($("#txtCcsLic").val());
+        if (isNaN(CcsLic)) {
+            CcsLic = 0;
+        }
+
+        var CcsLoan = parseFloat($("#txtCcsLoan").val());
+        if (isNaN(CcsLoan)) {
+            CcsLoan = 0;
+        }
+
+        var Coop = parseFloat($("#txtCoop").val());
+        if (isNaN(Coop)) {
+            Coop = 0;
+        }
+
+        var Gi = parseFloat($("#txtGi").val());
+        if (isNaN(Gi)) {
+            Gi = 0;
+        }
+
+        var Lic = parseFloat($("#txtLic").val());
+        if (isNaN(Lic)) {
+            Lic = 0;
+        }
+
+        var Festival = parseFloat($("#txtFestival").val());
+        if (isNaN(Festival)) {
+            Festival = 0;
+        }
+
+        var TotalDeduction = parseFloat($("#txtTotalDeduction").val());
+        if (isNaN(TotalDeduction)) {
+            TotalDeduction = 0;
+        }
+
+        var NetAmountBill = parseFloat($("#txtNetAmountBill").val());
+        if (isNaN(NetAmountBill)) {
+            NetAmountBill = 0;
+        }
+
         var FundSchemeId = parseFloat($("#txtFundSchemeId").val());
         if (isNaN(FundSchemeId)) {
             FundSchemeId = 0;
@@ -436,29 +537,29 @@
 
         var info = {
             VoucherNo: $("#txtVouterNo").val().trim(),
-            BasicBill: parseFloat($("#txtBasicBillAmount").val()),
+            BasicBill: BasicBill,
             SgstVal: SgstVal,
             CgstVal: CgstVal,
             Igst: Igst,
-            BasicCess: parseFloat($("#txtBasicCess").val()),
-            GrossAmount: parseFloat($("#txtGrossAmount").val()),
-            ItTds: parseFloat($("#txtItTds").val()),
-            SdMoney: parseFloat($("#txtSdMoney").val()),
-            GrossCess: parseFloat($("#txtGrossCess").val()),
-            TdsCgst: parseFloat($("#txtTdsCgst").val()),
-            TdsSgst: parseFloat($("#txtTdsSgst").val()),
-            Pf: parseFloat($("#txtPf").val()),
-            PfAdvance: parseFloat($("#txtPfAdvance").val()),
-            Ptax: parseFloat($("#txtPtax").val()),
-            CcsCount: parseFloat($("#txtCcsCount").val()),
-            CcsLic: parseFloat($("#txtCcsLic").val()),
-            CcsLoan: parseFloat($("#txtCcsLoan").val()), 
-            Coop: parseFloat($("#txtCoop").val()),
-            Gi: parseFloat($("#txtGi").val()),
-            Lic: parseFloat($("#txtLic").val()),
-            Festival: parseFloat($("#txtFestival").val()),
-            TotalDeduction: parseFloat($("#txtTotalDeduction").val()),
-            NetAmountBill: parseFloat($("#txtNetAmountBill").val()),
+            BasicCess: BasicCess,
+            GrossAmount: GrossAmount,
+            ItTds: ItTds,
+            SdMoney: SdMoney,
+            GrossCess: GrossCess,
+            TdsCgst: TdsCgst,
+            TdsSgst: TdsSgst,
+            Pf: Pf,
+            PfAdvance: PfAdvance,
+            Ptax: Ptax,
+            CcsCount: CcsCount,
+            CcsLic: CcsLic,
+            CcsLoan: CcsLoan, 
+            Coop: Coop,
+            Gi: Gi,
+            Lic: Lic,
+            Festival: Festival,
+            TotalDeduction: TotalDeduction,
+            NetAmountBill: NetAmountBill,
 
             PaymentTypeId: $('input[name=optradio]:checked').val(),
             BankId: parseInt($("#ddlBank").val()),

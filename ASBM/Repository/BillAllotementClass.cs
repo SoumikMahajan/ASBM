@@ -22,18 +22,26 @@ namespace ASBM.Repository
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
                     string Query = string.Empty;
+                    string Query2 = string.Empty;
 
                     Query = @"INSERT INTO tbl_accounts_bill_allotement_details (bill_allotement_docket_no, bill_allotement_dept_id_fk, bill_allotement_officer_id_fk, bill_allotement_date) VALUES(@docketno, @deptid, @officerid, @alloteddate)";
 
+                    Query2 = @"UPDATE tbl_accounts_bill_details SET bill_alloted_status = 1 WHERE bill_docket_no = @docketno";
+
                     SqlCommand cmd = new SqlCommand(Query, con);
+                    SqlCommand cmd2 = new SqlCommand(Query2, con);
+
                     cmd.Parameters.AddWithValue("@docketno", DocketNo);
                     cmd.Parameters.AddWithValue("@deptid", DepartmentId);
                     cmd.Parameters.AddWithValue("@officerid", OfficerId);
                     cmd.Parameters.AddWithValue("@alloteddate", AllotedDatte);
 
+                    cmd2.Parameters.AddWithValue("@docketno", DocketNo);
+
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
-                    if (AffectedRows == 1)
+                    int AffectedRows2 = cmd2.ExecuteNonQuery();
+                    if (AffectedRows == 1 && AffectedRows2 == 1)
                     {
                         res = 1;
                     }
@@ -89,7 +97,7 @@ namespace ASBM.Repository
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
                     string Query = "select bill_details_id_pk, bill_docket_no from tbl_accounts_bill_details " +
-                        "WHERE bill_department_id_fk = " + deptId + " ORDER BY bill_docket_no";
+                        "WHERE bill_department_id_fk = " + deptId + " AND bill_alloted_status = 0 ORDER BY bill_docket_no";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     con.Open();
 

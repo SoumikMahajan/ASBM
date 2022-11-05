@@ -24,7 +24,7 @@ namespace ASBM.Repository
                 {
                     if (radioVal == 1)
                     {
-                        Query = "select bill_details_id_pk as id, bill_docket_no as docket_no from tbl_accounts_bill_details where approve_status = 0 order by bill_docket_no";
+                        Query = "select bill_details_id_pk as id, bill_docket_no as docket_no from tbl_accounts_bill_details where approve_status = 0 AND bill_alloted_status = 1 order by bill_docket_no";
                     }
                     else if (radioVal == 2)
                     {
@@ -91,7 +91,7 @@ namespace ASBM.Repository
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
-                    if (AffectedRows == 1)
+                    if (AffectedRows >= 1)
                     {
                         res = 1;
                     }
@@ -109,6 +109,46 @@ namespace ASBM.Repository
             return res;
         }
 
+
+        public int RejectVoucher(int BillDocketType, string billdocketno)
+        {
+            int res = 0;
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = string.Empty;
+
+                    if (BillDocketType == 1)
+                    {
+                        Query = @"UPDATE tbl_accounts_bill_details SET approve_status = 2 WHERE bill_docket_no = @billdocketno";
+                    }
+                    else
+                    {
+                        Query = @"UPDATE tbl_accounts_random_bill_generation_details SET approve_status = 2 WHERE random_bill_docket_no = @billdocketno";
+                    }
+                    
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@billdocketno", billdocketno);
+                    con.Open();
+                    int AffectedRows = cmd.ExecuteNonQuery();
+                    if (AffectedRows == 1)
+                    {
+                        res = 1;
+                    }
+                    else
+                    {
+                        res = 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //res = "Failed|Internal error.";
+            }
+
+            return res;
+        }
 
         //public MultipleModel FetchNormalBillingdetails(string billdocketno)
         //{

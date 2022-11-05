@@ -41,6 +41,16 @@ namespace ASBM.Controllers
 
         }
 
+        [HttpPost]
+        public int ajax_reject_Voucher(int BillDocketType, string billdocketno)
+        {
+            int response;
+            response = vouter.RejectVoucher(BillDocketType, billdocketno);
+
+            return response;
+
+        }
+
         [HttpGet]
         public JsonResult ajax_getbilldeatilsby_DocketNo(string billdocketno)
         {

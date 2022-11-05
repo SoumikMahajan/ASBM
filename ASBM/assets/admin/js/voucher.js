@@ -269,4 +269,57 @@
         })
     });
 
+    $(document).on('click', '#btn_reject', function () {
+        debugger;
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                RejectVoucher();
+                $("#bill_form").trigger('reset');
+            }
+        })
+    });
+
+    function RejectVoucher() {
+        debugger;
+        var info = {
+            BillDocketType: parseInt($("input:radio[name=optradio]:checked").val()),
+            billdocketno: $("#ddlDocketNo option:selected").text()            
+        };
+
+        var url = '/VoucherGenerator/ajax_reject_Voucher';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            data: info,
+            success: function (data) {
+                var check_result = data;
+                if (check_result == 1) {
+                    swal.fire({
+                        icon: 'success',
+                        title: 'SAVED!',
+                        text: 'Voucher has been rejected.'
+                    }).then(function () {
+                        location.reload();
+                    });
+                }
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something went wrong!',
+                    })
+                }
+            },
+        });
+    }
+
 });

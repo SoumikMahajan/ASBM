@@ -24,6 +24,7 @@ namespace ASBM.Controllers
         FundEntryClass fund = new FundEntryClass();
         BillEntryClass Billmst = new BillEntryClass();
         BillingStatusClass billStatus = new BillingStatusClass();
+        RejectedBillClass rejBill = new RejectedBillClass();
 
         public ActionResult Index()
         {
@@ -304,7 +305,16 @@ namespace ASBM.Controllers
         /////////////// REJECTED BILL STATUS Start //////////////////////
         public ActionResult RejectedBill()
         {
-            return View();
+            MultipleModel mm = new MultipleModel();
+            try
+            {
+                mm = rejBill.Fetch_All_Rejected_Bill_Details();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(mm);
         }
         /////////////// REJECTED BILL STATUS End //////////////////////
 

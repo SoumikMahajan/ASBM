@@ -22,5 +22,8 @@ namespace ASBM.Models
 
         public FinanceModel finance { get; set; }
         public List<FinanceModel> financeList { get; set; }
+
+        public RejectedBillModel rejectBill { get; set; }
+        public List<RejectedBillModel> rejectBillList { get; set; }
     }
 }

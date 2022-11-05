@@ -1,4 +1,4 @@
-﻿
+﻿@model ASBM.Models.MultipleModel
 @{
     ViewBag.Title = "Rejected Bill";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -19,15 +19,28 @@
             <table id="table" class="display">
                 <thead>
                     <tr>
+                        <th scope="col">SL</th>
                         <th scope="col">Docket No</th>
-                        <th scope="col">Date</th>
                         <th scope="col">Department Name</th>
-                        <th scope="col">Party Name</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Date</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                    @{ int rows = 1;}
+                    @if (Model != null && Model.rejectBillList.Count > 0)
+                    {
+                        foreach (var obj in Model.rejectBillList)
+                        {
+                            <tr class="inAc" style="color: black;font-size: 13px !important;">
+                                <td>@rows</td>
+                                <td>@obj.docket_no</td>
+                                <td>@obj.department_name</td>
+                                <td>@obj.entry_time</td>
+                            </tr>
+
+                            rows++;
+                        }
+                    }
                 </tbody>
             </table>
         </div>
