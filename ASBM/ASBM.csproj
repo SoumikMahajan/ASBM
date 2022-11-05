@@ -294,7 +294,6 @@
     <Content Include="Views\Home\_partialBillingStatusDataTable.cshtml" />
     <Content Include="Views\Accountant\Index.cshtml" />
     <Content Include="Views\Accountant\_partialAccountantVouterDataTable.cshtml" />
-    <Content Include="Views\VoucherGenerator\_partialNormalBillDetailsModal.cshtml" />
     <Content Include="Views\Accountant\AmountCalculation.cshtml" />
     <Content Include="Views\Finance\Index.cshtml" />
     <Content Include="Views\Finance\_partialFinanceVouterDataTable.cshtml" />

@@ -36,13 +36,17 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"SELECT
-	                                    bill_allot.bill_allotement_id_pk,
-	                                    bill_allot.bill_allotement_docket_no,
-	                                    bill_allot.bill_allotement_date
-                                    FROM
-	                                    tbl_accounts_bill_allotement_details AS bill_allot
-	                                    WHERE bill_allot.bill_allotement_docket_no = @DocketNo and bill_allot.bill_allotement_date=@entryDate";
+                    //string Query = @"SELECT
+                    //                 bill_allot.bill_allotement_id_pk,
+                    //                 bill_allot.bill_allotement_docket_no,
+                    //                 bill_allot.bill_allotement_date
+                    //                FROM
+                    //                 tbl_accounts_bill_allotement_details AS bill_allot
+                    //                 WHERE bill_allot.bill_allotement_docket_no = @DocketNo and bill_allot.bill_allotement_date=@entryDate";
+
+                    string Query = @"select * from (select bill_docket_no,convert(date,entry_time) as entry_time from tbl_accounts_bill_details
+                                    union all
+                                    select random_bill_docket_no,convert(date,entry_time) as entry_time from tbl_accounts_random_bill_generation_details)as TBL where bill_docket_no=@DocketNo and entry_time=@entryDate";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@DocketNo", docketNo);
                     cmd.Parameters.AddWithValue("@entryDate", entryDate);                   
