@@ -56,6 +56,7 @@
             $("#SoleHideShow").hide(300);
             $("#PartnershipHideShow").hide(300);
         }
+
         if (companytype == 'SOLE PROPRIETOR') {
             $("#SoleHideShow").show(300);
             $("#IndHideShow").hide(300);
@@ -65,7 +66,6 @@
             $("#PartnershipHideShow").hide(300);
         }
 
-
         if (companytype == 'PARTNERSHIP FIRM') {
             $("#PartnershipHideShow").show(300);
             $("#SoleHideShow").hide(300);
@@ -74,7 +74,6 @@
             $("#ltdHideShow").hide(300);
             $("#pvtHideShow").hide(300);
         }
-
 
     });
 
@@ -190,6 +189,7 @@
         var SoleProprietorCmpName = $("#txtSoleProprietor").val().trim();
         var PartnershipCmpName = $("#txtpartnership").val().trim();
         var DepartmentId = parseInt($("#ddlDepartment").val());
+        var Mobile = $("#txt_mobile").val().trim();
         var Pan = $("#txt_pan").val().trim();
         var Gst = $("#txt_gst").val().trim();
         var FundId = parseInt($("#ddlFund").val());
@@ -198,56 +198,104 @@
         var BillTypeId = parseInt($("#ddlTypeBill").val());
 
         if (CompanyCategoryName === undefined) {
-            Swal.fire('Please Select Company category')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Select Company category!',
+            })
             return;
         }
 
         if (CompanyCategoryName == 'Individual' && IndividualCmpName == '') {
-            Swal.fire('Please Type Your Company Name')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Type Your Company Name!',
+            })
             return;
         }
         if (CompanyCategoryName == 'HUF' && HUFCmpName == '') {
-            Swal.fire('Please Type Your Company Name')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Type Your Company Name!',
+            })
             return;
         }
         if (CompanyCategoryName == 'Limited Company' && LTDCmpName == '') {
-            Swal.fire('Please Type Your Company Name')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Type Your Company Name!',
+            })
             return;
         }
         if (CompanyCategoryName == 'PVT LTD Company' && PVTCmpName == '') {
-            Swal.fire('Please Type Your Company Name')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Type Your Company Name!',
+            })
             return;
         }
         if (CompanyCategoryName == 'SOLE PROPRIETOR' && SoleProprietorCmpName == '') {
-            Swal.fire('Please Type Your Company Name')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Type Your Company Name!',
+            })
             return;
         }
         if (CompanyCategoryName == 'PARTNERSHIP FIRM' && PartnershipCmpName == '') {
-            Swal.fire('Please Type Your Company Name')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Type Your Company Name!',
+            })
+            return;
+        }
+        if (BillTypeId == '0') {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Select Bill Type!',
+            })
             return;
         }
         if (DepartmentId == '0') {
-            Swal.fire('Please Select Department')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Select Department!',
+            })
             return;
         }
-        if (Pan == '') {
-            Swal.fire('Please Enter PAN Number')
+        if (Mobile == '') {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Enter Mobile Number!',
+            })
             return;
         }
-        if (Gst == '') {
-            Swal.fire('Please Enter GST Number')
-            return;
-        }
+        //if (Pan == '') {
+        //    Swal.fire('Please Enter PAN Number')
+        //    return;
+        //}
+        //if (Gst == '') {
+        //    Swal.fire('Please Enter GST Number')
+        //    return;
+        //}
         if (FundId == '0') {
-            Swal.fire('Please Select Fund')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Select Fund!',
+            })
+            //Swal.fire('Please Select Fund')
             return;
         }
         if (WorkDesc == '') {
-            Swal.fire('Please Enter Work Description')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Enter Work Description!',
+            })
             return;
         }
         if (Amount == '') {
-            Swal.fire('Please Enter Amount')
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Enter Amount!',
+            })
             return;
         }
         Swal.fire({
@@ -327,7 +375,8 @@
             FundId: parseInt($("#ddlFund").val()),
             WorkDesc: $("#txt_work_desc").val().trim(),
             Amount: $("#txt_amount").val().trim(),
-            BillTypeId: parseInt($("#ddlTypeBill").val())
+            BillTypeId: parseInt($("#ddlTypeBill").val()),
+            Mobile: $("#txt_mobile").val().trim()
         };
 
         //info = JSON.stringify(info)
@@ -574,7 +623,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 UpdateBillSubmission();
-                $("#bill_form").trigger('reset');               
+                $("#bill_form").trigger('reset');
             }
         })
     });

@@ -50,23 +50,16 @@ namespace ASBM.Repository
             return result;
         }
 
-        public int ApprovedVoucher(string BillDocketType, string billdocketno, string iscic, string cicno, string isetender, string tenno, string ismed, string medno, string MeetingTenderCommittee, string MeetingChairman, string Tenderrate, string MeetingBOC, string AAFSNo, string WorkOrder, string WorkOrderDate, string AmountEstimate, string MBBookNo, string PageNo, string WorkRegisterNo, string WorkRegisterDate)
+        public int ApprovedVoucher(string BillDocketType, string billdocketno, string iscic, string cicno, string isetender, string tenno, string ismed, string medDate, string MeetingTenderCommitteeDate, string MeetingChairmanDate, string Tenderrate, string MeetingBOCDate, string AAFSNo, string WorkOrder, string WorkOrderDate, string AmountEstimate, string MBBookNo, string PageNo, string WorkRegisterNo, string WorkRegisterDate, string CertifiedBy, string CertificationDate, string IsApprovedByChairman, string chairpersonApprovalDate)
         {
             int res = 0;
             try
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = string.Empty;
-
-                    //        Query = @"INSERT INTO tbl_accounts_voucher (bill_docket_no,bill_docket_type_id,IsCICnumber,CICNumber,IsParticipateTender,ParticipateTenderNumber,IsMed,MedDate,TenderCommitteeMeeting,ChairmanMeeting,TenderRate,BOCSanctionMeeting,AAFSNumber,WorkOrderNo,WorkOrderDate,EstimateAmount,MBBookNo,PageNo,WorkRegNo,WorkRegNoDate) 
-                    //VALUES(@billdocketno,@BillDocketType,@iscic,@cicno,@isetender,@tenno,@ismed,@medno,@MeetingTenderCommittee,@MeetingChairman,@Tenderrate,
-                    //@MeetingBOC,@AAFSNo,@WorkOrder,@WorkOrderDate,@AmountEstimate,@MBBookNo,@PageNo,@WorkRegisterNo,@WorkRegisterDate)";
-
-
+                    string Query = string.Empty;                    
                     SqlCommand cmd = new SqlCommand("[dbo].[spAccountsVoucher]", con);
                     cmd.CommandType = CommandType.StoredProcedure;
-                    //SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
                     cmd.Parameters.AddWithValue("@billdocketno", billdocketno);
                     cmd.Parameters.AddWithValue("@BillDocketType", BillDocketType);
@@ -75,11 +68,11 @@ namespace ASBM.Repository
                     cmd.Parameters.AddWithValue("@isetender", isetender);
                     cmd.Parameters.AddWithValue("@tenno", tenno);
                     cmd.Parameters.AddWithValue("@ismed", ismed);
-                    cmd.Parameters.AddWithValue("@medno", medno);
-                    cmd.Parameters.AddWithValue("@MeetingTenderCommittee", MeetingTenderCommittee);
-                    cmd.Parameters.AddWithValue("@MeetingChairman", MeetingChairman);
+                    cmd.Parameters.AddWithValue("@medno", medDate);
+                    cmd.Parameters.AddWithValue("@MeetingTenderCommittee", MeetingTenderCommitteeDate);
+                    cmd.Parameters.AddWithValue("@MeetingChairman", MeetingChairmanDate);
                     cmd.Parameters.AddWithValue("@Tenderrate", Tenderrate);
-                    cmd.Parameters.AddWithValue("@MeetingBOC", MeetingBOC);
+                    cmd.Parameters.AddWithValue("@MeetingBOC", MeetingBOCDate);
                     cmd.Parameters.AddWithValue("@AAFSNo", AAFSNo);
                     cmd.Parameters.AddWithValue("@WorkOrder", WorkOrder);
                     cmd.Parameters.AddWithValue("@WorkOrderDate", WorkOrderDate);
@@ -88,6 +81,10 @@ namespace ASBM.Repository
                     cmd.Parameters.AddWithValue("@PageNo", PageNo);
                     cmd.Parameters.AddWithValue("@WorkRegisterNo", WorkRegisterNo);
                     cmd.Parameters.AddWithValue("@WorkRegisterDate", WorkRegisterDate);
+                    cmd.Parameters.AddWithValue("@CertifiedBy", CertifiedBy);
+                    cmd.Parameters.AddWithValue("@CertificationDate", CertificationDate);
+                    cmd.Parameters.AddWithValue("@IsApprovedByChairman", IsApprovedByChairman);
+                    cmd.Parameters.AddWithValue("@chairpersonApprovalDate", chairpersonApprovalDate);
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();

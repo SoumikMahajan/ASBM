@@ -32,10 +32,43 @@ namespace ASBM.Controllers
         }
 
         [HttpPost]
-        public int ajax_approved_VoucherSubmission(string BillDocketType, string billdocketno, string iscic, string cicno, string isetender, string tenno, string ismed, string medno, string MeetingTenderCommittee, string MeetingChairman, string Tenderrate, string MeetingBOC, string AAFSNo, string WorkOrder, string WorkOrderDate, string AmountEstimate, string MBBookNo, string PageNo, string WorkRegisterNo, string WorkRegisterDate)
+        public int ajax_approved_VoucherSubmission(string BillDocketType, string billdocketno, string iscic, string cicno, string isetender, string tenno, string ismed, string medDate, string MeetingTenderCommitteeDate, string MeetingChairmanDate, string Tenderrate, string MeetingBOCDate, string AAFSNo, string WorkOrder, string WorkOrderDate, string AmountEstimate, string MBBookNo, string PageNo, string WorkRegisterNo, string WorkRegisterDate, string CertifiedBy, string CertificationDate, string IsApprovedByChairman, string chairpersonApprovalDate)
         {
             int response;
-            response = vouter.ApprovedVoucher(BillDocketType, billdocketno, iscic, cicno, isetender, tenno, ismed, medno, MeetingTenderCommittee, MeetingChairman, Tenderrate, MeetingBOC, AAFSNo, WorkOrder, WorkOrderDate, AmountEstimate, MBBookNo, PageNo, WorkRegisterNo, WorkRegisterDate);
+            if (medDate == "")
+            {
+                medDate = null;
+            }
+            if (MeetingTenderCommitteeDate == "")
+            {
+                MeetingTenderCommitteeDate = null;
+            }
+            if (MeetingChairmanDate == "")
+            {
+                MeetingChairmanDate = null;
+            }
+            if (MeetingBOCDate == "")
+            {
+                MeetingBOCDate = null;
+            }
+            if (WorkOrderDate == "")
+            {
+                WorkOrderDate = null;
+            }
+            if (WorkRegisterDate == "")
+            {
+                WorkRegisterDate = null;
+            }
+            if (CertificationDate == "")
+            {
+                CertificationDate = null;
+            }
+            if (chairpersonApprovalDate == "")
+            {
+                chairpersonApprovalDate = null;
+            }
+
+            response = vouter.ApprovedVoucher(BillDocketType, billdocketno, iscic, cicno, isetender, tenno, ismed, medDate, MeetingTenderCommitteeDate, MeetingChairmanDate, Tenderrate, MeetingBOCDate, AAFSNo, WorkOrder, WorkOrderDate, AmountEstimate, MBBookNo, PageNo, WorkRegisterNo, WorkRegisterDate, CertifiedBy, CertificationDate, IsApprovedByChairman, chairpersonApprovalDate);
 
             return response;
 

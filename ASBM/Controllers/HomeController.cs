@@ -117,10 +117,10 @@ namespace ASBM.Controllers
         }
 
         [HttpPost]
-        public int ajax_confirm_BillSubmissionForm(string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
+        public int ajax_confirm_BillSubmissionForm(string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId, string Mobile)
         {
             int response;
-            response = bill.SubmitBill(CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount, BillTypeId);
+            response = bill.SubmitBill(CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount, BillTypeId, Mobile);
             return response;
             //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
         }

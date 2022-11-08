@@ -5,9 +5,11 @@
         document.getElementById('cicrandomRadio2').checked = true;
         document.getElementById('eTenRadioOption2').checked = true;
         document.getElementById('medRadio2').checked = true;
+        document.getElementById('chaipersonRadio2').checked = true;
         $("#cicnoHide").hide();
         $("#tennoHide").hide();
         $("#mednoHide").hide();
+        $("#chairRadioHide").hide();
         $("#billDetailsShowHide").hide();
         $("#billDetailsShowHideForRandoms").hide();
         $("#billBody").hide();
@@ -36,6 +38,15 @@
     $(document).on("click", "#medRadio2", function () {
         $("#mednoHide").hide();
         document.getElementById('medRadio1').checked = false;
+    });
+
+    $(document).on("click", "#chaipersonRadio1", function () {
+        $("#chairRadioHide").show(300);
+        document.getElementById('chaipersonRadio2').checked = false;
+    });
+    $(document).on("click", "#chaipersonRadio2", function () {
+        $("#chairRadioHide").hide();
+        document.getElementById('chaipersonRadio1').checked = false;
     });
 
     //$(document).on("click", "#btn_approved", function () {
@@ -98,11 +109,11 @@
         var isetender = $("input:radio[name=tenradio]:checked").val();
         var tenno = $("#ten_input_no").val().trim();
         var ismed = $("input:radio[name=medradio]:checked").val();
-        var medno = $("#med_input_no").val().trim();
-        var MeetingTenderCommittee = $("#txtMeetingTendeCommittee").val();
-        var MeetingChairman = $("#txtMeetingChairman").val();
+        var medDate = $("#med_input_no").val().trim();
+        var MeetingTenderCommitteeDate = $("#txtMeetingTendeCommittee").val();
+        var MeetingChairmanDate = $("#txtMeetingChairman").val();
         var Tenderrate = $("#txtAcceptanceTender").val().trim();
-        var MeetingBOC = $("#txtMeetingBOC").val();
+        var MeetingBOCDate = $("#txtMeetingBOC").val();
         var AAFSNo = $("#txtAAFSNo").val().trim();
         var WorkOrder = $("#txtWorkOrder").val().trim();
         var WorkOrderDate = $("#txtWorkOrderDate").val();
@@ -111,6 +122,10 @@
         var PageNo = $("#txtPageNo").val().trim();
         var WorkRegisterNo = $("#txtWorkRegisterNo").val().trim();
         var WorkRegisterDate = $("#txtWorkRegisterDate").val();
+        var CertifiedBy = $("#txtCertifiedBy").val().trim();
+        var CertificationDate = $("#txtCertificationDate").val();
+        var IsApprovedByChairman = $("input:radio[name=chaipersonradio]:checked").val();
+        var chairpersonApprovalDate = $("#chaiperson_approval_date").val().trim();
 
         if (BillDocketType == '1') {
             showNormalUserBillDetails();
@@ -200,6 +215,11 @@
 
     function ApprovedVoucher() {
         debugger;
+        //chairpersonApprovalDate = $("#chaiperson_approval_date").val().trim();
+        //if (chairpersonApprovalDate == '') {
+        //    chairpersonApprovalDate = null;
+        //}
+
         var info = {
             BillDocketType: $("input:radio[name=optradio]:checked").val(),
             billdocketno: $("#ddlDocketNo option:selected").text(),
@@ -208,11 +228,11 @@
             isetender: $("input:radio[name=tenradio]:checked").val(),
             tenno: $("#ten_input_no").val().trim(),
             ismed: $("input:radio[name=medradio]:checked").val(),
-            medno: $("#med_input_no").val().trim(),
-            MeetingTenderCommittee: $("#txtMeetingTendeCommittee").val(),
-            MeetingChairman: $("#txtMeetingChairman").val(),
+            medDate: $("#med_input_no").val().trim(),
+            MeetingTenderCommitteeDate: $("#txtMeetingTendeCommittee").val(),
+            MeetingChairmanDate: $("#txtMeetingChairman").val(),
             Tenderrate: $("#txtAcceptanceTender").val().trim(),
-            MeetingBOC: $("#txtMeetingBOC").val(),
+            MeetingBOCDate: $("#txtMeetingBOC").val(),
             AAFSNo: $("#txtAAFSNo").val().trim(),
             WorkOrder: $("#txtWorkOrder").val().trim(),
             WorkOrderDate: $("#txtWorkOrderDate").val(),
@@ -220,7 +240,11 @@
             MBBookNo: $("#txtMBBookNo").val().trim(),
             PageNo: $("#txtPageNo").val().trim(),
             WorkRegisterNo: $("#txtWorkRegisterNo").val().trim(),
-            WorkRegisterDate: $("#txtWorkRegisterDate").val()
+            WorkRegisterDate: $("#txtWorkRegisterDate").val(),
+            CertifiedBy: $("#txtCertifiedBy").val().trim(),
+            CertificationDate: $("#txtCertificationDate").val(),
+            IsApprovedByChairman: $("input:radio[name=chaipersonradio]:checked").val(),
+            chairpersonApprovalDate: $("#chaiperson_approval_date").val().trim()
         };
 
         var url = '/VoucherGenerator/ajax_approved_VoucherSubmission';
@@ -291,7 +315,7 @@
         debugger;
         var info = {
             BillDocketType: parseInt($("input:radio[name=optradio]:checked").val()),
-            billdocketno: $("#ddlDocketNo option:selected").text()            
+            billdocketno: $("#ddlDocketNo option:selected").text()
         };
 
         var url = '/VoucherGenerator/ajax_reject_Voucher';

@@ -14,7 +14,7 @@ namespace ASBM.Repository
     {
         string strcon = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
-        public int SubmitBill(string CompanyCategoryName, string companyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
+        public int SubmitBill(string CompanyCategoryName, string companyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId, string Mobile)
         {
             int res = 0;
             try
@@ -38,6 +38,7 @@ namespace ASBM.Repository
                     cmd.Parameters.AddWithValue("@work_desc", WorkDesc);
                     cmd.Parameters.AddWithValue("@bill_amount", Amount);
                     cmd.Parameters.AddWithValue("@bill_type_id", BillTypeId);
+                    cmd.Parameters.AddWithValue("@mobile", Mobile);
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
@@ -270,7 +271,8 @@ namespace ASBM.Repository
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
                     string Query = @"SELECT bill.bill_details_id_pk,bill.bill_docket_no, bill.bill_category_id_fk, bill.bill_company_name, "+
-                                    "bill.bill_pan, bill.bill_gst, dept.department_name, fund.fund_scheme_name, billtype.typeof_bill_name " +
+                                    "bill.bill_pan, bill.bill_gst, dept.department_name, fund.fund_scheme_name, billtype.typeof_bill_name, " +
+                                    "bill.bill_mobile_no " +
                                     "FROM tbl_accounts_bill_details AS bill " +
                                     "LEFT JOIN tbl_accounts_department_master as dept ON dept.department_id_pk = bill.bill_department_id_fk " +
                                     "LEFT JOIN tbl_accounts_fund_master as fund ON fund.fund_scheme_id_pk = bill.bill_fund_id_fk " +
