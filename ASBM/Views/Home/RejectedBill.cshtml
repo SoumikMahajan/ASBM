@@ -23,6 +23,7 @@
                         <th scope="col">Docket No</th>
                         <th scope="col">Department Name</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -36,6 +37,11 @@
                                 <td>@obj.docket_no</td>
                                 <td>@obj.department_name</td>
                                 <td>@obj.entry_time</td>
+                                <td>
+                                    <center>
+                                        <a href="javascript:void(o)" id="BtnReissue" data-id="@obj.docket_no" class="btn btn-warning BtnClEditPoUp"><i class="fa fa-level-up"></i> Re-Issue</a>                                        
+                                    </center>
+                                </td>
                             </tr>
 
                             rows++;

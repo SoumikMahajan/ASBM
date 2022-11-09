@@ -291,7 +291,7 @@ namespace ASBM.Controllers
                 throw ex;
             }
             return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", mm);
-            //return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", mm);
+
             //List<BillingStatusModel> temp = new List<BillingStatusModel>();
             //temp = billStatus.check_billing_status(docketNo, entryDate);
             //return PartialView("~/Views/Home/_partialBillingStatusDataTable.cshtml", temp);

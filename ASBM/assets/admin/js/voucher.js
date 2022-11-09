@@ -57,6 +57,16 @@
         debugger;
         var value = parseInt($('input[name=optradio]:checked').val());
         fetchDocketNo(value);
+        $("#billBody").hide(300);
+        $("#billDetailsShowHide").hide(300);
+        $("#billDetailsShowHideForRandoms").hide(300);
+    });
+
+    $('#ddlDocketNo').change(function () {
+        //debugger;
+        $("#billBody").hide(300);
+        $("#billDetailsShowHide").hide(300);
+        $("#billDetailsShowHideForRandoms").hide(300);
     });
 
     function fetchDocketNo(value) {
@@ -165,6 +175,7 @@
                     $('#txtdescription').val(data.bill_description);
                     $('#txtbillamount').val(data.bill_amount);
                     $('#txtFund').val(data.fund_scheme_name);
+                    $('#txtMobileNo').val(data.bill_mobile_no);
                 }
             }
         });
@@ -215,10 +226,6 @@
 
     function ApprovedVoucher() {
         debugger;
-        //chairpersonApprovalDate = $("#chaiperson_approval_date").val().trim();
-        //if (chairpersonApprovalDate == '') {
-        //    chairpersonApprovalDate = null;
-        //}
 
         var info = {
             BillDocketType: $("input:radio[name=optradio]:checked").val(),

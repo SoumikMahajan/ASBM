@@ -57,7 +57,7 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = string.Empty;                    
+                    string Query = string.Empty;
                     SqlCommand cmd = new SqlCommand("[dbo].[spAccountsVoucher]", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
@@ -115,27 +115,43 @@ namespace ASBM.Repository
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
                     string Query = string.Empty;
+                    string Query2 = string.Empty;
 
                     if (BillDocketType == 1)
                     {
                         Query = @"UPDATE tbl_accounts_bill_details SET approve_status = 2 WHERE bill_docket_no = @billdocketno";
+                        Query2 = @"UPDATE tbl_accounts_bill_allotement_details SET approve_status = 2 WHERE bill_allotement_docket_no = @billdocketno";
+                        SqlCommand cmd = new SqlCommand(Query, con);
+                        SqlCommand cmd2 = new SqlCommand(Query2, con);
+                        cmd.Parameters.AddWithValue("@billdocketno", billdocketno);
+                        cmd2.Parameters.AddWithValue("@billdocketno", billdocketno);
+                        con.Open();
+                        int AffectedRows1 = cmd.ExecuteNonQuery();
+                        int AffectedRows2 = cmd2.ExecuteNonQuery();
+                        if (AffectedRows1 == 1 && AffectedRows2 == 1)
+                        {
+                            res = 1;
+                        }
+                        else
+                        {
+                            res = 0;
+                        }
                     }
                     else
                     {
                         Query = @"UPDATE tbl_accounts_random_bill_generation_details SET approve_status = 2 WHERE random_bill_docket_no = @billdocketno";
-                    }
-                    
-                    SqlCommand cmd = new SqlCommand(Query, con);
-                    cmd.Parameters.AddWithValue("@billdocketno", billdocketno);
-                    con.Open();
-                    int AffectedRows = cmd.ExecuteNonQuery();
-                    if (AffectedRows == 1)
-                    {
-                        res = 1;
-                    }
-                    else
-                    {
-                        res = 0;
+                        SqlCommand cmd = new SqlCommand(Query, con);
+                        cmd.Parameters.AddWithValue("@billdocketno", billdocketno);
+                        con.Open();
+                        int AffectedRows = cmd.ExecuteNonQuery();
+                        if (AffectedRows == 1)
+                        {
+                            res = 1;
+                        }
+                        else
+                        {
+                            res = 0;
+                        }
                     }
                 }
             }
@@ -147,20 +163,6 @@ namespace ASBM.Repository
             return res;
         }
 
-        //public MultipleModel FetchNormalBillingdetails(string billdocketno)
-        //{
-        //    MultipleModel mm = new MultipleModel();
-        //    try
-        //    {
-        //        mm.billSubmission = getNormalBillDeatils(billdocketno);
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //    }
-        //    return mm;
-        //}
-
         public BillSubmission FetchNormalBillingdetails(string billdocketno)
         {
             BillSubmission Res = new BillSubmission();
@@ -168,7 +170,8 @@ namespace ASBM.Repository
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query = @"select T1.bill_details_id_pk,T1.bill_docket_no,T1.bill_category_id_fk,T1.bill_company_name,T1.bill_pan,T1.bill_gst,T1.bill_description,T1.bill_amount,T2.department_name,T3.fund_scheme_name from tbl_accounts_bill_details as T1
+                    string Query = @"select T1.bill_details_id_pk,T1.bill_docket_no,T1.bill_category_id_fk,T1.bill_company_name,T1.bill_pan,T1.bill_gst,T1.bill_description,T1.bill_amount,T2.department_name,T3.fund_scheme_name,T1.bill_mobile_no
+                        FROM tbl_accounts_bill_details as T1
                         left join tbl_accounts_department_master as T2 on T2.department_id_pk=T1.bill_department_id_fk
                         left join tbl_accounts_fund_master as T3 on T3.fund_scheme_id_pk=T1.bill_fund_id_fk
                         where bill_docket_no=@DocketNo";

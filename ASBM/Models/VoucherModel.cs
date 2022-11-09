@@ -19,15 +19,15 @@ namespace ASBM.Models
 		public DateTime MedDate { get; set; }
 		public DateTime TenderCommitteeMeeting { get; set; }
 		public DateTime ChairmanMeeting { get; set; }
-		public long TenderRate { get; set; }
+		public string TenderRate { get; set; }
 		public DateTime BOCSanctionMeeting { get; set; }
-		public long AAFSNumber { get; set; }
-		public long WorkOrderNo { get; set; }
+		public string AAFSNumber { get; set; }
+		public string WorkOrderNo { get; set; }
 		public DateTime WorkOrderDate { get; set; }
-		public long EstimateAmount { get; set; }
-		public long MBBookNo { get; set; }
-		public long PageNo { get; set; }
-		public long WorkRegNo { get; set; }
+		public string EstimateAmount { get; set; }
+		public string MBBookNo { get; set; }
+		public string PageNo { get; set; }
+		public string WorkRegNo { get; set; }
 		public DateTime WorkRegNoDate { get; set; }
 	}
 }

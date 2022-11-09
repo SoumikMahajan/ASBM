@@ -21,8 +21,8 @@
                 <tr class="inAc" style="color: black;font-size: 13px !important;">
                     <td>@rows</td>
                     <td>@obj.bill_docket_no</td>
-                    <td>@obj.entry_time</td>
-                    <td></td>
+                    <td>@obj.entry_time.ToShortDateString()</td>
+                    <td>@obj.current_tatus</td>
                 </tr>
                 rows++;
             }
