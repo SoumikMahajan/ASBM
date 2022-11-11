@@ -316,6 +316,16 @@ namespace ASBM.Controllers
             }
             return View(mm);
         }
+
+        [HttpPost]
+        public int ajax_Reissue_voucher(string DocketNo)
+        {
+            int response;
+            response = rejBill.Reissue_voucher(DocketNo);
+
+            return response;
+
+        }
         /////////////// REJECTED BILL STATUS End //////////////////////
 
 
