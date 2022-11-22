@@ -41,6 +41,22 @@
         });
         return html;
     }
+    function fetchDepartmentById(deptId) {
+        //debugger;
+        var html = "";
+        $.ajax({
+            type: "GET",
+            async: false,
+            dataType: "text",
+            contentType: "application/json; charset=utf-8",
+            url: "/Home/GetDeptById/?deptId=" + deptId,
+            success: function (data) {
+                html = data;
+                $("#ddlDepartment").html(html);
+            }
+        });
+        return html;
+    }
 
     $(document).on("change", "#ddlDepartment", function () {
         var deptId = parseInt($("#ddlDepartment").val());
@@ -205,42 +221,26 @@
         });
     }
 
-    //$(document).on('click', '.confirm_nodal_frwd_claim', function (event) {
-    //    //event.preventDefault();
+    $(document).on('click', '#BtnEdit', function (event) {
+        debugger;
+        var id = $(this).data("id");
+        $.ajax({
+            url: "/Home/ajax_GetBillAllotementDetailsForUpdate?id=" + id,
+            type: "GET",
+            dataType: "json",
+            //async: false,            
+            success: function (data) {
+                $('#hiddenBillAllotmentId').val(data.bill_allotement_id_pk);
+                $('#AllottedDate').val(data.bill_allotement_date);
+                fetchDepartmentById(data.bill_allotement_dept_id_fk);               
 
-    //    var info = {
-    //        DocketNo: $("#ddlDocketNo").val().trim(),
-    //        DepartmentId: parseInt($("#ddlDepartment").val().trim()),
-    //        OfficerId: parseInt($("#ddlOfficer").val().trim()),
-    //        AllotedDatte: $("#AllottedDate").val().trim()
-    //    };
+                $("#btn_update").removeClass('d-lg-none');
+                $("#btn_submit").addClass('d-lg-none');
+            },
+            error: function () {
 
-    //    //info = JSON.stringify(info)
-    //    //var valdata = $("#bill_form").serialize();
+            }
+        });
 
-    //    $(".confirm_nodal_frwd_claim").hide();
-    //    $(".frwd_btn_no").hide();
-    //    var url = '/Home/ajax_confirm_BillAllotementForm';
-    //    $.ajax({
-    //        type: 'POST',
-    //        url: url,
-    //        dataType: 'json',
-    //        data: info,
-    //        success: function (data) {
-    //            $(".frwd_btn_no").show();
-    //            //$('.modal_forward_claim_body').html(data);
-
-    //            var check_result = data;
-    //            if (check_result == 1) {
-    //                $('.modal_forward_claim_body').html('<div class="alert alert-success">Bill Allotement Submitted Successfully</div>');
-    //            }
-    //            else {
-    //                $('.modal_forward_claim_body').html('<div class="alert alert-danger">Failed</div>');
-    //            }
-    //        },
-    //        beforeSend: function () {
-    //            $('.modal_forward_claim_body').html('<div class="loader_con"><div class="loader"></div>Loading ...</div>');
-    //        }
-    //    });
-    //});
+    });
 });

@@ -160,5 +160,40 @@ namespace ASBM.Repository
             }
             return List;
         }
+
+        public BillAllotementModel GetBillAllotementDetailsById(int id)
+        {
+            BillAllotementModel obj = new BillAllotementModel();
+            DataTable dt = new DataTable();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+                    string Query = @"select bill_allotement_id_pk,bill_allotement_docket_no,bill_allotement_dept_id_fk,bill_allotement_officer_id_fk,bill_allotement_date from tbl_accounts_bill_allotement_details where bill_allotement_id_pk=@ID";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+                    cmd.Parameters.AddWithValue("@ID", id);
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+                    SqlDataAdapter adp = new SqlDataAdapter(cmd);
+                    adp.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        obj = JsonConvert.DeserializeObject<List<BillAllotementModel>>(JsonConvert.SerializeObject(dt)).FirstOrDefault();
+                    }
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return obj;
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace ASBM.Models
         public string random_bill_name { get; set; }
         public int random_bill_dept_id_fk { get; set; }
         public int random_bill_fund_id_fk { get; set; }
+        public int random_bill_type_id_fk { get; set; }
         public string random_bill_work_desc { get; set; }
         public string random_bill_mobile_no { get; set; }
         public string process_status { get; set; }

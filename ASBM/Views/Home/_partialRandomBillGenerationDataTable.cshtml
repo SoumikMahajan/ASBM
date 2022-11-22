@@ -11,6 +11,7 @@
             <th>Fund Scheme Name</th>
             <th>Work Description</th>
             <th>Mobile No</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,12 @@
                     <td>@obj.fund_scheme_name</td>
                     <td>@obj.random_bill_work_desc</td>
                     <td>@obj.random_bill_mobile_no</td>
+                    <td>
+                        <center>
+                            <a href="javascript:void(0)" id="BtnEdit" data-id="@obj.random_bill_id_pk" class="BtnClEditPoUp"><i class="fa fa-edit"></i></a>
+                            <a href="javascript:void(0)" id="BtnDelete" data-id="@obj.random_bill_id_pk" class="BtnDeletePoUp"><i class="fa fa-trash"></i></a>
+                        </center>
+                    </td>
                 </tr>
                 rows++;
             }

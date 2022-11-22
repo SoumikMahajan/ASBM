@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 
 namespace ASBM.Repository
@@ -60,7 +61,7 @@ namespace ASBM.Repository
             return res;
         }
 
-        public int UpdateBill(string BillId,string CompanyCategoryName, string companyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
+        public int UpdateBill(string BillId,string CompanyCategoryName, string companyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId,string Mobile)
         {
             int res = 0;
             try
@@ -72,7 +73,7 @@ namespace ASBM.Repository
                     //Query = @"INSERT INTO tbl_accounts_bill_details (bill_category_id_fk, bill_company_name, bill_department_id_fk, bill_pan, bill_gst, bill_fund_id_fk, bill_description, bill_amount) VALUES(@category_id, @companyName,@dept_id, @pan, @gst, @fund_id, @work_desc, @bill_amount)";
 
 
-                    SqlCommand cmd = new SqlCommand("[dbo].[spBillSubmission]", con);
+                    SqlCommand cmd = new SqlCommand("[dbo].[spAccountsBillSubmission]", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@OPERATION_ID", 3);
                     cmd.Parameters.AddWithValue("@bill_id", BillId);
@@ -85,6 +86,7 @@ namespace ASBM.Repository
                     cmd.Parameters.AddWithValue("@work_desc", WorkDesc);
                     cmd.Parameters.AddWithValue("@bill_amount", Amount);
                     cmd.Parameters.AddWithValue("@bill_type_id", BillTypeId);
+                    cmd.Parameters.AddWithValue("@mobile", Mobile);
 
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
@@ -149,7 +151,7 @@ namespace ASBM.Repository
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
                     string Query = @"select bill_details_id_pk, bill_category_id_fk, bill_company_name, bill_type_id_fk, bill_department_id_fk, bill_pan, 
-                                    bill_gst, bill_fund_id_fk, bill_description, bill_amount from [dbo].[tbl_accounts_bill_details] WHERE bill_details_id_pk =@ID";
+                                    bill_gst, bill_fund_id_fk, bill_description, bill_amount,bill_mobile_no from [dbo].[tbl_accounts_bill_details] WHERE bill_details_id_pk =@ID";
                     SqlCommand cmd = new SqlCommand(Query, con);
                     cmd.Parameters.AddWithValue("@ID", id);
                     if (con.State != ConnectionState.Open)

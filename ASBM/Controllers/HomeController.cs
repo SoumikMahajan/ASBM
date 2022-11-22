@@ -155,10 +155,10 @@ namespace ASBM.Controllers
 
 
         [HttpPost]
-        public int ajax_Update_BillSubmissionForm(string BillId, string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId)
+        public int ajax_Update_BillSubmissionForm(string BillId, string CompanyCategoryName, string CompanyName, int DepartmentId, string Pan, string Gst, int FundId, string WorkDesc, string Amount, int BillTypeId,string Mobile)
         {
             int response;
-            response = bill.UpdateBill(BillId, CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount, BillTypeId);
+            response = bill.UpdateBill(BillId, CompanyCategoryName, CompanyName, DepartmentId, Pan, Gst, FundId, WorkDesc, Amount, BillTypeId, Mobile);
             return response;
             //return PartialView("~/Views/Home/_partialBillSubmission_view.cshtml");
         }
@@ -242,6 +242,26 @@ namespace ASBM.Controllers
             return response;
         }
 
+        [HttpGet]
+        public JsonResult ajax_GetBillAllotementDetailsForUpdate(string id)
+        {
+            BillAllotementModel obj = new BillAllotementModel();
+            try
+            {
+                if (!string.IsNullOrEmpty(id))
+                {
+                    obj = billAllote.GetBillAllotementDetailsById(Convert.ToInt16(id));
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+            //return PartialView("~/Views/ContentManagement/_partialBillSubmissionForm.cshtml", obj);
+        }
+
+
         /////////////// BILL ALLOTEMENT End //////////////////////
 
 
@@ -263,6 +283,32 @@ namespace ASBM.Controllers
         {
             int response;
             response = randomBill.SubmitRandomBill(Name, BillTypeId, DepartmentId, FundId, WorkDesc, Mobile);
+            return response;
+        }
+
+        [HttpGet]
+        public JsonResult ajax_GetRandomBillDetailsForUpdate(string id)
+        {
+            RandomBillGenerationModel obj = new RandomBillGenerationModel();
+            try
+            {
+                if (!string.IsNullOrEmpty(id))
+                {
+                    obj = randomBill.GetRandomBillDetailsById(Convert.ToInt16(id));
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public int ajax_Update_RandomBillForm(string BillId, string Name, string BillTypeId, int DepartmentId, string FundId, string WorkDesc, int Mobile)
+        {
+            int response;
+            response = randomBill.UpdateRandomBill(BillId, Name, BillTypeId, DepartmentId,FundId, WorkDesc, Mobile);
             return response;
         }
 
@@ -321,7 +367,10 @@ namespace ASBM.Controllers
         public int ajax_Reissue_voucher(string DocketNo)
         {
             int response;
-            response = rejBill.Reissue_voucher(DocketNo);
+           
+            string getTwoString = DocketNo.Substring(5,2);
+            
+            response = rejBill.Reissue_voucher(DocketNo, getTwoString);
 
             return response;
 

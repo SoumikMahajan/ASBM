@@ -5,7 +5,7 @@
     });
 
     $(document).on('click', '#BtnReissue', function () {
-
+        var DocketNo = $(this).data("id");
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -16,20 +16,20 @@
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                submitReissue();
+                submitReissue(DocketNo);
                 //window.location.href = "/Home/RejectedBill";
             }
         })
     });
 
-    function submitReissue() {
+    function submitReissue(DocketNo) {
         debugger;
 
-        var voucherNo = $(this).data("id");
-        alert(voucherNo);
+        //var voucherNo = $(this).data("id");
+        //alert(voucherNo);
 
         var info = {
-            VoucherNo: voucherNo
+            DocketNo: DocketNo
         };
 
         var url = '/Home/ajax_Reissue_voucher';
@@ -45,7 +45,7 @@
                     swal.fire({
                         icon: 'success',
                         title: 'SAVED!',
-                        text: 'Payment Details has been Submitted Successfully.'
+                        text: 'Your Docket No reissue Successfully.'
                     }).then(function () {
                         location.reload();
                     });

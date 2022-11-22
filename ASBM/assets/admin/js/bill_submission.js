@@ -464,6 +464,7 @@
                 $('#txt_pan').val(data.bill_pan);
                 $('#txt_work_desc').val(data.bill_description);
                 $('#txt_amount').val(data.bill_amount);
+                $('#txt_mobile').val(data.bill_mobile_no);
                 fetchDepartmentById(data.bill_department_id_fk);
                 fetchFundById(data.bill_fund_id_fk);
                 fetchBillTypeById(data.bill_type_id_fk);
@@ -558,6 +559,7 @@
         var WorkDesc = $("#txt_work_desc").val().trim();
         var Amount = $("#txt_amount").val().trim();
         var BillTypeId = parseInt($("#ddlTypeBill").val());
+        var Mobile = $("#txt_mobile").val().trim();
 
         if (CompanyCategoryName === undefined) {
             Swal.fire('Please Select Company category')
@@ -610,6 +612,13 @@
         }
         if (Amount == '') {
             Swal.fire('Please Enter Amount')
+            return;
+        }
+        if (Mobile == '') {
+            Swal.fire({
+                icon: 'warning',
+                text: 'Please Enter Mobile Number!',
+            })
             return;
         }
         Swal.fire({
@@ -671,7 +680,8 @@
             FundId: parseInt($("#ddlFund").val()),
             WorkDesc: $("#txt_work_desc").val().trim(),
             Amount: $("#txt_amount").val().trim(),
-            BillTypeId: parseInt($("#ddlTypeBill").val())
+            BillTypeId: parseInt($("#ddlTypeBill").val()),
+            Mobile: $("#txt_mobile").val().trim()
         };
 
         //info = JSON.stringify(info)

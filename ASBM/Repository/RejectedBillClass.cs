@@ -86,34 +86,48 @@ namespace ASBM.Repository
             return Res;
         }
 
-        public int Reissue_voucher(string DocketNo)
+        public int Reissue_voucher(string DocketNo,string getTwoString)
         {
             int res = 0;
             try
             {
                 using (SqlConnection con = new SqlConnection(strcon))
                 {
-                    string Query1 = null;
-                    string Query2 = null;
-                    string Query3 = null;
-                    Query1 = @"UPDATE tbl_accounts_bill_details SET approve_status = 0 AND bill_alloted_status = 0 WHERE bill_docket_no = @docketNo AND approve_status = 2";
-                    Query2 = @"UPDATE tbl_accounts_bill_allotement_details SET approve_status = 0 WHERE bill_allotement_docket_no = @docketNo";
+                    //string Query1 = null;
+                    //string Query2 = null;
+                    //string Query3 = null;
+                    SqlCommand cmd = new SqlCommand("[dbo].[spAccountsRejectBill]", con);
+                    if (getTwoString == "NB")
+                    {
+                        //Query1 = @"UPDATE tbl_accounts_bill_details SET approve_status = 0 AND bill_alloted_status = 0 WHERE bill_docket_no = @docketNo AND approve_status = 2";
+                        //Query2 = @"UPDATE tbl_accounts_bill_allotement_details SET approve_status = 0 WHERE bill_allotement_docket_no = @docketNo";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@OPERATION_ID", 1);
+                        cmd.Parameters.AddWithValue("@docketNo", DocketNo);
+                    }
+                    if(getTwoString == "RA")
+                    {
+                        //Query3 = @"UPDATE tbl_accounts_random_bill_generation_details SET approve_status = 0 WHERE random_bill_docket_no = @docketNo";
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@OPERATION_ID", 2);
+                        cmd.Parameters.AddWithValue("@docketNo", DocketNo);
+                    }
 
                     //********* OR **************/
-
-                    Query3 = @"UPDATE tbl_accounts_random_bill_generation_details SET approve_status = 0 WHERE random_bill_docket_no = @docketNo";
-
-                    SqlCommand cmd = new SqlCommand(Query1, con);
-                    cmd.Parameters.AddWithValue("@docketNo", DocketNo);
+                                    
                     con.Open();
                     int AffectedRows = cmd.ExecuteNonQuery();
-                    if (AffectedRows == 2)
+                    if (AffectedRows > 0)
                     {
                         res = 1;
                     }
                     else
                     {
                         res = 0;
+                    }
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
                     }
                 }
             }
