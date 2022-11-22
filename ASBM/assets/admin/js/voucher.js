@@ -13,6 +13,7 @@
         $("#billDetailsShowHide").hide();
         $("#billDetailsShowHideForRandoms").hide();
         $("#billBody").hide();
+        $("#listHideShow").hide();
     }
     $(document).on("click", "#cicrandomRadio1", function () {
         $("#cicnoHide").show(300);
@@ -352,5 +353,24 @@
             },
         });
     }
+
+    $(document).on("click", "#btn_my_voucher_list", function () {
+        debugger;
+        $("#listHideShow").show(300);
+        var url = '/VoucherGenerator/ajax_approved_list_status';
+        $.ajax({
+            type: 'GET',
+            url: url,
+            contentType: "application/json; charset=utf-8",
+            dataType: "text",
+            success: function (data) {
+                //$('#billingDataTable').html(data);
+                if (data != "") {
+                    $('#table').DataTable();
+                    $("#listHideShow").html(data);
+                }
+            }
+        });
+    });
 
 });

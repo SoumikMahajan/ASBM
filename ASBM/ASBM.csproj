@@ -300,6 +300,7 @@
     <Content Include="Views\Accountant\AmountCalculation.cshtml" />
     <Content Include="Views\Finance\Index.cshtml" />
     <Content Include="Views\Finance\_partialFinanceVouterDataTable.cshtml" />
+    <Content Include="Views\VoucherGenerator\_partialApproveVoucherDataTable.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

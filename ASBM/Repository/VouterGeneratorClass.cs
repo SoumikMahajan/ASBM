@@ -249,5 +249,42 @@ namespace ASBM.Repository
             }
             return Res;
         }
+
+        public List<VoucherModel> FetchAllVoucherList()
+        {
+            List<VoucherModel> Res = new List<VoucherModel>();
+            try
+            {
+                using (SqlConnection con = new SqlConnection(strcon))
+                {
+
+                    string Query = @"select voucher_no,bill_docket_no from tbl_accounts_voucher";
+                    SqlCommand cmd = new SqlCommand(Query, con);
+
+                    if (con.State != ConnectionState.Open)
+                    {
+                        con.Open();
+                    }
+
+                    SqlDataAdapter sda = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    sda.Fill(dt);
+                    if (dt.Rows.Count > 0)
+                    {
+                        Res = JsonConvert.DeserializeObject<List<VoucherModel>>(JsonConvert.SerializeObject(dt));
+                    }
+
+                    if (con.State != ConnectionState.Closed)
+                    {
+                        con.Close();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return Res;
+        }
     }
 }

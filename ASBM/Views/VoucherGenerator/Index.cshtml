@@ -220,7 +220,13 @@
             </form>
 
         </div>
+        <div id="approvedVoucherList" style="background-color: beige;">
+            <div id="listHideShow">
+                @Html.Partial("~/Views/VoucherGenerator/_partialApproveVoucherDataTable.cshtml")
+            </div>
+        </div>
     </div>
+
 
     @*for SB*@
     <div id="afterVoucherApprovedForNormal">
@@ -349,6 +355,7 @@
     </div>
 
     @*for Random*@
+
 
 
 </div>

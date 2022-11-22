@@ -124,5 +124,20 @@ namespace ASBM.Controllers
             return Json(rn, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpGet]
+        public ActionResult ajax_approved_list_status()
+        {
+            List<VoucherModel> temp = new List<VoucherModel>();
+            try
+            {
+                temp = vouter.FetchAllVoucherList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return PartialView("~/Views/VoucherGenerator/_partialApproveVoucherDataTable.cshtml", temp);
+        }
+
     }
 }
